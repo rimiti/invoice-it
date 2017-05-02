@@ -2,7 +2,7 @@
   "order": {
     "header": {
       "title": "",
-      "subject": "ORDER",
+      "subject": "Facture",
       "reference": "Réf. :",
       "date": "Date facturation :"
     },
@@ -12,9 +12,9 @@
       "tax": "TVA",
       "quantity": "Qté",
       "price_without_taxes": "Total HT",
-      "price_without_taxes_unit": "P.U. HT"
+      "price_without_taxes_unit": "P.U. HT",
       "note": "Note",
-      "total_without_taxes": "",
+      "total_without_taxes": "Total HT",
       "total_taxes": "Total TVA 20%",
       "total_with_taxes": "Total TTC"
     },
