@@ -14,10 +14,14 @@
   "footer": {
     "content": "Société à responsabilité limité (SARL) - Capital de 1 000 000 € - SIRET: 87564738493127 <br>NAF-APE: 6202A - Num. TVA: FR28987856541"
   },
-  "order": {
-    "prefix": "OR"
-  },
-  "invoice": {
-    "prefix": "IN"
+  "templates": {
+    "order": {
+      "path": "./static/order.jade",
+      "prefix": "OR"
+    },
+    "invoice": {
+      "path": "./static/invoice.jade",
+      "prefix": "IN"
+    }
   }
 }
