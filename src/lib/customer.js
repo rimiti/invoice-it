@@ -1,4 +1,4 @@
-class Customer {
+export default class Customer {
 
     constructor() {
         this._company_name = ''
