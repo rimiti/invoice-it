@@ -1,4 +1,6 @@
-export default class Customer {
+import Base from 'base'
+
+export default class Customer extends Base {
 
     constructor() {
         this._company_name = ''
