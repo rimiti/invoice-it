@@ -1,0 +1,27 @@
+{
+  "name": "invoice-generator",
+  "version": "1.0.0",
+  "description": "Order and invoice generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rimiti/invoice-generator.git"
+  },
+  "keywords": [
+    "node",
+    "order",
+    "invoice",
+    "html",
+    "pdf",
+    "generator"
+  ],
+  "author": "Dimitri DO BAIRRO",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rimiti/invoice-generator/issues"
+  },
+  "homepage": "https://github.com/rimiti/invoice-generator#readme"
+}
