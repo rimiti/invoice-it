@@ -71,8 +71,8 @@ gulp.task('clean:dist', [], () => del(paths.js.dist))
 gulp.task('clean', ['clean:dist', 'clean:test'])
 
 /**
- *$ gulp mocha
- * description: runs unit tests
+ * @description Runs unit tests
+ * @example gulp mocha
  * */
 gulp.task('mocha', ['pre-test', 'babel:test'], () => {
   return gulp.src([paths.test.run], {read: false})
@@ -84,8 +84,12 @@ gulp.task('mocha', ['pre-test', 'babel:test'], () => {
     .on('error', gutil.log)
 })
 
+/**
+ * @description Execute pre-test
+ * @example gulp pre-test
+ */
 gulp.task('pre-test', () => {
-  return gulp.src(['src/**/*.js'])
+  return gulp.src(paths.js.src)
     .pipe(istanbul({
       instrumenter: Instrumenter,
       includeUntested: true
@@ -102,6 +106,10 @@ gulp.task('watch', () => {
   gulp.watch(paths.test.src, ['babel:test'])
 })
 
+/**
+ * @description Watches change in test folder
+ * @example gulp watch:mocha
+ */
 gulp.task('watch:mocha', () => {
   gulp.watch(paths.test.src, ['mocha'])
 })
