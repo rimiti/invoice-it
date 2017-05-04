@@ -16,8 +16,8 @@ const paths = {
   },
   test: {
     src: 'test/**/*.js',
-    dist: 'test-dist/',
-    run: 'test-dist/**/*.js'
+    dist: 'dist/test/',
+    run: 'dist/test/**/*.js'
   },
   sourceRoot: path.resolve('src')
 }
