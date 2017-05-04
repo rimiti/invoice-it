@@ -1,9 +1,13 @@
 import chai from 'chai'
+import Document from '../class'
 chai.should()
 
 describe('Invoice', () => {
 
   it(`Object attributes`, (done) => {
+
+    let document = new Document()
+
     done()
   })
 
