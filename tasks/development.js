@@ -19,6 +19,10 @@ const paths = {
     dist: 'dist/test/',
     run: 'dist/test/**/*.js'
   },
+  config: {
+    src: 'src/config/**/*',
+    dist: 'dist/config'
+  },
   sourceRoot: path.resolve('src')
 }
 
@@ -38,7 +42,7 @@ gulp.task('babel:test', ['babel:src', 'clean:test'], () =>
  * @description Compile es6 files to es5 and put them in dist directory
  * @example gulp babel:src
  */
-gulp.task('babel:src', ['clean:dist'], () =>
+gulp.task('babel:src', ['clean:dist', 'babel:config'], () =>
   gulp.src(paths.js.src)
     .pipe(sourcemaps.init())
     .pipe(babel())
@@ -50,7 +54,33 @@ gulp.task('babel:src', ['clean:dist'], () =>
  * @description Compile all es6 files to es5 and put them in dist directories
  * @example gulp babel
  */
+gulp.task('babel:config', ['config', 'clean:config'], () =>
+  gulp.src(`${paths.config.src}.js`)
+    .pipe(sourcemaps.init())
+    .pipe(babel())
+    .pipe(sourcemaps.write('.', {sourceRoot: paths.sourceRoot}))
+    .pipe(gulp.dest(paths.config.dist)))
+
+/**
+ * @description Compile all es6 files to es5 and put them in dist directories
+ * @example gulp babel
+ */
 gulp.task('babel', ['babel:src', 'babel:test'])
+
+/**
+ * @description Copy config directory to dist directory
+ * @example gulp config
+ */
+gulp.task('config', ['clean:config'], () => {
+  gulp.src(`${paths.config.src}.json`)
+    .pipe(gulp.dest(paths.config.dist))
+})
+
+/**
+ * @description Cleans config files
+ * @example gulp clean:config
+ **/
+gulp.task('clean:config', () => del(paths.config.dist))
 
 /**
  * @description Cleans compiled test files
@@ -75,7 +105,7 @@ gulp.task('clean', ['clean:dist', 'clean:test'])
  * @example gulp mocha
  * */
 gulp.task('mocha', ['pre-test', 'babel:test'], () => {
-  return gulp.src([paths.test.run], {read: false})
+  gulp.src([paths.test.run], {read: false})
     .pipe(mocha({reporter: 'spec'}))
     // Creating the reports after tests ran
     // .pipe(istanbul.writeReports())
@@ -89,7 +119,7 @@ gulp.task('mocha', ['pre-test', 'babel:test'], () => {
  * @example gulp pre-test
  */
 gulp.task('pre-test', () => {
-  return gulp.src(paths.js.src)
+  gulp.src(paths.js.src)
     .pipe(istanbul({
       instrumenter: Instrumenter,
       includeUntested: true
