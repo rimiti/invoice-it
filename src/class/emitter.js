@@ -1,9 +1,15 @@
 import Base from './base'
+import config from '../config'
 
 export default class Emitter extends Base {
 
   constructor(emitter) {
     super()
+    this.company_name = config.from.company.name
+    this.street_number = config.from.company.street_number
+    this.street_name = config.from.company.street_name
+    this.zip_code = config.from.company.zip_code
+    this.city = config.from.company.city
     this.hydrate(emitter, this._itemsToHydrate())
   }
 
@@ -13,22 +19,6 @@ export default class Emitter extends Base {
 
   set company_name(value) {
     this._company_name = value
-  }
-
-  get first_name() {
-    return this._first_name
-  }
-
-  set first_name(value) {
-    this._first_name = value
-  }
-
-  get last_name() {
-    return this._last_name
-  }
-
-  set last_name(value) {
-    this._last_name = value
   }
 
   get street_number() {
@@ -64,6 +54,6 @@ export default class Emitter extends Base {
   }
 
   _itemsToHydrate() {
-    return ['company_name', 'first_name', 'last_name', 'street_number', 'street_name', 'zip_code', 'city']
+    return ['company_name', 'street_number', 'street_name', 'zip_code', 'city', 'recipient', 'phone', 'mail', 'website']
   }
 }
