@@ -1,4 +1,23 @@
 {
+  "Order": "Order",
+  "Invoice": "Invoice",
+  "Ref. :": "Ref. :",
+  "Invoice date :": "Invoice date :",
+
+  "Amounts expressed in Euros": "Amounts expressed in Euros",
+  "Description": "Description",
+  "Tax": "VAT",
+  "Qt": "Qt",
+  "Total exc. VAT": "Total exc. VAT",
+  "U.P": "U.P",
+  "Note": "Note",
+  "Total exc.VAT": "Total exc.VAT",
+  "Total VAT 20%": "Total VAT 20%",
+  "Total inc. VAT": "Total inc. VAT",
+
+  "footer": "Dim Solution inc - Registration: 87564738493127 <br> NAF-APE: 6202A - Num. VAT: EN28987856541"
+
+
   "order": {
     "header": {
       "title": "",

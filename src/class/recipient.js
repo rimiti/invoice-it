@@ -15,6 +15,22 @@ export default class Recipient extends Base {
     this._company_name = value
   }
 
+  get first_name() {
+    return this._first_name
+  }
+
+  set first_name(value) {
+    this._first_name = value
+  }
+
+  get last_name() {
+    return this._last_name
+  }
+
+  set last_name(value) {
+    this._last_name = value
+  }
+
   get street_number() {
     return this._street_number
   }
@@ -80,6 +96,6 @@ export default class Recipient extends Base {
   }
 
   _itemsToHydrate() {
-    return ['company_name', 'street_number', 'street_name', 'zip_code', 'city', 'recipient', 'phone', 'mail', 'website']
+    return ['company_name', 'first_name', 'last_name', 'street_number', 'street_name', 'zip_code', 'city', 'recipient', 'phone', 'mail', 'website']
   }
 }

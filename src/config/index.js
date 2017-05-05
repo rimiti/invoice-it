@@ -1,3 +1,3 @@
-import config from 'config.json'
+import config from './config.json'
 
 export default config
