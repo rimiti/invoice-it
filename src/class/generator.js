@@ -9,24 +9,16 @@ import moment from 'moment'
 export default class Generator {
 
   constructor(config) {
-    this._emitter = (config.emitter) ? new Emitter(config.emitter) : new Emitter()
     this._recipient = (config.recipient) ? new Recipient(config.recipient) : new Recipient()
+    this._emitter = (config.emitter) ? new Emitter(config.emitter) : new Emitter()
   }
 
-  recipient() {
-    return this._recipient
+  recipient(obj) {
+    this._recipient.hydrate(obj, this._recipient.itemsToHydrate())
   }
 
-  set recipient(value) {
-    this._recipient = value
-  }
-
-  emitter() {
-    return this._emitter
-  }
-
-  set emitter(value) {
-    this._emitter = value
+  emitter(obj) {
+    this._emitter.hydrate(obj, this._emitter.itemsToHydrate())
   }
 
   get template() {
