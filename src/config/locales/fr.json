@@ -1,23 +1,21 @@
 {
-  "order": {
-    "header": {
-      "title": "",
-      "subject": "Facture",
-      "reference": "Réf. :",
-      "date": "Date facturation :"
-    },
-    "table": {
-      "information": "Montants exprimés en Euros",
-      "description": "Désignation",
-      "tax": "TVA",
-      "quantity": "Qté",
-      "price_without_taxes": "Total HT",
-      "price_without_taxes_unit": "P.U. HT",
-      "note": "Note",
-      "total_without_taxes": "Total HT",
-      "total_taxes": "Total TVA 20%",
-      "total_with_taxes": "Total TTC"
-    },
-    "footer": "Société par Actions Simplifiée Unipersonnelle (SASU) - Capital de 1 000 000 € - SIRET: 87564738493127 <br> NAF-APE: 6202A - Num. TVA: FR28987856541"
-  }
+  "order_header_title": "Commande",
+  "order_header_subject": "Commande",
+  "order_header_reference": "Réf. :",
+  "order_header_date": "Date commande:",
+  "invoice_header_title": "Facture",
+  "invoice_header_subject": "Facture",
+  "invoice_header_reference": "Réf. :",
+  "invoice_header_date": "Date facturation:",
+  "table_information": "Montants exprimés en Euros",
+  "table_description": "Description",
+  "table_tax": "TVA",
+  "table_quantity": "Qt",
+  "table_price_without_taxes": "Total HT",
+  "table_price_without_taxes_unit": "P.U. HT",
+  "table_note": "Note",
+  "table_total_without_taxes": "Total HT",
+  "table_total_taxes": "Total TVA 20%",
+  "table_total_with_taxes": "Total TTC",
+  "footer": "Société par Actions Simplifiée Unipersonnelle (SASU) - Capital de 1 000 000 € - SIRET: 87564738493127 <br> NAF-APE: 6202A - Num. TVA: FR28987856541"
 }
