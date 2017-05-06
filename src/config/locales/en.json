@@ -1,42 +1,21 @@
 {
-  "Order": "Order",
-  "Invoice": "Invoice",
-  "Ref. :": "Ref. :",
-  "Invoice date :": "Invoice date :",
-
-  "Amounts expressed in Euros": "Amounts expressed in Euros",
-  "Description": "Description",
-  "Tax": "VAT",
-  "Qt": "Qt",
-  "Total exc. VAT": "Total exc. VAT",
-  "U.P": "U.P",
-  "Note": "Note",
-  "Total exc.VAT": "Total exc.VAT",
-  "Total VAT 20%": "Total VAT 20%",
-  "Total inc. VAT": "Total inc. VAT",
-
+  "order_header_title": "Order",
+  "order_header_subject": "Order",
+  "order_header_reference": "Ref. :",
+  "order_header_date": "Order date :",
+  "invoice_header_title": "Invoice",
+  "invoice_header_subject": "Invoice",
+  "invoice_header_reference": "Ref. :",
+  "invoice_header_date": "Invoice date :",
+  "table_information": "Amounts expressed in Euros",
+  "table_description": "Description",
+  "table_tax": "VAT",
+  "table_quantity": "Qt",
+  "table_price_without_taxes": "Total exc. VAT",
+  "table_price_without_taxes_unit": "U.P",
+  "table_note": "Note",
+  "table_total_without_taxes": "Total exc.VAT",
+  "table_total_taxes": "Total VAT 20%",
+  "table_total_with_taxes": "Total inc. VAT",
   "footer": "Dim Solution inc - Registration: 87564738493127 <br> NAF-APE: 6202A - Num. VAT: EN28987856541"
-
-
-  "order": {
-    "header": {
-      "title": "",
-      "subject": "Invoice",
-      "reference": "Ref. :",
-      "date": "Invoice date :"
-    },
-    "table": {
-      "information": "Amounts expressed in Euros",
-      "description": "Description",
-      "tax": "VAT",
-      "quantity": "Qt",
-      "price_without_taxes": "Total exc. VAT",
-      "price_without_taxes_unit": "U.P",
-      "note": "Note",
-      "total_without_taxes": "Total exc.VAT",
-      "total_taxes": "Total VAT 20%",
-      "total_with_taxes": "Total inc. VAT"
-    },
-    "footer": "Dim Solution inc - Registration: 87564738493127 <br> NAF-APE: 6202A - Num. VAT: EN28987856541"
-  }
 }
