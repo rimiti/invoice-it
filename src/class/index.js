@@ -8,9 +8,7 @@ export default {
    * @description Configure the generator with object config
    * @param config
    */
-  configure: (config) => {
-    configuration = config
-  },
+  configure: (config) => configuration = config,
 
   /**
    * @description Generate generator with configuration
@@ -20,8 +18,8 @@ export default {
    */
   create: (recipient, emitter) => {
     let generator = new Generator(configuration)
-    generator.emitter(emitter)
     generator.recipient(recipient)
+    generator.emitter(emitter)
     return generator
   }
 
