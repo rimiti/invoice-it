@@ -4,30 +4,33 @@ chai.should()
 
 describe('Order', () => {
 
-  it(`Object auto-filled`, (done) => {
-    let order = generator.create({
-      company_name: 'Receiver company',
-      first_name: 'Will',
-      last_name: 'Jameson',
-      street_number: '20',
-      street_name: 'Rue Victor Hugo',
-      zip_code: '77340',
-      city: 'Pontault-Combault',
-      country: 'France',
-      phone: '06 00 00 00 00',
-      mail: 'will.jameson@test.com'
-    }, {
-      name: 'Dim Solution',
-      street_number: '15',
-      street_name: 'Rue Jean Jaures',
-      zip_code: '75012',
-      city: 'Paris',
-      country: 'France',
-      phone: '01 00 00 00 00',
-      mail: 'contact@dimsolution.com',
-      website: 'www.dimsolution.com'
-    })
+  let recipient = {
+    company_name: 'Receiver company',
+    first_name: 'Will',
+    last_name: 'Jameson',
+    street_number: '20',
+    street_name: 'Rue Victor Hugo',
+    zip_code: '77340',
+    city: 'Pontault-Combault',
+    country: 'France',
+    phone: '06 00 00 00 00',
+    mail: 'will.jameson@test.com'
+  }
 
+  let emitter = {
+    name: 'Dim Solution',
+    street_number: '15',
+    street_name: 'Rue Jean Jaures',
+    zip_code: '75012',
+    city: 'Paris',
+    country: 'France',
+    phone: '01 00 00 00 00',
+    mail: 'contact@dimsolution.com',
+    website: 'www.dimsolution.com'
+  }
+
+  it(`Object auto-filled`, (done) => {
+    let order = generator.create(recipient, emitter)
     order.recipient().company_name.should.be.equal('Receiver company')
     order.recipient().first_name.should.be.equal('Will')
     order.recipient().last_name.should.be.equal('Jameson')
@@ -52,30 +55,8 @@ describe('Order', () => {
 
   it(`Object not auto-filled`, (done) => {
     let order = generator.create()
-    order.emitter({
-      name: 'Dim Solution',
-      street_number: '15',
-      street_name: 'Rue Jean Jaures',
-      zip_code: '75012',
-      city: 'Paris',
-      country: 'France',
-      phone: '01 00 00 00 00',
-      mail: 'contact@dimsolution.com',
-      website: 'www.dimsolution.com'
-    })
-    order.recipient({
-      company_name: 'Receiver company',
-      first_name: 'Will',
-      last_name: 'Jameson',
-      street_number: '20',
-      street_name: 'Rue Victor Hugo',
-      zip_code: '77340',
-      city: 'Pontault-Combault',
-      country: 'France',
-      phone: '06 00 00 00 00',
-      mail: 'will.jameson@test.com'
-    })
-
+    order.emitter(emitter)
+    order.recipient(recipient)
     order.recipient().company_name.should.be.equal('Receiver company')
     order.recipient().first_name.should.be.equal('Will')
     order.recipient().last_name.should.be.equal('Jameson')
