@@ -2,24 +2,14 @@
   "header": {
     "logo": "http://www.dimsolution.com/bundles/dimportfolio/images/web/logo_email.png"
   },
-  "from": {
-    "company": {
-      "name": "Dim Solution",
-      "street_number": "73",
-      "street_name": "Rue des prairies",
-      "zip_code": 77340,
-      "city": "Pontault-Combault"
-    }
-  },
-  "footer": {
-    "content": "Société à responsabilité limité (SARL) - Capital de 1 000 000 € - SIRET: 87564738493127 <br>NAF-APE: 6202A - Num. TVA: FR28987856541"
-  },
   "templates": {
     "order": {
-      "path": "./static/order.jade"
+      "path": "./static/order.jade",
+      "reference_pattern": "{prefix}{date-YY}{date-MM}-{id-6}"
     },
     "invoice": {
-      "path": "./static/invoice.jade"
+      "path": "./static/invoice.jade",
+      "reference_pattern": "{prefix}{date-YY}{date-MM}-{id-6}"
     }
   }
 }
