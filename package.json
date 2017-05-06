@@ -27,6 +27,7 @@
   "dependencies": {
     "i18n": "^0.8.3",
     "jade": "^1.11.0",
+    "moment": "^2.18.1",
     "source-map-support": "^0.4.15"
   },
   "devDependencies": {
