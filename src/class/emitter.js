@@ -1,23 +1,22 @@
-import Base from './base'
-import config from '../config'
+import Common from './common'
 
-export default class Emitter extends Base {
+export default class Emitter extends Common {
 
   constructor(emitter) {
     super()
-    this.company_name = config.from.company.name
-    this.street_number = config.from.company.street_number
-    this.street_name = config.from.company.street_name
-    this.zip_code = config.from.company.zip_code
-    this.city = config.from.company.city
+    this.name = (emitter) ? emitter.name : ''
+    this.street_number = (emitter) ? emitter.street_number : ''
+    this.street_name = (emitter) ? emitter.street_name : ''
+    this.zip_code = (emitter) ? emitter.zip_code : ''
+    this.city = (emitter) ? emitter.city : ''
     this.hydrate(emitter, this._itemsToHydrate())
   }
 
-  get company_name() {
+  get name() {
     return this._company_name
   }
 
-  set company_name(value) {
+  set name(value) {
     this._company_name = value
   }
 
@@ -54,6 +53,6 @@ export default class Emitter extends Base {
   }
 
   _itemsToHydrate() {
-    return ['company_name', 'street_number', 'street_name', 'zip_code', 'city', 'recipient', 'phone', 'mail', 'website']
+    return ['name', 'street_number', 'street_name', 'zip_code', 'city', 'phone', 'mail', 'website']
   }
 }
