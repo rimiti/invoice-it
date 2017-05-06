@@ -9,7 +9,7 @@ export default class Emitter extends Common {
     this.street_name = (emitter) ? emitter.street_name : ''
     this.zip_code = (emitter) ? emitter.zip_code : ''
     this.city = (emitter) ? emitter.city : ''
-    this.hydrate(emitter, this._itemsToHydrate())
+    this.hydrate(emitter, this.itemsToHydrate())
   }
 
   get name() {
@@ -52,7 +52,7 @@ export default class Emitter extends Common {
     this._city = value
   }
 
-  _itemsToHydrate() {
+  itemsToHydrate() {
     return ['name', 'street_number', 'street_name', 'zip_code', 'city', 'phone', 'mail', 'website']
   }
 }
