@@ -16,12 +16,10 @@
   },
   "templates": {
     "order": {
-      "path": "./static/order.jade",
-      "prefix": "OR"
+      "path": "./static/order.jade"
     },
     "invoice": {
-      "path": "./static/invoice.jade",
-      "prefix": "IN"
+      "path": "./static/invoice.jade"
     }
   }
 }
