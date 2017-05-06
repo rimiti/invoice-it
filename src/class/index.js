@@ -1,28 +1,28 @@
 import Generator from './generator'
 
-export default (() => {
+let configuration
 
-  const document = {}
-  let configuration
+export default {
 
   /**
    * @description Configure the generator with object config
    * @param config
    */
-  document.configure = (config) => configuration = config
+  configure: (config) => {
+    configuration = config
+  },
 
   /**
-   * @description Generate document with configuration
+   * @description Generate generator with configuration
    * @param emitter
    * @param recipient
    * @returns {Generator}
    */
-  document.create = (emitter, recipient) => {
+  create: (recipient, emitter) => {
     let generator = new Generator(configuration)
     generator.emitter(emitter)
     generator.recipient(recipient)
     return generator
   }
 
-  return document
-})
+}
