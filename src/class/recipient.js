@@ -63,6 +63,14 @@ export default class Recipient extends Common {
     this._city = value
   }
 
+  get country() {
+    return this._country
+  }
+
+  set country(value) {
+    this._country = value
+  }
+
   get phone() {
     return this._phone
   }
@@ -80,6 +88,6 @@ export default class Recipient extends Common {
   }
 
   itemsToHydrate() {
-    return ['company_name', 'first_name', 'last_name', 'street_number', 'street_name', 'zip_code', 'city', 'phone', 'mail']
+    return ['company_name', 'first_name', 'last_name', 'street_number', 'street_name', 'zip_code', 'city', 'country', 'phone', 'mail']
   }
 }
