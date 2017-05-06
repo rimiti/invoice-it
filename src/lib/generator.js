@@ -1,9 +1,6 @@
 import generator from '../class'
 
 generator.configure({
-    "header": {
-      "logo": "https://placeholdit.imgix.net/~text?txtsize=38&txt=logo&w=200&h=100"
-    },
     "emitter": {
       "name": "Your company",
       "street_number": "10",
@@ -14,15 +11,10 @@ generator.configure({
       "mail": "contact@website.com",
       "website": "www.website.com"
     },
-    "templates": {
-      "order": {
-        "path": "./static/order.jade",
-        "reference_pattern": "{prefix}{date-YY}{date-MM}-{id-6}"
-      },
-      "invoice": {
-        "path": "./static/invoice.jade",
-        "reference_pattern": "{prefix}{date-YY}{date-MM}-{id-6}"
-      }
+    "global": {
+      "logo": "http://placehold.it/230x70&text=logo",
+      "order_template": "./static/order.jade",
+      "invoice_template": "./static/invoice.jade",
     }
   }
 )
