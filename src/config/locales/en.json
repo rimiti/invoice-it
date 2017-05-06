@@ -9,6 +9,8 @@
   "invoice_header_reference": "Ref. :",
   "invoice_header_prefix": "IN",
   "invoice_header_date": "Invoice date :",
+  "fromto_phone": "Phone:",
+  "fromto_mail": "Email:",
   "table_information": "Amounts expressed in Euros",
   "table_description": "Description",
   "table_tax": "VAT",

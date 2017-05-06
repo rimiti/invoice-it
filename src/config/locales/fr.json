@@ -9,6 +9,8 @@
   "invoice_header_reference": "Réf. :",
   "invoice_header_prefix": "FA",
   "invoice_header_date": "Date facturation:",
+  "fromto_phone": "Tél:",
+  "fromto_mail": "Email:",
   "table_information": "Montants exprimés en Euros",
   "table_description": "Description",
   "table_tax": "TVA",
