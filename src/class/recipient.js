@@ -1,10 +1,10 @@
-import Base from './base'
+import Common from './common'
 
-export default class Recipient extends Base {
+export default class Recipient extends Common {
 
   constructor(recipient) {
     super()
-    this.hydrate(recipient, this._itemsToHydrate())
+    this.hydrate(recipient, this.itemsToHydrate())
   }
 
   get company_name() {
@@ -63,14 +63,6 @@ export default class Recipient extends Base {
     this._city = value
   }
 
-  get recipient() {
-    return this._recipient
-  }
-
-  set recipient(value) {
-    this._recipient = value
-  }
-
   get phone() {
     return this._phone
   }
@@ -87,15 +79,7 @@ export default class Recipient extends Base {
     this._mail = value
   }
 
-  get website() {
-    return this._website
-  }
-
-  set website(value) {
-    this._website = value
-  }
-
-  _itemsToHydrate() {
-    return ['company_name', 'first_name', 'last_name', 'street_number', 'street_name', 'zip_code', 'city', 'recipient', 'phone', 'mail', 'website']
+  itemsToHydrate() {
+    return ['company_name', 'first_name', 'last_name', 'street_number', 'street_name', 'zip_code', 'city', 'phone', 'mail']
   }
 }
