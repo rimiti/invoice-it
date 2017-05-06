@@ -9,6 +9,9 @@ export default class Emitter extends Common {
     this.street_name = (emitter) ? emitter.street_name : ''
     this.zip_code = (emitter) ? emitter.zip_code : ''
     this.city = (emitter) ? emitter.city : ''
+    this.phone = (emitter) ? emitter.phone : ''
+    this.mail = (emitter) ? emitter.mail : ''
+    this.website = (emitter) ? emitter.website : ''
     this.hydrate(emitter, this.itemsToHydrate())
   }
 
@@ -50,6 +53,30 @@ export default class Emitter extends Common {
 
   set city(value) {
     this._city = value
+  }
+
+  get phone() {
+    return this._phone
+  }
+
+  set phone(value) {
+    this._phone = value
+  }
+
+  get mail() {
+    return this._mail
+  }
+
+  set mail(value) {
+    this._mail = value
+  }
+
+  get website() {
+    return this._website
+  }
+
+  set website(value) {
+    this._website = value
   }
 
   itemsToHydrate() {
