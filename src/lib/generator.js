@@ -15,6 +15,7 @@ generator.configure({
       "logo": "http://placehold.it/230x70&text=logo",
       "order_template": "./static/order.jade",
       "invoice_template": "./static/invoice.jade",
+      "date_format": "DD/MM/YYYY"
     }
   }
 )
