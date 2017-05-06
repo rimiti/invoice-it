@@ -80,6 +80,9 @@ describe('Order', () => {
   })
 
   it(`Export to HTML`, (done) => {
+    // TODO: create reference + items + note methods
+    let order = generator.create(recipient, emitter)
+    order.getOrder()
     done()
   })
 

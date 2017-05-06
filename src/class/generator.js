@@ -174,7 +174,6 @@ export default class Generator extends Common {
       table_total_without_taxes_value: '3,99',
       table_total_taxes_value: '0,08',
       table_total_with_taxes_value: '4,79'
-
     })
   }
 }
