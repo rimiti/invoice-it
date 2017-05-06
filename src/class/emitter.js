@@ -55,6 +55,14 @@ export default class Emitter extends Common {
     this._city = value
   }
 
+  get country() {
+    return this._country
+  }
+
+  set country(value) {
+    this._country = value
+  }
+
   get phone() {
     return this._phone
   }
@@ -80,6 +88,6 @@ export default class Emitter extends Common {
   }
 
   itemsToHydrate() {
-    return ['name', 'street_number', 'street_name', 'zip_code', 'city', 'phone', 'mail', 'website']
+    return ['name', 'street_number', 'street_name', 'zip_code', 'city', 'country', 'phone', 'mail', 'website']
   }
 }
