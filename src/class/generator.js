@@ -230,7 +230,8 @@ export default class Generator extends Common {
     const pdf = htmlToPdf.create(this._toHTML().html)
     return {
       pdf: pdf,
-      toFile: (filepath) => this._toFileFromPDF(pdf, (filepath) ? filepath : `${this.getOrder().filename}.pdf`)
+      toFile: (filepath) => this._toFileFromPDF(pdf, (filepath) ? filepath : `${this.getOrder().filename}.pdf`),
+      toBuffer: () => this._toBufferFromPDF(pdf)
     }
   }
 
@@ -257,6 +258,16 @@ export default class Generator extends Common {
       if (err) return console.log(err)
       return res
     })
+  }
+
+  /**
+   * @description Export PDF to buffer
+   * @param content
+   * @returns {*}
+   * @private
+   */
+  _toBufferFromPDF(content) {
+    return content.toBuffer((err, buffer) => buffer)
   }
 
 }
