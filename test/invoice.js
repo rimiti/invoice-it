@@ -1,8 +1,12 @@
 import chai from 'chai'
 import generator from '../lib/generator'
-chai.should()
+import fs from 'fs'
+let should = chai.should()
 
 describe('Invoice', () => {
+
+  let htmlPathfile = 'dist/invoice.html'
+  let pdfPathfile = 'dist/invoice.pdf'
 
   let recipient = {
     company_name: 'Receiver company',
@@ -79,12 +83,52 @@ describe('Invoice', () => {
     done()
   })
 
-  it(`Export to HTML`, (done) => {
+  it(`Convert to HTML`, (done) => {
+    let invoice = generator.create(recipient, emitter)
+    invoice.getInvoice().toHTML().should.be.html
     done()
   })
 
-  it(`Export to PDF`, (done) => {
-    done()
-  })
+  it(`Export to HTML file`, (done) => {
+    let invoice = generator.create(recipient, emitter)
+    invoice.getInvoice().toHTML().toFile(htmlPathfile)
+    setTimeout(() => {
+      fs.existsSync(htmlPathfile).should.be.ok
+      done()
+    }, 1500)
+  }).timeout(2000)
+
+  it(`Check HTML content file`, (done) => {
+    let invoice = generator.create(recipient, emitter)
+    invoice.getInvoice().toHTML().toFile(htmlPathfile)
+    setTimeout(() => {
+      fs.readFile(htmlPathfile, 'utf8', (err, data) => {
+        should.not.exist(err)
+        data.should.be.html
+        done()
+      })
+    }, 1500)
+  }).timeout(2000)
+
+  it(`Export to PDF file`, (done) => {
+    let invoice = generator.create(recipient, emitter)
+    invoice.getInvoice().toPDF().toFile(pdfPathfile)
+    setTimeout(() => {
+      fs.existsSync(pdfPathfile).should.be.ok
+      done()
+    }, 10000)
+  }).timeout(12000)
+
+  it(`Check PDF content file`, (done) => {
+    let invoice = generator.create(recipient, emitter)
+    invoice.getInvoice().toPDF().toFile(pdfPathfile)
+    setTimeout(() => {
+      fs.readFile(pdfPathfile, 'utf8', (err, data) => {
+        should.not.exist(err)
+        data.should.be.ok
+        done()
+      })
+    }, 4000)
+  }).timeout(5000)
 
 })
