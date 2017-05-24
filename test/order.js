@@ -5,6 +5,9 @@ let should = chai.should()
 
 describe('Order', () => {
 
+  let htmlPathfile = 'dist/order.html'
+  let pdfPathfile = 'dist/order.pdf'
+
   let recipient = {
     company_name: 'Receiver company',
     first_name: 'Will',
@@ -88,18 +91,18 @@ describe('Order', () => {
 
   it(`Export to HTML file`, (done) => {
     let order = generator.create(recipient, emitter)
-    order.getOrder().toHTML().toFile('dist/order.html')
+    order.getOrder().toHTML().toFile(htmlPathfile)
     setTimeout(() => {
-      fs.existsSync('dist/order.html').should.be.ok
+      fs.existsSync(htmlPathfile).should.be.ok
       done()
     }, 1500)
   }).timeout(2000)
 
   it(`Check HTML content file`, (done) => {
     let order = generator.create(recipient, emitter)
-    order.getOrder().toHTML().toFile('dist/order.html')
+    order.getOrder().toHTML().toFile(htmlPathfile)
     setTimeout(() => {
-      fs.readFile('dist/order.html', 'utf8', (err, data) => {
+      fs.readFile(htmlPathfile, 'utf8', (err, data) => {
         should.not.exist(err)
         data.should.be.html
         done()
@@ -109,7 +112,23 @@ describe('Order', () => {
 
   it(`Export to PDF file`, (done) => {
     let order = generator.create(recipient, emitter)
-    order.getOrder().toPDF().toFile('dist/order.pdf')
-    done()
-  }).timeout(1000)
+    order.getOrder().toPDF().toFile(pdfPathfile)
+    setTimeout(() => {
+      fs.existsSync(pdfPathfile).should.be.ok
+      done()
+    }, 3000)
+  }).timeout(5000)
+
+  it(`Check PDF content file`, (done) => {
+    let order = generator.create(recipient, emitter)
+    order.getOrder().toPDF().toFile(pdfPathfile)
+    setTimeout(() => {
+      fs.readFile(pdfPathfile, 'utf8', (err, data) => {
+        should.not.exist(err)
+        data.should.be.ok
+        done()
+      })
+    }, 4000)
+  }).timeout(5000)
+
 })
