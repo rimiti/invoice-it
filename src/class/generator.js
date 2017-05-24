@@ -138,12 +138,13 @@ export default class Generator extends Common {
   }
 
   getInvoice() {
-    return this._compile({
+    return Object.assign({
       invoice_header_title: i18n.__({phrase: 'invoice_header_title', locale: this.lang}),
       invoice_header_subject: i18n.__({phrase: 'invoice_header_subject', locale: this.lang}),
       invoice_header_reference: i18n.__({phrase: 'invoice_header_reference', locale: this.lang}),
       invoice_header_date: i18n.__({phrase: 'invoice_header_date', locale: this.lang})
-    })
+      toHTML: () => this._toHTML()
+    }, this._preCompileCommonTranslations())
   }
 
   getOrder() {
@@ -174,7 +175,7 @@ export default class Generator extends Common {
       table_total_without_taxes_value: '3,99',
       table_total_taxes_value: '0,08',
       table_total_with_taxes_value: '4,79',
-      toHTML: () => this._toHTML(this)
+      toHTML: () => this._toHTML()
     }, this._preCompileCommonTranslations())
   }
 
