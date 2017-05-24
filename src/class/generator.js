@@ -165,7 +165,8 @@ export default class Generator extends Common {
       invoice_header_subject: i18n.__({phrase: 'invoice_header_subject', locale: this.lang}),
       invoice_header_reference: i18n.__({phrase: 'invoice_header_reference', locale: this.lang}),
       invoice_header_date: i18n.__({phrase: 'invoice_header_date', locale: this.lang}),
-      toHTML: () => this._toHTML()
+      toHTML: () => this._toHTML(),
+      toPDF: () => this._toPDF()
     }, this._preCompileCommonTranslations())
   }
 
@@ -271,7 +272,6 @@ export default class Generator extends Common {
   _toBufferFromPDF(content) {
     return content.toBuffer((err, buffer) => {
       if (err) return console.log(err)
-      console.log('==> This is a buffer:', Buffer.isBuffer(buffer))
       return buffer
     })
   }
