@@ -116,8 +116,8 @@ describe('Order', () => {
     setTimeout(() => {
       fs.existsSync(pdfPathfile).should.be.ok
       done()
-    }, 3000)
-  }).timeout(5000)
+    }, 5000)
+  }).timeout(7000)
 
   it(`Check PDF content file`, (done) => {
     let order = generator.create(recipient, emitter)
