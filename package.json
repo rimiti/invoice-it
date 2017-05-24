@@ -19,7 +19,7 @@
     "generator"
   ],
   "author": "Dimitri DO BAIRRO",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/rimiti/invoice-generator/issues"
   },
