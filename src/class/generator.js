@@ -255,7 +255,7 @@ export default class Generator extends Common {
    */
   _toFileFromPDF(content, filepath) {
     return content.toFile(filepath, (err, res) => {
-      if (err) return console.log(err)
+      if (err) return console.error(err)
       return res
     })
   }
@@ -267,7 +267,9 @@ export default class Generator extends Common {
    * @private
    */
   _toBufferFromPDF(content) {
-    return content.toBuffer((err, buffer) => buffer)
+    return content.toBuffer((err, buffer) => {
+      if (err) return console.error(err)
+      return buffer
+    })
   }
-
 }
