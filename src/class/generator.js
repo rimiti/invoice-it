@@ -152,8 +152,6 @@ export default class Generator extends Common {
    */
   _compile(keys) {
     let template = keys.filename === 'order' ? this.order_template : this.invoice_template
-    console.log(keys)
-    console.log(`=========> ${keys.filename} / ${template}`)
     let compiled = jade.compileFile(path.resolve(template))
     return compiled(keys)
   }
@@ -163,14 +161,16 @@ export default class Generator extends Common {
    * @returns {*}
    */
   getInvoice() {
-    return Object.assign({
+    let keys = {
       invoice_header_title: i18n.__({phrase: 'invoice_header_title', locale: this.lang}),
       invoice_header_subject: i18n.__({phrase: 'invoice_header_subject', locale: this.lang}),
       invoice_header_reference: i18n.__({phrase: 'invoice_header_reference', locale: this.lang}),
       invoice_header_date: i18n.__({phrase: 'invoice_header_date', locale: this.lang}),
-      filename: 'invoice',
-      toHTML: () => this._toHTML(),
-      toPDF: () => this._toPDF()
+      filename: 'invoice'
+    }
+    return Object.assign(keys, {
+      toHTML: () => this._toHTML(keys),
+      toPDF: () => this._toPDF(keys)
     }, this._preCompileCommonTranslations())
   }
 
@@ -179,7 +179,7 @@ export default class Generator extends Common {
    * @returns {*}
    */
   getOrder() {
-    return Object.assign({
+    let keys = {
       order_header_title: i18n.__({phrase: 'order_header_title', locale: this.lang}),
       order_header_subject: i18n.__({phrase: 'order_header_subject', locale: this.lang}),
       order_header_reference: i18n.__({phrase: 'order_header_reference', locale: this.lang}),
@@ -206,9 +206,11 @@ export default class Generator extends Common {
       table_total_without_taxes_value: '3,99',
       table_total_taxes_value: '0,08',
       table_total_with_taxes_value: '4,79',
-      filename: 'order',
-      toHTML: () => this._toHTML(),
-      toPDF: () => this._toPDF()
+      filename: 'order'
+    }
+    return Object.assign(keys, {
+      toHTML: () => this._toHTML(keys),
+      toPDF: () => this._toPDF(keys)
     }, this._preCompileCommonTranslations())
   }
 
@@ -217,11 +219,11 @@ export default class Generator extends Common {
    * @returns {{html: *, toFile: (function(*): *)}}
    * @private
    */
-  _toHTML() {
-    const html = this._compile(this.getOrder())
+  _toHTML(keys) {
+    const html = this._compile(keys.filename === 'order' ? this.getOrder() : this.getInvoice())
     return {
       html: html,
-      toFile: (filepath) => this._toFileFromHTML(html, (filepath) ? filepath : `${this.getOrder().filename}.html`)
+      toFile: (filepath) => this._toFileFromHTML(html, (filepath) ? filepath : `${keys.filename}.html`)
     }
   }
 
@@ -231,14 +233,13 @@ export default class Generator extends Common {
    * @returns {*}
    * @private
    */
-  _toPDF() {
-    const pdf = htmlToPdf.create(this._toHTML().html)
+  _toPDF(keys) {
+    const pdf = htmlToPdf.create(this._toHTML(keys).html)
     return {
       pdf: pdf,
-      toFile: (filepath) => this._toFileFromPDF(pdf, (filepath) ? filepath : `${this.getOrder().filename}.pdf`),
+      toFile: (filepath) => this._toFileFromPDF(pdf, (filepath) ? filepath : `${keys.filename}.pdf`),
       toBuffer: (filepath) => this._toBufferFromPDF(pdf),
-      toStream: (filepath) => this._toStreamFromPDF(pdf, (filepath) ? filepath : `${this.getOrder().filename}.pdf`)
-
+      toStream: (filepath) => this._toStreamFromPDF(pdf, (filepath) ? filepath : `${keys.filename}.pdf`)
     }
   }
 
@@ -275,7 +276,7 @@ export default class Generator extends Common {
    */
   _toBufferFromPDF(content) {
     return content.toBuffer((err, buffer) => {
-      if (err) return console.log(err)
+      if (err) return console.error(err)
       return buffer
     })
   }
