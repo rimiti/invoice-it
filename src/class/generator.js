@@ -85,7 +85,7 @@ export default class Generator extends Common {
   }
 
   set date(value) {
-    if(!moment(value).isValid()) throw new Error(`Date not valid`)
+    if (!moment(value).isValid()) throw new Error(`Date not valid`)
     this._date = moment(value).format(this.date_format)
   }
 
@@ -132,7 +132,7 @@ export default class Generator extends Common {
    */
   _compile(keys) {
     let compiled = jade.compileFile(path.resolve('./static/order.jade'))
-    let html = compiled(Object.assign(keys, this._preCompileCommonTranslations()))
+    let html = compiled(keys)
     fs.writeFile('test.html', html) // Only for testing (during developments)
     return html
   }
@@ -147,7 +147,7 @@ export default class Generator extends Common {
   }
 
   getOrder() {
-    return this._compile({
+    return Object.assign({
       order_header_title: i18n.__({phrase: 'order_header_title', locale: this.lang}),
       order_header_subject: i18n.__({phrase: 'order_header_subject', locale: this.lang}),
       order_header_reference: i18n.__({phrase: 'order_header_reference', locale: this.lang}),
@@ -173,7 +173,13 @@ export default class Generator extends Common {
       table_note_content: '',
       table_total_without_taxes_value: '3,99',
       table_total_taxes_value: '0,08',
-      table_total_with_taxes_value: '4,79'
-    })
+      table_total_with_taxes_value: '4,79',
+      toHTML: () => this._toHTML(this)
+    }, this._preCompileCommonTranslations())
   }
+
+  _toHTML() {
+    return this._compile(this.getOrder())
+  }
+
 }
