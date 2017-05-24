@@ -203,7 +203,7 @@ export default class Generator extends Common {
       table_total_with_taxes_value: '4,79',
       filename: 'order',
       toHTML: () => this._toHTML(),
-      toPDF: (filepath) => this._toPDF(filepath)
+      toPDF: () => this._toPDF()
     }, this._preCompileCommonTranslations())
   }
 
@@ -216,7 +216,7 @@ export default class Generator extends Common {
     const html = this._compile(this.getOrder())
     return {
       html: html,
-      toFile: (filepath) => this._toFile(html, (filepath) ? filepath : `${this.getOrder().filename}.html`)
+      toFile: (filepath) => this._toFileFromHTML(html, (filepath) ? filepath : `${this.getOrder().filename}.html`)
     }
   }
 
@@ -226,22 +226,37 @@ export default class Generator extends Common {
    * @returns {*}
    * @private
    */
-  _toPDF(filepath) {
-    return htmlToPdf.create(this._toHTML().html).toFile((filepath) ? filepath : `${this.getOrder().filename}.pdf`, (err, res) => {
-      if (err) return console.log(err)
-      return res
-    })
+  _toPDF() {
+    const pdf = htmlToPdf.create(this._toHTML().html)
+    return {
+      pdf: pdf,
+      toFile: (filepath) => this._toFileFromPDF(pdf, (filepath) ? filepath : `${this.getOrder().filename}.pdf`)
+    }
   }
 
   /**
-   * @description Save content into file
+   * @description Save content into file from toHTML() method
    * @param content
-   * @param path
+   * @param filepath
    * @returns {*}
    * @private
    */
-  _toFile(content, path) {
-    return fs.writeFile(path, content)
+  _toFileFromHTML(content, filepath) {
+    return fs.writeFile(filepath, content)
+  }
+
+  /**
+   * @description Save content into file from toPDF() method
+   * @param content
+   * @param filepath
+   * @returns {*}
+   * @private
+   */
+  _toFileFromPDF(content, filepath) {
+    return content.toFile(filepath, (err, res) => {
+      if (err) return console.log(err)
+      return res
+    })
   }
 
 }
