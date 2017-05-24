@@ -151,7 +151,10 @@ export default class Generator extends Common {
    * @private
    */
   _compile(keys) {
-    let compiled = jade.compileFile(path.resolve('./static/order.jade'))
+    let template = keys.filename === 'order' ? this.order_template : this.invoice_template
+    console.log(keys)
+    console.log(`=========> ${keys.filename} / ${template}`)
+    let compiled = jade.compileFile(path.resolve(template))
     return compiled(keys)
   }
 
@@ -165,6 +168,7 @@ export default class Generator extends Common {
       invoice_header_subject: i18n.__({phrase: 'invoice_header_subject', locale: this.lang}),
       invoice_header_reference: i18n.__({phrase: 'invoice_header_reference', locale: this.lang}),
       invoice_header_date: i18n.__({phrase: 'invoice_header_date', locale: this.lang}),
+      filename: 'invoice',
       toHTML: () => this._toHTML(),
       toPDF: () => this._toPDF()
     }, this._preCompileCommonTranslations())
