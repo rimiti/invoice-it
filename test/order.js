@@ -1,5 +1,6 @@
 import chai from 'chai'
 import generator from '../lib/generator'
+import fs from 'fs'
 chai.should()
 
 describe('Order', () => {
@@ -88,8 +89,11 @@ describe('Order', () => {
   it(`Export to HTML file`, (done) => {
     let order = generator.create(recipient, emitter)
     order.getOrder().toHTML().toFile('dist/order.html')
-    done()
-  }).timeout(1000)
+    setTimeout(() => {
+      fs.existsSync('dist/order.html').should.be.ok
+      done()
+    }, 1500)
+  }).timeout(2000)
 
   it(`Export to PDF file`, (done) => {
     let order = generator.create(recipient, emitter)
