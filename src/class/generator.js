@@ -89,20 +89,39 @@ export default class Generator extends Common {
     this._date = moment(value).format(this.date_format)
   }
 
+  /**
+   * @description Hydrate from configuration
+   * @returns {[string,string,string,string]}
+   */
   itemsToHydrate() {
     return ['logo', 'order_template', 'invoice_template', 'date_format']
   }
 
+  /**
+   * @description Hydrate recipient object
+   * @param obj
+   * @returns {*}
+   */
   recipient(obj) {
     if (!obj) return this._recipient
     return this._recipient.hydrate(obj, this._recipient.itemsToHydrate())
   }
 
+  /**
+   * @description Hydrate emitter object
+   * @param obj
+   * @returns {*}
+   */
   emitter(obj) {
     if (!obj) return this._emitter
     return this._emitter.hydrate(obj, this._emitter.itemsToHydrate())
   }
 
+  /**
+   * @description Precompile translation to merging glabal with custom translations
+   * @returns {{logo: *, header_date: *, table_information, table_description, table_tax, table_quantity, table_price_without_taxes, table_price_without_taxes_unit, table_note, table_total_without_taxes, table_total_taxes, table_total_with_taxes, fromto_phone, fromto_mail, footer, moment: (*|moment.Moment)}}
+   * @private
+   */
   _preCompileCommonTranslations() {
     return {
       logo: this.logo,
@@ -135,6 +154,10 @@ export default class Generator extends Common {
     return compiled(keys)
   }
 
+  /**
+   * @description Return invoice translation keys object
+   * @returns {*}
+   */
   getInvoice() {
     return Object.assign({
       invoice_header_title: i18n.__({phrase: 'invoice_header_title', locale: this.lang}),
@@ -145,6 +168,10 @@ export default class Generator extends Common {
     }, this._preCompileCommonTranslations())
   }
 
+  /**
+   * @description Return order translation keys object
+   * @returns {*}
+   */
   getOrder() {
     return Object.assign({
       order_header_title: i18n.__({phrase: 'order_header_title', locale: this.lang}),
@@ -178,6 +205,11 @@ export default class Generator extends Common {
     }, this._preCompileCommonTranslations())
   }
 
+  /**
+   * @description Export object with html content and exportation functions
+   * @returns {{html: *, toFile: (function(*): *)}}
+   * @private
+   */
   _toHTML() {
     const html = this._compile(this.getOrder())
     return {
@@ -186,6 +218,13 @@ export default class Generator extends Common {
     }
   }
 
+  /**
+   * @description Save content into file
+   * @param content
+   * @param path
+   * @returns {*}
+   * @private
+   */
   _toFile(content, path) {
     return fs.writeFile(path, content)
   }
