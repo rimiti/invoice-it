@@ -231,7 +231,9 @@ export default class Generator extends Common {
     return {
       pdf: pdf,
       toFile: (filepath) => this._toFileFromPDF(pdf, (filepath) ? filepath : `${this.getOrder().filename}.pdf`),
-      toBuffer: () => this._toBufferFromPDF(pdf)
+      toBuffer: (filepath) => this._toBufferFromPDF(pdf),
+      toStream: (filepath) => this._toStreamFromPDF(pdf, (filepath) ? filepath : `${this.getOrder().filename}.pdf`)
+
     }
   }
 
@@ -268,8 +270,22 @@ export default class Generator extends Common {
    */
   _toBufferFromPDF(content) {
     return content.toBuffer((err, buffer) => {
-      if (err) return console.error(err)
+      if (err) return console.log(err)
+      console.log('==> This is a buffer:', Buffer.isBuffer(buffer))
       return buffer
+    })
+  }
+
+  /**
+   * @description Export PDF to file using stream
+   * @param content
+   * @param filepath
+   * @returns {*}
+   * @private
+   */
+  _toStreamFromPDF(content, filepath) {
+    return content.toStream((err, stream) => {
+      return stream.pipe(fs.createWriteStream(filepath))
     })
   }
 }
