@@ -54,16 +54,16 @@ order.recipient.zip_code = '77340'
 order.recipient.city = 'Pontault-Combault'
 order.recipient.country = 'France'
 order.recipient.phone = '06 00 00 00 00'
-order.recipient.mail = 'will.jameson@test.com
+order.recipient.mail = 'will.jameson@test.com'
 
-order.emitter.name = 'Dim Solution',
-order.emitter.street_number = '15',
-order.emitter.street_name = 'Rue Jean Jaures',
-order.emitter.zip_code = '75012',
-order.emitter.city = 'Paris',
-order.emitter.country = 'France',
-order.emitter.phone = '01 00 00 00 00',
-order.emitter.mail = 'contact@dimsolution.com',
+order.emitter.name = 'Dim Solution'
+order.emitter.street_number = '15'
+order.emitter.street_name = 'Rue Jean Jaures'
+order.emitter.zip_code = '75012'
+order.emitter.city = 'Paris'
+order.emitter.country = 'France'
+order.emitter.phone = '01 00 00 00 00'
+order.emitter.mail = 'contact@dimsolution.com'
 order.emitter.website = 'www.dimsolution.com'
 ```
 
@@ -136,16 +136,16 @@ invoice.recipient.zip_code = '77340'
 invoice.recipient.city = 'Pontault-Combault'
 invoice.recipient.country = 'France'
 invoice.recipient.phone = '06 00 00 00 00'
-invoice.recipient.mail = 'will.jameson@test.com
+invoice.recipient.mail = 'will.jameson@test.com'
 
-invoice.emitter.name = 'Dim Solution',
-invoice.emitter.street_number = '15',
-invoice.emitter.street_name = 'Rue Jean Jaures',
-invoice.emitter.zip_code = '75012',
-invoice.emitter.city = 'Paris',
-invoice.emitter.country = 'France',
-invoice.emitter.phone = '01 00 00 00 00',
-invoice.emitter.mail = 'contact@dimsolution.com',
+invoice.emitter.name = 'Dim Solution'
+invoice.emitter.street_number = '15'
+invoice.emitter.street_name = 'Rue Jean Jaures'
+invoice.emitter.zip_code = '75012'
+invoice.emitter.city = 'Paris'
+invoice.emitter.country = 'France'
+invoice.emitter.phone = '01 00 00 00 00'
+invoice.emitter.mail = 'contact@dimsolution.com'
 invoice.emitter.website = 'www.dimsolution.com'
 ```
 
