@@ -6,6 +6,7 @@ import path from 'path'
 import i18n from '../lib/i18n'
 import fs from 'fs'
 import moment from 'moment'
+import htmlToPdf from 'html-pdf'
 
 export default class Generator extends Common {
 
@@ -201,7 +202,8 @@ export default class Generator extends Common {
       table_total_taxes_value: '0,08',
       table_total_with_taxes_value: '4,79',
       filename: 'order',
-      toHTML: (path) => this._toHTML(path)
+      toHTML: () => this._toHTML(),
+      toPDF: (filepath) => this._toPDF(filepath)
     }, this._preCompileCommonTranslations())
   }
 
@@ -214,8 +216,21 @@ export default class Generator extends Common {
     const html = this._compile(this.getOrder())
     return {
       html: html,
-      toFile: (filename) => this._toFile(html, (filename) ? filename : `${this.getOrder().filename}.html`)
+      toFile: (filepath) => this._toFile(html, (filepath) ? filepath : `${this.getOrder().filename}.html`)
     }
+  }
+
+  /**
+   * @description Save content to pdf file
+   * @param filepath
+   * @returns {*}
+   * @private
+   */
+  _toPDF(filepath) {
+    return htmlToPdf.create(this._toHTML().html).toFile((filepath) ? filepath : `${this.getOrder().filename}.pdf`, (err, res) => {
+      if (err) return console.log(err)
+      return res
+    })
   }
 
   /**
