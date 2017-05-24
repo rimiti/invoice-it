@@ -79,15 +79,19 @@ describe('Order', () => {
     done()
   })
 
-  it(`Export to HTML`, (done) => {
-    // TODO: create reference + items + note methods
+  it(`Convert to HTML`, (done) => {
     let order = generator.create(recipient, emitter)
-    order.getOrder()
+    order.getOrder().toHTML().should.be.html
     done()
   })
+
+  it(`Export to HTML file`, (done) => {
+    let order = generator.create(recipient, emitter)
+    order.getOrder().toHTML().toFile('dist/order.html')
+    done()
+  }).timeout(1000)
 
   it(`Export to PDF`, (done) => {
     done()
   })
-
 })
