@@ -132,9 +132,7 @@ export default class Generator extends Common {
    */
   _compile(keys) {
     let compiled = jade.compileFile(path.resolve('./static/order.jade'))
-    let html = compiled(keys)
-    fs.writeFile('test.html', html) // Only for testing (during developments)
-    return html
+    return compiled(keys)
   }
 
   getInvoice() {
@@ -142,7 +140,7 @@ export default class Generator extends Common {
       invoice_header_title: i18n.__({phrase: 'invoice_header_title', locale: this.lang}),
       invoice_header_subject: i18n.__({phrase: 'invoice_header_subject', locale: this.lang}),
       invoice_header_reference: i18n.__({phrase: 'invoice_header_reference', locale: this.lang}),
-      invoice_header_date: i18n.__({phrase: 'invoice_header_date', locale: this.lang})
+      invoice_header_date: i18n.__({phrase: 'invoice_header_date', locale: this.lang}),
       toHTML: () => this._toHTML()
     }, this._preCompileCommonTranslations())
   }
@@ -175,12 +173,21 @@ export default class Generator extends Common {
       table_total_without_taxes_value: '3,99',
       table_total_taxes_value: '0,08',
       table_total_with_taxes_value: '4,79',
-      toHTML: () => this._toHTML()
+      filename: 'order',
+      toHTML: (path) => this._toHTML(path)
     }, this._preCompileCommonTranslations())
   }
 
   _toHTML() {
-    return this._compile(this.getOrder())
+    const html = this._compile(this.getOrder())
+    return {
+      html: html,
+      toFile: (filename) => this._toFile(html, (filename) ? filename : `${this.getOrder().filename}.html`)
+    }
+  }
+
+  _toFile(content, path) {
+    return fs.writeFile(path, content)
   }
 
 }
