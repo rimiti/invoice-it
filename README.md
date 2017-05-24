@@ -169,5 +169,12 @@ Save html invoice into file (default filepath: 'invoice.pdf')
 invoice.getInvoice().toPDF().toFile('./invoice.pdf')
 ```
 
+## Tests
+
+Run tests
+```js
+gulp mocha
+```
+
 ## License
 MIT © [Dimitri DO BAIRRO](https://dimsolution.com)
