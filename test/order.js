@@ -91,7 +91,9 @@ describe('Order', () => {
     done()
   }).timeout(1000)
 
-  it(`Export to PDF`, (done) => {
+  it(`Export to PDF file`, (done) => {
+    let order = generator.create(recipient, emitter)
+    order.getOrder().toPDF().toFile('dist/order.pdf')
     done()
-  })
+  }).timeout(1000)
 })
