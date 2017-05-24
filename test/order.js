@@ -1,7 +1,7 @@
 import chai from 'chai'
 import generator from '../lib/generator'
 import fs from 'fs'
-chai.should()
+let should = chai.should()
 
 describe('Order', () => {
 
@@ -92,6 +92,18 @@ describe('Order', () => {
     setTimeout(() => {
       fs.existsSync('dist/order.html').should.be.ok
       done()
+    }, 1500)
+  }).timeout(2000)
+
+  it(`Check HTML content file`, (done) => {
+    let order = generator.create(recipient, emitter)
+    order.getOrder().toHTML().toFile('dist/order.html')
+    setTimeout(() => {
+      fs.readFile('dist/order.html', 'utf8', (err, data) => {
+        should.not.exist(err)
+        data.should.be.html
+        done()
+      })
     }, 1500)
   }).timeout(2000)
 
