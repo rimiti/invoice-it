@@ -132,3 +132,11 @@ describe('Order', () => {
   }).timeout(5000)
 
 })
+
+
+// Next steps
+// 1. Rajouter Note :
+// 2. Gérer la traduction à la demande (via getter / setter + conf)
+// 3. Gérer la numérotation des commande + factures
+// 4. Gérer les items
+// 5. Gérer la pagination en fonction du nombre d'items
