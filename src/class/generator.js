@@ -302,4 +302,24 @@ export default class Generator extends Common {
       return stream.pipe(fs.createWriteStream(filepath))
     })
   }
+
+  /**
+   * @description Return pattern type and value
+   * @param item
+   * @return {*}
+   * @private
+   */
+  _getPatternType(item) {
+    if (!item.endsWith('}')) throw new Error(`Wrong pattern type`)
+    if (item.startsWith('prefix{')) return {type: 'prefix', value: item.replace('prefix{').slice(0, -1)}
+    if (item.startsWith('separator{')) return {type: 'separator', value: item.replace('separator{').slice(0, -1)}
+    if (item.startsWith('date{')) return {type: 'date', value: moment().format(item.replace('date{').slice(0, -1))}
+
+    if (item.startsWith('id{')) {
+      const id = item.replace('prefix{').slice(0, -1)
+      if (!Number.isInteger(id)) throw new Error(`Id must be a string`)
+      return {type: 'id', value: id}
+    }
+  }
+
 }
