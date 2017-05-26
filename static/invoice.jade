@@ -2,7 +2,7 @@ doctype html
 html(lang='en')
     head
         meta(charset='UTF-8')
-        title Simple invoice html template
+        title=invoice_header_title
     body
         style.
             @import "https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700";
@@ -244,49 +244,56 @@ html(lang='en')
         #container
             #header
                 #logo
-                    img(src='http://placehold.it/230x70&text=logo', alt='')
+                    img(src='#{logo}', alt='')
                 #reference
                     h3
-                        strong Facture
-                    h4 Réf. : FA1703-00001
-                    p Date facturation : 20/03/2017
+                        strong=invoice_header_subject
+                    h4 #{invoice_header_reference} #{invoice_header_reference_value}
+                    p #{invoice_header_date} #{header_date}
             #fromto
                 #from
                     p
-                        strong Your company
+                        strong=emitter_name
                         br
-                        |                8 avenue des Champs Elysées
+                        |   #{emitter_first_name} #{emitter_last_name}
                         br
-                        |                75000 Paris
+                        |                #{emitter_street_number} #{emitter_street_name}
+                        br
+                        |                #{emitter_zip_code} #{emitter_city}
                         br
                         br
-                        |                Tél.: 01 00 00 00 00
+                        |                #{fromto_phone} #{emitter_phone}
                         br
-                        |                Email: contact@website.com
-                        br
-                        |                Web: www.website.com
+                        |                #{fromto_mail} #{emitter_mail}
                 #to
                     p
-                        strong John Doe
+                        strong=recipient_company
                         br
-                        |                10 rue Charles Rouxel
+                        |   #{recipient_first_name} #{recipient_last_name}
                         br
-                        |                77014 Paris
+                        |                #{recipient_street_number} #{recipient_street_name}
+                        br
+                        |                #{recipient_zip_code} #{recipient_city}
+                        br
+                        br
+                        |                #{fromto_phone} #{recipient_phone}
+                        br
+                        |                #{fromto_mail} #{recipient_mail}
             #items
-                p Montants exprimés en Euros
+                p=table_information
                 table
                     tr
-                        th Désignation
-                        th TVA
-                        th P.U. HT
-                        th Qté
-                        th Total HT
+                        th=table_description
+                        th=table_tax
+                        th=table_price_without_taxes_unit
+                        th=table_quantity
+                        th=table_price_without_taxes
                     tr
-                        td Article
-                        td 20%
-                        td 3,99
-                        td 1
-                        td 3,99
+                        td
+                        td
+                        td
+                        td
+                        td
                     tr
                         td
                         td
@@ -397,21 +404,18 @@ html(lang='en')
                         td
             #summary
                 #note
-                    h4 Note :
-                    p Information complémentaire à ajouter.
+                    h4=table_note
+                    p=table_note_content
                 #total
                     table(border='1')
                         tr
-                            td Total HT
-                            td 3,99
+                            td=table_total_without_taxes
+                            td=table_total_without_taxes_value
                         tr
-                            td Total TVA 20%
-                            td 0,80
+                            td=table_total_taxes
+                            td=table_total_taxes_value
                         tr
-                            td Total TTC
-                            td 4,79
+                            td=table_total_with_taxes
+                            td=table_total_with_taxes_value
             #footer
-                p
-                    | Société à responsabilité limité (SARL) - Capital de 1 000 000 € - SIRET: 87564738493127
-                    br
-                    |            NAF-APE: 6202A - Num. TVA: FR28987856541
+                p!=footer
