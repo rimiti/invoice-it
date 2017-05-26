@@ -42,7 +42,7 @@ export default class Generator extends Common {
   }
 
   get order_reference_pattern() {
-    return (!this._order_reference_pattern) ? '$prefix{OR}$date{YYMM}$separator{-}$id{0000}' : this._order_reference_pattern
+    return (!this._order_reference_pattern) ? '$prefix{OR}$date{YYMM}$separator{-}$id{00000}' : this._order_reference_pattern
   }
 
   set order_reference_pattern(value) {
@@ -50,7 +50,7 @@ export default class Generator extends Common {
   }
 
   get invoice_reference_pattern() {
-    return (!this._invoice_reference_pattern) ? '$prefix{IN}$date{YYMM}$separator{-}$id{0000}' : this._invoice_reference_pattern
+    return (!this._invoice_reference_pattern) ? '$prefix{IN}$date{YYMM}$separator{-}$id{00000}' : this._invoice_reference_pattern
   }
 
   set invoice_reference_pattern(value) {
