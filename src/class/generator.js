@@ -173,6 +173,7 @@ export default class Generator extends Common {
       invoice_header_title: i18n.__({phrase: 'invoice_header_title', locale: this.lang}),
       invoice_header_subject: i18n.__({phrase: 'invoice_header_subject', locale: this.lang}),
       invoice_header_reference: i18n.__({phrase: 'invoice_header_reference', locale: this.lang}),
+      order_header_reference_value: this._getReferenceFromPattern(this.invoice_reference_pattern),
       invoice_header_date: i18n.__({phrase: 'invoice_header_date', locale: this.lang}),
       filename: 'invoice'
     }
@@ -191,7 +192,7 @@ export default class Generator extends Common {
       order_header_title: i18n.__({phrase: 'order_header_title', locale: this.lang}),
       order_header_subject: i18n.__({phrase: 'order_header_subject', locale: this.lang}),
       order_header_reference: i18n.__({phrase: 'order_header_reference', locale: this.lang}),
-      // order_header_reference_value: ,
+      order_header_reference_value: this._getReferenceFromPattern(this.order_reference_pattern),
       order_header_date: i18n.__({phrase: 'order_header_date', locale: this.lang}),
       emitter_name: this.emitter().name,
       emitter_street_number: this.emitter().street_number,
@@ -304,22 +305,40 @@ export default class Generator extends Common {
   }
 
   /**
-   * @description Return pattern type and value
+   * @description Return reference
    * @param item
    * @return {*}
    * @private
    */
-  _getPatternType(item) {
-    if (!item.endsWith('}')) throw new Error(`Wrong pattern type`)
-    if (item.startsWith('prefix{')) return {type: 'prefix', value: item.replace('prefix{').slice(0, -1)}
-    if (item.startsWith('separator{')) return {type: 'separator', value: item.replace('separator{').slice(0, -1)}
-    if (item.startsWith('date{')) return {type: 'date', value: moment().format(item.replace('date{').slice(0, -1))}
-
-    if (item.startsWith('id{')) {
-      const id = item.replace('prefix{').slice(0, -1)
-      if (!Number.isInteger(id)) throw new Error(`Id must be a string`)
-      return {type: 'id', value: id}
+  _getReferenceFromPattern(pattern) {
+    let output = ''
+    for (let item of pattern) {
+      if (!item.endsWith('}')) throw new Error(`Wrong pattern type`)
+      else if (item.startsWith('prefix{')) output += item.replace('prefix{').slice(0, -1)
+      else if (item.startsWith('separator{')) output += item.replace('separator{').slice(0, -1)
+      else if (item.startsWith('date{')) output += moment().format(item.replace('date{').slice(0, -1))
+      else if (item.startsWith('id{')) {
+        const id = item.replace('prefix{').slice(0, -1)
+        if (!Number.isInteger(id)) throw new Error(`Id must be a string`)
+        output = (this._id) ? this._apad(this._id, id.length) : this._apad(0, id.length)
+      }
+      else throw new Error(`${item} pattern reference unknown`)
     }
+    return output
+  }
+
+  /**
+   * @description Return number with padding
+   * @example if id = 10, return 0010
+   * @param num
+   * @param size
+   * @return {string}
+   * @private
+   */
+  _apad(num, size) {
+    let output = num.toString()
+    while (output.length < size) output = `0${output}`
+    return output
   }
 
 }
