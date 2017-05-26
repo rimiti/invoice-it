@@ -311,16 +311,17 @@ export default class Generator extends Common {
    * @private
    */
   _getReferenceFromPattern(pattern) {
+    let tmp = pattern.split('$').slice(1)
     let output = ''
-    for (let item of pattern) {
+    for (let item of tmp) {
       if (!item.endsWith('}')) throw new Error(`Wrong pattern type`)
-      else if (item.startsWith('prefix{')) output += item.replace('prefix{').slice(0, -1)
-      else if (item.startsWith('separator{')) output += item.replace('separator{').slice(0, -1)
-      else if (item.startsWith('date{')) output += moment().format(item.replace('date{').slice(0, -1))
+      if (item.startsWith('prefix{')) output += item.replace('prefix{', '').slice(0, -1)
+      else if (item.startsWith('separator{')) output += item.replace('separator{', '').slice(0, -1)
+      else if (item.startsWith('date{')) output += moment().format(item.replace('date{', '').slice(0, -1))
       else if (item.startsWith('id{')) {
-        const id = item.replace('prefix{').slice(0, -1)
-        if (!Number.isInteger(id)) throw new Error(`Id must be a string`)
-        output = (this._id) ? this._apad(this._id, id.length) : this._apad(0, id.length)
+        const id = item.replace('id{', '').slice(0, -1)
+        if (!/^\d+$/.test(id)) throw new Error(`Id must be an integer (${id})`)
+        output += (this._id) ? this._apad(this._id, id.length) : this._apad(0, id.length)
       }
       else throw new Error(`${item} pattern reference unknown`)
     }
