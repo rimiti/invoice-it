@@ -41,12 +41,20 @@ export default class Generator extends Common {
     this._id = value
   }
 
-  get reference() {
-    return this._reference
+  get order_reference_pattern() {
+    return this._order_reference_pattern
   }
 
-  set reference(value) {
-    this._reference = value
+  set order_reference_pattern(value) {
+    this._order_reference_pattern = value
+  }
+
+  get invoice_reference_pattern() {
+    return this._invoice_reference_pattern
+  }
+
+  set invoice_reference_pattern(value) {
+    this._invoice_reference_pattern = value
   }
 
   get logo() {
@@ -95,7 +103,7 @@ export default class Generator extends Common {
    * @returns {[string,string,string,string]}
    */
   itemsToHydrate() {
-    return ['logo', 'order_template', 'invoice_template', 'date_format']
+    return ['logo', 'order_template', 'invoice_template', 'date_format', 'order_reference_pattern', 'invoice_reference_pattern']
   }
 
   /**
@@ -183,6 +191,7 @@ export default class Generator extends Common {
       order_header_title: i18n.__({phrase: 'order_header_title', locale: this.lang}),
       order_header_subject: i18n.__({phrase: 'order_header_subject', locale: this.lang}),
       order_header_reference: i18n.__({phrase: 'order_header_reference', locale: this.lang}),
+      // order_header_reference_value: ,
       order_header_date: i18n.__({phrase: 'order_header_date', locale: this.lang}),
       emitter_name: this.emitter().name,
       emitter_street_number: this.emitter().street_number,
