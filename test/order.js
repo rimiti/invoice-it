@@ -33,6 +33,20 @@ describe('Order', () => {
     website: 'www.dimsolution.com'
   }
 
+  let article1 = {
+    description: 'Apple - Macbook Pro',
+    tax: 20,
+    price: 1200,
+    qt: 1
+  }
+
+  let article2 = {
+    description: 'Github licence',
+    tax: 10,
+    price: 79,
+    qt: 1
+  }
+
   it(`Object auto-filled`, (done) => {
     let order = generator.create(recipient, emitter)
     order.recipient().company_name.should.be.equal('Receiver company')
@@ -131,12 +145,30 @@ describe('Order', () => {
     }, 4000)
   }).timeout(5000)
 
+  it(`Add multiple articles from array`, (done) => {
+    let order = generator.create(recipient, emitter)
+    order.article = [article1, article2]
+    order.article.length.should.be.equal(2)
+    order.article[0].description.should.be.equal('Apple - Macbook Pro')
+    order.article[0].tax.should.be.equal(20)
+    order.article[0].price.should.be.equal(1200)
+    order.article[0].qt.should.be.equal(1)
+    order.article[0].total_product_without_taxes.should.be.equal(1200)
+    order.article[0].total_product_taxes.should.be.equal(240)
+    order.article[0].total_product_with_taxes.should.be.equal(1440)
+    order.article[1].description.should.be.equal('Github licence')
+    order.article[1].tax.should.be.equal(10)
+    order.article[1].price.should.be.equal(79)
+    order.article[1].qt.should.be.equal(1)
+    order.article[1].total_product_without_taxes.should.be.equal(79)
+    order.article[1].total_product_taxes.should.be.equal(7.9)
+    order.article[1].total_product_with_taxes.should.be.equal(86.9)
+    done()
+  })
+
 })
 
-
 // Next steps
-// 1. Rajouter Note :
 // 2. Gérer la traduction à la demande (via getter / setter + conf)
-// 3. Gérer la numérotation des commande + factures
 // 4. Gérer les items
 // 5. Gérer la pagination en fonction du nombre d'items
