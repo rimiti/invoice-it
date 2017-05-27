@@ -262,9 +262,9 @@ html(lang='en')
                         |                #{emitter_zip_code} #{emitter_city}
                         br
                         br
-                        |                #{fromto_phone} #{emitter_phone}
+                        |                #{emitter_phone ? fromto_phone : ''} #{emitter_phone}
                         br
-                        |                #{fromto_mail} #{emitter_mail}
+                        |                #{emitter_mail ? fromto_mail : ''} #{emitter_mail}
                 #to
                     p
                         strong=recipient_company
@@ -276,9 +276,9 @@ html(lang='en')
                         |                #{recipient_zip_code} #{recipient_city}
                         br
                         br
-                        |                #{fromto_phone} #{recipient_phone}
+                        |                #{recipient_phone ? fromto_phone : ''} #{recipient_phone}
                         br
-                        |                #{fromto_mail} #{recipient_mail}
+                        |                #{recipient_mail ? fromto_mail : ''} #{recipient_mail}
             #items
                 p=table_information
                 table
