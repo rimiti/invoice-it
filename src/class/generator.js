@@ -14,6 +14,9 @@ export default class Generator extends Common {
     super()
     this._recipient = (config.recipient) ? new Recipient(config.recipient) : new Recipient()
     this._emitter = (config.emitter) ? new Emitter(config.emitter) : new Emitter()
+    this._total_exc_taxes = 0
+    this._total_taxes = 0
+    this._total_inc_taxes = 0
     this.hydrate(config.global, this.itemsToHydrate())
   }
 
@@ -96,6 +99,34 @@ export default class Generator extends Common {
   set date(value) {
     if (!moment(value).isValid()) throw new Error(`Date not valid`)
     this._date = moment(value).format(this.date_format)
+  }
+
+  get total_exc_taxes() {
+    return this._total_exc_taxes
+  }
+
+  set total_exc_taxes(value) {
+    this._total_exc_taxes = value
+  }
+
+  get total_taxes() {
+    return this._total_taxes
+  }
+
+  set total_taxes(value) {
+    this._total_taxes = value
+  }
+
+  get total_inc_taxes() {
+    return this._total_inc_taxes
+  }
+
+  set total_inc_taxes(value) {
+    this._total_inc_taxes = value
+  }
+
+  get article() {
+    return this._article
   }
 
   /**
