@@ -36,4 +36,21 @@ export default class Common {
     return !isNaN(parseFloat(n)) && isFinite(n)
   }
 
+  /**
+   * @description Round float with x decimals
+   * @param num
+   * @param decimals, default 2 decimals
+   * @returns {number}
+   */
+  round(num, decimals = 2) {
+    if (!("" + num).includes("e")) {
+      return +(Math.round(num + "e+" + decimals) + "e-" + decimals)
+    } else {
+      let arr = ("" + num).split("e")
+      let sig = ""
+      if (+arr[1] + decimals > 0) sig = "+"
+      return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + decimals)) + "e-" + decimals)
+    }
+  }
+
 }
