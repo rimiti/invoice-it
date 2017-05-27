@@ -130,6 +130,48 @@ export default class Generator extends Common {
   }
 
   /**
+   * @description Set
+   * @param array || object
+   * @example article({description: 'Licence', tax: 20, price: 100, qt: 1})
+   * @example article([{description: 'Licence', tax: 20, price: 100, qt: 1}, {description: 'Licence', tax: 20, price: 100, qt: 1}])
+   */
+  set article(value) {
+    if (Array.isArray(value)) {
+      for (let i = 0; i < value.length; i++) {
+        this._checkArticle(value[i])
+        value[i].total_product_without_taxes = value[i].price * value[i].qt
+        value[i].total_product_taxes = this.round(value[i].total_product_without_taxes * (value[i].tax/100))
+        value[i].total_product_with_taxes = this.round(value[i].total_product_without_taxes + value[i].total_product_taxes)
+      }
+      this._article ? this._article.concat(value) : value
+    } else {
+      this._checkArticle(value)
+      value.total_product_without_taxes = value.price * value.qt
+      value.total_product_taxes = this.round(value.total_product_without_taxes * (value.tax/100))
+      value.total_product_with_taxes = this.round(value.total_product_without_taxes + value.total_product_taxes)
+      return (this._article) ? this._article.push(value) : [].concat(value)
+
+    }
+    this._article = (this._article) ? this._article.concat(value) : [].concat(value)
+  }
+
+  /**
+   * @description Check article structure and data
+   * @param article
+   * @private
+   */
+  _checkArticle(article) {
+    if (!article.hasOwnProperty('description')) throw new Error(`Description is attribute is missing`)
+    if (!article.hasOwnProperty('tax')) throw new Error(`Tax attribute is missing`)
+    if (!this.isNumeric(article.tax)) throw new Error(`Tax attribute have to be a number`)
+    if (!article.hasOwnProperty('price')) throw new Error(`Price attribute is missing`)
+    if (!this.isNumeric(article.price)) throw new Error(`Price attribute have to be a number`)
+    if (!article.hasOwnProperty('qt')) throw new Error(`Qt attribute is missing`)
+    if (!this.isNumeric(article.qt)) throw new Error(`Qt attribute have to be an integer`)
+    if (!Number.isInteger(article.qt)) throw new Error(`Qt attribute have to be an integer, not a float`)
+  }
+
+  /**
    * @description Hydrate from configuration
    * @returns {[string,string,string,string]}
    */
@@ -352,24 +394,10 @@ export default class Generator extends Common {
       else if (item.startsWith('id{')) {
         const id = item.replace('id{', '').slice(0, -1)
         if (!/^\d+$/.test(id)) throw new Error(`Id must be an integer (${id})`)
-        output += (this._id) ? this._apad(this._id, id.length) : this._apad(0, id.length)
+        output += (this._id) ? this.pad(this._id, id.length) : this.pad(0, id.length)
       }
       else throw new Error(`${item} pattern reference unknown`)
     }
-    return output
-  }
-
-  /**
-   * @description Return number with padding
-   * @example if id = 10, return 0010
-   * @param num
-   * @param size
-   * @return {string}
-   * @private
-   */
-  _apad(num, size) {
-    let output = num.toString()
-    while (output.length < size) output = `0${output}`
     return output
   }
 
