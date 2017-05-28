@@ -153,6 +153,13 @@ export default class Generator extends Common {
   }
 
   /**
+   * @description Reinitialize article attribute
+   */
+  deleteArticles() {
+    this._article = []
+  }
+
+  /**
    * @description Check article structure and data
    * @param article
    * @private
