@@ -104,12 +104,12 @@ describe('Invoice', () => {
     done()
   })
 
-  // it(`Convert to HTML`, (done) => {
-  //   let invoice = generator.create(recipient, emitter)
-  //   invoice.getInvoice().toHTML().should.be.html
-  //   done()
-  // })
-  //
+  it(`Convert to HTML`, (done) => {
+    let invoice = generator.create(recipient, emitter)
+    invoice.getInvoice().toHTML().should.be.html
+    done()
+  })
+
   it(`Export to HTML file`, (done) => {
     let invoice = generator.create(recipient, emitter)
     invoice.getInvoice().toHTML().toFile(htmlPathfile)
@@ -117,7 +117,7 @@ describe('Invoice', () => {
       fs.existsSync(htmlPathfile).should.be.ok
       done()
     }, 1500)
-  }).timeout(2000)
+  }).timeout(4000)
 
   it(`Check HTML content file`, (done) => {
     let invoice = generator.create(recipient, emitter)
@@ -149,8 +149,8 @@ describe('Invoice', () => {
         data.should.be.ok
         done()
       })
-    }, 4000)
-  }).timeout(5000)
+    }, 10000)
+  }).timeout(12000)
 
   it(`Add multiple articles from array`, (done) => {
     let invoice = generator.create(recipient, emitter)
@@ -208,6 +208,16 @@ describe('Invoice', () => {
     invoice.article[2].total_product_without_taxes.should.be.equal(300)
     invoice.article[2].total_product_taxes.should.be.equal(60)
     invoice.article[2].total_product_with_taxes.should.be.equal(360)
+    done()
+  })
+
+  it(`Delete all articles`, (done) => {
+    let invoice = generator.create(recipient, emitter)
+    invoice.article = article1
+    invoice.article = article2
+    invoice.article.length.should.be.equal(2)
+    invoice.deleteArticles()
+    invoice.article.length.should.be.equal(0)
     done()
   })
 

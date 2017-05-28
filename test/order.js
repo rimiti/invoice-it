@@ -149,8 +149,8 @@ describe('Order', () => {
         data.should.be.ok
         done()
       })
-    }, 4000)
-  }).timeout(5000)
+    }, 10000)
+  }).timeout(12000)
 
   it(`Add multiple articles from array`, (done) => {
     let order = generator.create(recipient, emitter)
@@ -208,6 +208,16 @@ describe('Order', () => {
     order.article[2].total_product_without_taxes.should.be.equal(300)
     order.article[2].total_product_taxes.should.be.equal(60)
     order.article[2].total_product_with_taxes.should.be.equal(360)
+    done()
+  })
+
+  it(`Delete all articles`, (done) => {
+    let order = generator.create(recipient, emitter)
+    order.article = article1
+    order.article = article2
+    order.article.length.should.be.equal(2)
+    order.deleteArticles()
+    order.article.length.should.be.equal(0)
     done()
   })
 
