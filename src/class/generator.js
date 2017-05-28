@@ -17,7 +17,7 @@ export default class Generator extends Common {
     this._total_exc_taxes = 0
     this._total_taxes = 0
     this._total_inc_taxes = 0
-    this.hydrate(config.global, this.itemsToHydrate())
+    this.hydrate(config.global, this._itemsToHydrate())
   }
 
   get template() {
@@ -172,7 +172,7 @@ export default class Generator extends Common {
    * @description Hydrate from configuration
    * @returns {[string,string,string,string]}
    */
-  itemsToHydrate() {
+  _itemsToHydrate() {
     return ['logo', 'order_template', 'invoice_template', 'date_format', 'order_reference_pattern', 'invoice_reference_pattern']
   }
 
@@ -183,7 +183,7 @@ export default class Generator extends Common {
    */
   recipient(obj) {
     if (!obj) return this._recipient
-    return this._recipient.hydrate(obj, this._recipient.itemsToHydrate())
+    return this._recipient.hydrate(obj, this._recipient._itemsToHydrate())
   }
 
   /**
@@ -193,7 +193,7 @@ export default class Generator extends Common {
    */
   emitter(obj) {
     if (!obj) return this._emitter
-    return this._emitter.hydrate(obj, this._emitter.itemsToHydrate())
+    return this._emitter.hydrate(obj, this._emitter._itemsToHydrate())
   }
 
   /**

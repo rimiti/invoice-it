@@ -4,7 +4,7 @@ export default class Recipient extends Common {
 
   constructor(recipient) {
     super()
-    this.hydrate(recipient, this.itemsToHydrate())
+    this.hydrate(recipient, this._itemsToHydrate())
   }
 
   get company_name() {
@@ -87,7 +87,7 @@ export default class Recipient extends Common {
     this._mail = value
   }
 
-  itemsToHydrate() {
+  _itemsToHydrate() {
     return ['company_name', 'first_name', 'last_name', 'street_number', 'street_name', 'zip_code', 'city', 'country', 'phone', 'mail']
   }
 }
