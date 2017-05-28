@@ -20,7 +20,7 @@ export default class Common {
    * @return {string}
    * @private
    */
-  pad(num, size) {
+  pad(num, size = 3) {
     let output = num.toString()
     while (output.length < size) output = `0${output}`
     return output
@@ -44,13 +44,26 @@ export default class Common {
    */
   round(num, decimals = 2) {
     if (!("" + num).includes("e")) {
-      return +(Math.round(num + "e+" + decimals) + "e-" + decimals)
+      return +(Math.round(num + 'e+' + decimals) + 'e-' + decimals)
     } else {
-      let arr = ("" + num).split("e")
-      let sig = ""
-      if (+arr[1] + decimals > 0) sig = "+"
-      return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + decimals)) + "e-" + decimals)
+      let arr = ('' + num).split('e')
+      let sig = ''
+      if (+arr[1] + decimals > 0) sig = '+'
+      return +(Math.round(+arr[0] + 'e' + sig + (+arr[1] + decimals)) + 'e-' + decimals)
     }
+  }
+
+  formatOutputNumber(num, decimals) {
+    let number = num.toString()
+
+    if (number.includes('.')) {
+      let split = number.split('.')
+
+      return (split[1].length === 1) ? `${split[0]}.${split[1]}0` : `${split[0]}.${split[1]}0`
+        `${number}00`
+    }
+
+
   }
 
 }
