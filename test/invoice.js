@@ -33,6 +33,27 @@ describe('Invoice', () => {
     website: 'www.dimsolution.com'
   }
 
+  let article1 = {
+    description: 'Apple - Macbook Pro',
+    tax: 20,
+    price: 1200,
+    qt: 1
+  }
+
+  let article2 = {
+    description: 'Github licence',
+    tax: 10,
+    price: 79,
+    qt: 1
+  }
+
+  let article3 = {
+    description: 'Apple care 1 year',
+    tax: 20,
+    price: 100,
+    qt: 3
+  }
+
   it(`Object auto-filled`, (done) => {
     let invoice = generator.create(recipient, emitter)
     invoice.recipient().company_name.should.be.equal('Receiver company')
@@ -83,12 +104,12 @@ describe('Invoice', () => {
     done()
   })
 
-  it(`Convert to HTML`, (done) => {
-    let invoice = generator.create(recipient, emitter)
-    invoice.getInvoice().toHTML().should.be.html
-    done()
-  })
-
+  // it(`Convert to HTML`, (done) => {
+  //   let invoice = generator.create(recipient, emitter)
+  //   invoice.getInvoice().toHTML().should.be.html
+  //   done()
+  // })
+  //
   it(`Export to HTML file`, (done) => {
     let invoice = generator.create(recipient, emitter)
     invoice.getInvoice().toHTML().toFile(htmlPathfile)
@@ -130,5 +151,64 @@ describe('Invoice', () => {
       })
     }, 4000)
   }).timeout(5000)
+
+  it(`Add multiple articles from array`, (done) => {
+    let invoice = generator.create(recipient, emitter)
+    invoice.article = [article1, article2]
+    invoice.article.length.should.be.equal(2)
+    invoice.article[0].description.should.be.equal('Apple - Macbook Pro')
+    invoice.article[0].tax.should.be.equal(20)
+    invoice.article[0].price.should.be.equal(1200)
+    invoice.article[0].qt.should.be.equal(1)
+    invoice.article[0].total_product_without_taxes.should.be.equal(1200)
+    invoice.article[0].total_product_taxes.should.be.equal(240)
+    invoice.article[0].total_product_with_taxes.should.be.equal(1440)
+    invoice.article[1].description.should.be.equal('Github licence')
+    invoice.article[1].tax.should.be.equal(10)
+    invoice.article[1].price.should.be.equal(79)
+    invoice.article[1].qt.should.be.equal(1)
+    invoice.article[1].total_product_without_taxes.should.be.equal(79)
+    invoice.article[1].total_product_taxes.should.be.equal(7.9)
+    invoice.article[1].total_product_with_taxes.should.be.equal(86.9)
+    invoice.article = article3
+    invoice.article[2].description.should.be.equal('Apple care 1 year')
+    invoice.article[2].tax.should.be.equal(20)
+    invoice.article[2].price.should.be.equal(100)
+    invoice.article[2].qt.should.be.equal(3)
+    invoice.article[2].total_product_without_taxes.should.be.equal(300)
+    invoice.article[2].total_product_taxes.should.be.equal(60)
+    invoice.article[2].total_product_with_taxes.should.be.equal(360)
+    done()
+  })
+
+  it(`Add articles per articles`, (done) => {
+    let invoice = generator.create(recipient, emitter)
+    invoice.article = article1
+    invoice.article = article2
+    invoice.article.length.should.be.equal(2)
+    invoice.article[0].description.should.be.equal('Apple - Macbook Pro')
+    invoice.article[0].tax.should.be.equal(20)
+    invoice.article[0].price.should.be.equal(1200)
+    invoice.article[0].qt.should.be.equal(1)
+    invoice.article[0].total_product_without_taxes.should.be.equal(1200)
+    invoice.article[0].total_product_taxes.should.be.equal(240)
+    invoice.article[0].total_product_with_taxes.should.be.equal(1440)
+    invoice.article[1].description.should.be.equal('Github licence')
+    invoice.article[1].tax.should.be.equal(10)
+    invoice.article[1].price.should.be.equal(79)
+    invoice.article[1].qt.should.be.equal(1)
+    invoice.article[1].total_product_without_taxes.should.be.equal(79)
+    invoice.article[1].total_product_taxes.should.be.equal(7.9)
+    invoice.article[1].total_product_with_taxes.should.be.equal(86.9)
+    invoice.article = [article3]
+    invoice.article[2].description.should.be.equal('Apple care 1 year')
+    invoice.article[2].tax.should.be.equal(20)
+    invoice.article[2].price.should.be.equal(100)
+    invoice.article[2].qt.should.be.equal(3)
+    invoice.article[2].total_product_without_taxes.should.be.equal(300)
+    invoice.article[2].total_product_taxes.should.be.equal(60)
+    invoice.article[2].total_product_with_taxes.should.be.equal(360)
+    done()
+  })
 
 })
