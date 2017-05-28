@@ -143,14 +143,11 @@ export default class Generator extends Common {
         value[i].total_product_taxes = this.round(value[i].total_product_without_taxes * (value[i].tax/100))
         value[i].total_product_with_taxes = this.round(value[i].total_product_without_taxes + value[i].total_product_taxes)
       }
-      this._article ? this._article.concat(value) : value
     } else {
       this._checkArticle(value)
       value.total_product_without_taxes = value.price * value.qt
       value.total_product_taxes = this.round(value.total_product_without_taxes * (value.tax/100))
       value.total_product_with_taxes = this.round(value.total_product_without_taxes + value.total_product_taxes)
-      return (this._article) ? this._article.push(value) : [].concat(value)
-
     }
     this._article = (this._article) ? this._article.concat(value) : [].concat(value)
   }
