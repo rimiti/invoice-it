@@ -231,6 +231,9 @@ describe('Order', () => {
     order.total_exc_taxes.should.be.equal(1579)
     order.total_taxes.should.be.equal(307.9)
     order.total_inc_taxes.should.be.equal(1886.9)
+    order.formatOutputNumber(order.total_exc_taxes).should.be.equal('1579.00')
+    order.formatOutputNumber(order.total_taxes).should.be.equal('307.90')
+    order.formatOutputNumber(order.total_inc_taxes).should.be.equal('1886.90')
     done()
   })
 
