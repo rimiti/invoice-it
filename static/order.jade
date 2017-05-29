@@ -288,120 +288,14 @@ html(lang='en')
                         th=table_price_without_taxes_unit
                         th=table_quantity
                         th=table_price_without_taxes
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
+
+                    each article in articles
+                        tr
+                            td !{article.description}
+                            td !{article.tax}
+                            td !{article.price}
+                            td !{article.qt}
+                            td !{article.total_product_without_taxes}
             #summary
                 #note
                     h4=table_note

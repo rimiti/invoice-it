@@ -252,6 +252,7 @@ export default class Generator extends Common {
       recipient_country: this.recipient().country,
       recipient_phone: this.recipient().phone,
       recipient_mail: this.recipient().mail,
+      articles: this.article,
       table_total_without_taxes_value: this.formatOutputNumber(this.total_exc_taxes),
       table_total_taxes_value: this.formatOutputNumber(this.total_taxes),
       table_total_with_taxes_value: this.formatOutputNumber(this.total_inc_taxes),
