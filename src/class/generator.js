@@ -140,7 +140,7 @@ export default class Generator extends Common {
       for (let i = 0; i < value.length; i++) {
         this._checkArticle(value[i])
         value[i].total_product_without_taxes = value[i].price * value[i].qt
-        value[i].total_product_taxes = this.round(value[i].total_product_without_taxes * (value[i].tax/100))
+        value[i].total_product_taxes = this.round(value[i].total_product_without_taxes * (value[i].tax / 100))
         value[i].total_product_with_taxes = this.round(value[i].total_product_without_taxes + value[i].total_product_taxes)
         this.total_exc_taxes += value[i].total_product_without_taxes
         this.total_inc_taxes += value[i].total_product_with_taxes
@@ -149,7 +149,7 @@ export default class Generator extends Common {
     } else {
       this._checkArticle(value)
       value.total_product_without_taxes = value.price * value.qt
-      value.total_product_taxes = this.round(value.total_product_without_taxes * (value.tax/100))
+      value.total_product_taxes = this.round(value.total_product_without_taxes * (value.tax / 100))
       value.total_product_with_taxes = this.round(value.total_product_without_taxes + value.total_product_taxes)
       this.total_exc_taxes += value.total_product_without_taxes
       this.total_inc_taxes += value.total_product_taxes
@@ -252,6 +252,9 @@ export default class Generator extends Common {
       recipient_country: this.recipient().country,
       recipient_phone: this.recipient().phone,
       recipient_mail: this.recipient().mail,
+      table_total_without_taxes_value: this.formatOutputNumber(this.total_exc_taxes),
+      table_total_taxes_value: this.formatOutputNumber(this.total_taxes),
+      table_total_with_taxes_value: this.formatOutputNumber(this.total_inc_taxes),
       moment: moment()
     }
   }
@@ -299,9 +302,6 @@ export default class Generator extends Common {
       order_header_reference_value: this._getReferenceFromPattern(this.order_reference_pattern),
       order_header_date: i18n.__({phrase: 'order_header_date', locale: this.lang}),
       table_note_content: '',
-      table_total_without_taxes_value: '3,99',
-      table_total_taxes_value: '0,08',
-      table_total_with_taxes_value: '4,79',
       filename: 'order'
     }
     return Object.assign(keys, {
@@ -347,7 +347,9 @@ export default class Generator extends Common {
    * @private
    */
   _toFileFromHTML(content, filepath) {
-    return fs.writeFile(filepath, content)
+    return fs.writeFile(filepath, content, (err) => {
+      if (err) throw err
+    })
   }
 
   /**
