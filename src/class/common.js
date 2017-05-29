@@ -53,17 +53,20 @@ export default class Common {
     }
   }
 
-  formatOutputNumber(num, decimals) {
+  /**
+   * @description Format number to return number with two decimals
+   * @param num
+   * @return {string}
+   */
+  formatOutputNumber(num) {
     let number = num.toString()
-
     if (number.includes('.')) {
       let split = number.split('.')
-
-      return (split[1].length === 1) ? `${split[0]}.${split[1]}0` : `${split[0]}.${split[1]}0`
-        `${number}00`
+      if (split[1].length === 1) return `${split[0]}.${split[1]}0`
+      else if (split[1].length === 2) return number
+      else return `${split[0]}.${split[1][0]}${split[1][1]}`
     }
-
-
+    return `${number}.00`
   }
 
 }
