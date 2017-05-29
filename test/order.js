@@ -208,6 +208,7 @@ describe('Order', () => {
     order.article[2].total_product_without_taxes.should.be.equal(300)
     order.article[2].total_product_taxes.should.be.equal(60)
     order.article[2].total_product_with_taxes.should.be.equal(360)
+    // order.getOrder().toHTML().toFile(htmlPathfile) // only during developments
     done()
   })
 
