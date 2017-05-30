@@ -2,7 +2,7 @@ doctype html
 html(lang='en')
     head
         meta(charset='UTF-8')
-        title=invoice_header_title
+        title=order_header_title
     body
         style.
             @import "https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700";
@@ -244,41 +244,41 @@ html(lang='en')
         #container
             #header
                 #logo
-                    img(src='#{logo}', alt='')
+                    img(src=logo, alt='')
                 #reference
                     h3
-                        strong=invoice_header_subject
-                    h4 #{invoice_header_reference} #{invoice_header_reference_value}
-                    p #{invoice_header_date} #{header_date}
+                        strong=order_header_subject
+                    h4 #{order_header_reference} #{order_header_reference_value}
+                    p #{order_header_date} #{header_date}
             #fromto
                 #from
                     p
                         strong=emitter_name
                         br
-                        |   #{emitter_first_name} #{emitter_last_name}
+                        |       #{emitter_first_name} #{emitter_last_name}
                         br
-                        |                #{emitter_street_number} #{emitter_street_name}
+                        |       #{emitter_street_number} #{emitter_street_name}
                         br
-                        |                #{emitter_zip_code} #{emitter_city}
+                        |       #{emitter_zip_code} #{emitter_city}
                         br
                         br
-                        |                #{emitter_phone ? fromto_phone : ''} #{emitter_phone}
+                        |       #{emitter_phone ? fromto_phone : ''} #{emitter_phone}
                         br
-                        |                #{emitter_mail ? fromto_mail : ''} #{emitter_mail}
+                        |       #{emitter_mail ? fromto_mail : ''} #{emitter_mail}
                 #to
                     p
                         strong=recipient_company
                         br
-                        |   #{recipient_first_name} #{recipient_last_name}
+                        |       #{recipient_first_name} #{recipient_last_name}
                         br
-                        |                #{recipient_street_number} #{recipient_street_name}
+                        |       #{recipient_street_number} #{recipient_street_name}
                         br
-                        |                #{recipient_zip_code} #{recipient_city}
+                        |       #{recipient_zip_code} #{recipient_city}
                         br
                         br
-                        |                #{recipient_phone ? fromto_phone : ''} #{recipient_phone}
+                        |       #{recipient_phone ? fromto_phone : ''} #{recipient_phone}
                         br
-                        |                #{recipient_mail ? fromto_mail : ''} #{recipient_mail}
+                        |       #{recipient_mail ? fromto_mail : ''} #{recipient_mail}
             #items
                 p=table_information
                 table
@@ -288,120 +288,14 @@ html(lang='en')
                         th=table_price_without_taxes_unit
                         th=table_quantity
                         th=table_price_without_taxes
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
+
+                    each article in articles
+                        tr
+                            td #{article.description} #{format}
+                            td #{article.tax}
+                            td #{article.price}
+                            td #{article.qt}
+                            td #{article.total_product_without_taxes}
             #summary
                 #note
                     h4=table_note
