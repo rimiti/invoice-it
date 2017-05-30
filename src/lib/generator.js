@@ -15,8 +15,8 @@ generator.configure({
       "logo": "http://placehold.it/230x70&text=logo",
       "order_reference_pattern": "$prefix{OR}$date{YYMM}$separator{-}$id{00000}",
       "invoice_reference_pattern": "$prefix{IN}$date{YYMM}$separator{-}$id{00000}",
-      "order_template": "./static/order.jade",
-      "invoice_template": "./static/invoice.jade",
+      "order_template": "./static/order.pug",
+      "invoice_template": "./static/invoice.pug",
       "date_format": "DD/MM/YYYY"
     }
   }

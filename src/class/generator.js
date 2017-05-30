@@ -1,7 +1,7 @@
 import Common from './common'
 import Recipient from './recipient'
 import Emitter from './emitter'
-import jade from 'jade'
+import pug from 'pug'
 import path from 'path'
 import i18n from '../lib/i18n'
 import fs from 'fs'
@@ -17,6 +17,7 @@ export default class Generator extends Common {
     this._total_exc_taxes = 0
     this._total_taxes = 0
     this._total_inc_taxes = 0
+    this._article = []
     this.hydrate(config.global, this._itemsToHydrate())
   }
 
@@ -261,14 +262,14 @@ export default class Generator extends Common {
   }
 
   /**
-   * @description Compile jade template to HTML
+   * @description Compile pug template to HTML
    * @param keys
    * @returns {*}
    * @private
    */
   _compile(keys) {
     let template = keys.filename === 'order' ? this.order_template : this.invoice_template
-    let compiled = jade.compileFile(path.resolve(template))
+    let compiled = pug.compileFile(path.resolve(template))
     return compiled(keys)
   }
 
