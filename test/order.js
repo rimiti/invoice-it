@@ -187,10 +187,10 @@ describe('Order', () => {
     order.article = article2
     order.article.length.should.be.equal(2)
     order.article[0].description.should.be.equal('Apple - Macbook Pro')
-    order.article[0].tax.should.be.equal(20)
-    order.article[0].price.should.be.equal(1200)
+    order.article[0].tax.should.be.equal(20.00)
+    order.article[0].price.should.be.equal(1200.00)
     order.article[0].qt.should.be.equal(1)
-    order.article[0].total_product_without_taxes.should.be.equal(1200)
+    order.article[0].total_product_without_taxes.should.be.equal(1200.00)
     order.article[0].total_product_taxes.should.be.equal(240)
     order.article[0].total_product_with_taxes.should.be.equal(1440)
     order.article[1].description.should.be.equal('Github licence')

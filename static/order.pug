@@ -243,7 +243,7 @@ html(lang='en')
             }
 
             .padding-table {
-                margin-top: 3000px;
+                margin-top: 50px;
             }
         #container
             #header
@@ -298,11 +298,11 @@ html(lang='en')
 
                         - var rowPerPage = 0
                         if loopTable === 0
-                            rowPerPage = template_configuration.rows_in_first_page
+                            - rowPerPage = template_configuration.rows_in_first_page
                         else if loopTable === (template_configuration.loop_table - 1)
-                            rowPerPage = template_configuration.rows_in_last_page
+                            - rowPerPage = template_configuration.rows_in_last_page
                         else
-                            rowPerPage = template_configuration.rows_per_pages
+                            - rowPerPage = template_configuration.rows_per_pages
 
                         - for(var row = 0; row <= rowPerPage; row++) {
                         tr
@@ -312,23 +312,27 @@ html(lang='en')
                             td #{articles[row].qt ? articles[row].qt : ''}
                             td #{articles[row].total_product_without_taxes ? articles[row].total_product_without_taxes : ''}
                         - }
+
+                    if loopTable > 0
+                        div(style='page-break-before:always')
+
                 - }
 
 
-    #summary
-        #note
-            h4=table_note
-            p=table_note_content
-        #total
-            table(border='1')
-                tr
-                    td=table_total_without_taxes
-                    td=table_total_without_taxes_value
-                tr
-                    td=table_total_taxes
-                    td=table_total_taxes_value
-                tr
-                    td=table_total_with_taxes
-                    td=table_total_with_taxes_value
-    #footer
-        p!=footer
+    //#summary
+    //    #note
+    //        h4=table_note
+    //        p=table_note_content
+    //    #total
+    //        table(border='1')
+    //            tr
+    //                td=table_total_without_taxes
+    //                td=table_total_without_taxes_value
+    //            tr
+    //                td=table_total_taxes
+    //                td=table_total_taxes_value
+    //            tr
+    //                td=table_total_with_taxes
+    //                td=table_total_with_taxes_value
+    //#footer
+    //    p!=footer

@@ -140,21 +140,21 @@ export default class Generator extends Common {
     if (Array.isArray(value)) {
       for (let i = 0; i < value.length; i++) {
         this._checkArticle(value[i])
-        value[i].total_product_without_taxes = value[i].price * value[i].qt
-        value[i].total_product_taxes = this.round(value[i].total_product_without_taxes * (value[i].tax / 100))
-        value[i].total_product_with_taxes = this.round(value[i].total_product_without_taxes + value[i].total_product_taxes)
-        this.total_exc_taxes += value[i].total_product_without_taxes
-        this.total_inc_taxes += value[i].total_product_with_taxes
-        this.total_taxes += value[i].total_product_taxes
+        value[i].total_product_without_taxes = this.formatOutputNumber(value[i].price * value[i].qt)
+        value[i].total_product_taxes = this.formatOutputNumber(this.round(value[i].total_product_without_taxes * (value[i].tax / 100)))
+        value[i].total_product_with_taxes = this.formatOutputNumber(this.round(value[i].total_product_without_taxes + value[i].total_product_taxes))
+        this.total_exc_taxes += this.formatOutputNumber(value[i].total_product_without_taxes)
+        this.total_inc_taxes += this.formatOutputNumber(value[i].total_product_with_taxes)
+        this.total_taxes += this.formatOutputNumber(value[i].total_product_taxes)
       }
     } else {
       this._checkArticle(value)
-      value.total_product_without_taxes = value.price * value.qt
-      value.total_product_taxes = this.round(value.total_product_without_taxes * (value.tax / 100))
-      value.total_product_with_taxes = this.round(value.total_product_without_taxes + value.total_product_taxes)
-      this.total_exc_taxes += value.total_product_without_taxes
-      this.total_inc_taxes += value.total_product_taxes
-      this.total_taxes += value.total_product_with_taxes
+      value.total_product_without_taxes = this.formatOutputNumber(value.price * value.qt)
+      value.total_product_taxes = this.formatOutputNumber(this.round(value.total_product_without_taxes * (value.tax / 100)))
+      value.total_product_with_taxes = this.formatOutputNumber(this.round(value.total_product_without_taxes + value.total_product_taxes))
+      this.total_exc_taxes += this.formatOutputNumber(value.total_product_without_taxes)
+      this.total_inc_taxes += this.formatOutputNumber(value.total_product_taxes)
+      this.total_taxes += this.formatOutputNumber(value.total_product_with_taxes)
     }
     this._article = (this._article) ? this._article.concat(value) : [].concat(value)
   }
@@ -428,7 +428,7 @@ export default class Generator extends Common {
     let template_rows_per_page = 29
     return {
       rows_in_first_page: (this.article.length > 20) ? template_rows_per_page : 20,
-      rows_per_pages: 45,
+      rows_per_pages: 44,
       rows_in_last_page: 32,
       loop_table: this._roundToCeilMultiple(this.article.length, template_rows_per_page) / template_rows_per_page
     }
