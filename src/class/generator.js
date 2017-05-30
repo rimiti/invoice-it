@@ -257,6 +257,7 @@ export default class Generator extends Common {
       table_total_without_taxes_value: this.formatOutputNumber(this.total_exc_taxes),
       table_total_taxes_value: this.formatOutputNumber(this.total_taxes),
       table_total_with_taxes_value: this.formatOutputNumber(this.total_inc_taxes),
+      template_configuration: this._templateConfiguration(),
       moment: moment()
     }
   }
@@ -416,6 +417,32 @@ export default class Generator extends Common {
       else throw new Error(`${item} pattern reference unknown`)
     }
     return output
+  }
+
+  /**
+   * @description Calculates number of pages and items per page
+   * @return {{rows_in_first_page: number, rows_in_others_pages: number, loop_table: number}}
+   * @private
+   */
+  _templateConfiguration() {
+    let template_rows_per_page = 25
+    return {
+      rows_in_first_page: (this.article.length > 20) ? 25 : 20,
+      rows_in_last_page: 40,
+      rows_per_pages: 40,
+      loop_table: this._roundToCeilMultiple(this.article.length, template_rows_per_page) / template_rows_per_page
+    }
+  }
+
+  /**
+   * @description Round ceil number to  multiple
+   * @param num
+   * @param multiple
+   * @return {number}
+   * @private
+   */
+  _roundToCeilMultiple(num, multiple) {
+    return Math.ceil(num / multiple) * multiple
   }
 
 }
