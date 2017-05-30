@@ -27,8 +27,8 @@
   "dependencies": {
     "html-pdf": "^2.1.0",
     "i18n": "^0.8.3",
-    "jade": "^1.11.0",
     "moment": "^2.18.1",
+    "pug": "^2.0.0-rc.1",
     "source-map-support": "^0.4.15"
   },
   "devDependencies": {
