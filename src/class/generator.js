@@ -87,6 +87,22 @@ export default class Generator extends Common {
     this._invoice_template = value
   }
 
+  get order_note() {
+    return this._order_note
+  }
+
+  set order_note(value) {
+    this._order_note = value
+  }
+
+  get invoice_note() {
+    return this._invoice_note
+  }
+
+  set invoice_note(value) {
+    this._invoice_note = value
+  }
+
   get date_format() {
     return (!this._date_format) ? 'YYYY/MM/DD' : this._date_format
   }
@@ -196,7 +212,7 @@ export default class Generator extends Common {
    * @returns {[string,string,string,string]}
    */
   _itemsToHydrate() {
-    return ['logo', 'order_template', 'invoice_template', 'date_format', 'order_reference_pattern', 'invoice_reference_pattern']
+    return ['logo', 'order_template', 'invoice_template', 'date_format', 'order_reference_pattern', 'invoice_reference_pattern', 'order_note', 'invoice_note']
   }
 
   /**
@@ -291,6 +307,10 @@ export default class Generator extends Common {
       invoice_header_reference: i18n.__({phrase: 'invoice_header_reference', locale: this.lang}),
       invoice_header_reference_value: this._getReferenceFromPattern(this.invoice_reference_pattern),
       invoice_header_date: i18n.__({phrase: 'invoice_header_date', locale: this.lang}),
+      table_note_content: this.invoice_note,
+      note: (note) => {
+        this.invoice_note = note
+      },
       filename: 'invoice'
     }
     return Object.assign(keys, {
@@ -310,7 +330,10 @@ export default class Generator extends Common {
       order_header_reference: i18n.__({phrase: 'order_header_reference', locale: this.lang}),
       order_header_reference_value: this._getReferenceFromPattern(this.order_reference_pattern),
       order_header_date: i18n.__({phrase: 'order_header_date', locale: this.lang}),
-      table_note_content: '',
+      table_note_content: this.order_note,
+      note: (note) => {
+        this.order_note = note
+      },
       filename: 'order'
     }
     return Object.assign(keys, {
