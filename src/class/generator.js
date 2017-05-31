@@ -430,23 +430,38 @@ export default class Generator extends Common {
    */
   _templateConfiguration() {
     let template_rows_per_page = 29
-    return {
+    let templateConfig = {
       rows_in_first_page: (this.article.length > 19) ? template_rows_per_page : 19,
-      rows_per_pages: 44,
-      rows_in_last_page: 35,
-      loop_table: this._roundToCeilMultiple(this.article.length, template_rows_per_page) / template_rows_per_page
+      rows_per_pages: 43,
+      rows_in_last_page: 33,
     }
-  }
 
-  /**
-   * @description Round ceil number to  multiple
-   * @param num
-   * @param multiple
-   * @return {number}
-   * @private
-   */
-  _roundToCeilMultiple(num, multiple) {
-    return Math.ceil(num / multiple) * multiple
+    let nbArticles = this.article.length
+    let loop = 1
+    while (true) {
+
+      if (loop === 1) {
+        nbArticles -= templateConfig.rows_in_first_page
+        if (nbArticles <= 0) {
+          templateConfig.loop_table = (templateConfig.rows_in_first_page !== template_rows_per_page) ? 1 : 2
+          return templateConfig
+        }
+      }
+
+      if (loop >= 2) {
+        if (nbArticles <= templateConfig.rows_in_last_page) {
+          templateConfig.loop_table = loop
+          return templateConfig
+        } else {
+          nbArticles -= templateConfig.rows_per_pages
+          if (nbArticles <= 0) {
+            templateConfig.loop_table = loop
+            return templateConfig
+          }
+        }
+      }
+      loop++
+    }
   }
 
 }
