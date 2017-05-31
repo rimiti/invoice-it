@@ -63,6 +63,14 @@ export default class Generator extends Common {
     this._invoice_reference_pattern = value
   }
 
+  get reference() {
+    return this._reference
+  }
+
+  set reference(value) {
+    this._reference = value
+  }
+
   get logo() {
     return this._logo
   }
@@ -305,7 +313,7 @@ export default class Generator extends Common {
       invoice_header_title: i18n.__({phrase: 'invoice_header_title', locale: this.lang}),
       invoice_header_subject: i18n.__({phrase: 'invoice_header_subject', locale: this.lang}),
       invoice_header_reference: i18n.__({phrase: 'invoice_header_reference', locale: this.lang}),
-      invoice_header_reference_value: this._getReferenceFromPattern(this.invoice_reference_pattern),
+      invoice_header_reference_value: (this.reference) ? this.reference : this._getReferenceFromPattern(this.invoice_reference_pattern),
       invoice_header_date: i18n.__({phrase: 'invoice_header_date', locale: this.lang}),
       table_note_content: this.invoice_note,
       note: (note) => {
@@ -328,7 +336,7 @@ export default class Generator extends Common {
       order_header_title: i18n.__({phrase: 'order_header_title', locale: this.lang}),
       order_header_subject: i18n.__({phrase: 'order_header_subject', locale: this.lang}),
       order_header_reference: i18n.__({phrase: 'order_header_reference', locale: this.lang}),
-      order_header_reference_value: this._getReferenceFromPattern(this.order_reference_pattern),
+      order_header_reference_value: (this.reference) ? this.reference : this._getReferenceFromPattern(this.order_reference_pattern),
       order_header_date: i18n.__({phrase: 'order_header_date', locale: this.lang}),
       table_note_content: this.order_note,
       note: (note) => {
