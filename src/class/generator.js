@@ -431,9 +431,9 @@ export default class Generator extends Common {
   _templateConfiguration() {
     let template_rows_per_page = 29
     return {
-      rows_in_first_page: (this.article.length > 20) ? template_rows_per_page : 20,
+      rows_in_first_page: (this.article.length > 19) ? template_rows_per_page : 19,
       rows_per_pages: 44,
-      rows_in_last_page: 32,
+      rows_in_last_page: 35,
       loop_table: this._roundToCeilMultiple(this.article.length, template_rows_per_page) / template_rows_per_page
     }
   }
