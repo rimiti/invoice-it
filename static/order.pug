@@ -187,7 +187,7 @@ html(lang='en')
             }
 
             #summary {
-                height: 170px;
+                height: 155px;
                 margin-top: 30px
             }
 
@@ -230,7 +230,7 @@ html(lang='en')
                 margin: auto;
                 position: absolute;
                 left: 4%;
-                bottom: 4%;
+                bottom: 20px;
                 right: 4%;
                 border-top: solid grey 1px
             }
@@ -243,7 +243,7 @@ html(lang='en')
             }
 
             .padding-table {
-                margin-top: 50px;
+                margin-top: 60px;
             }
         #container
             #header
@@ -286,7 +286,7 @@ html(lang='en')
             #items
                 p=table_information
 
-
+                - var rowCounter = 0
                 - for(var loopTable = 0; loopTable < template_configuration.loop_table; loopTable++) {
                 table(class=(loopTable === 0 ? '' : 'padding-table'))
                     tr
@@ -305,34 +305,33 @@ html(lang='en')
                             - rowPerPage = template_configuration.rows_per_pages
 
                         - for(var row = 0; row <= rowPerPage; row++) {
-                        tr
-                            td #{articles[row].description ? articles[row].description : ''}
-                            td #{articles[row].tax ? articles[row].tax : ''}
-                            td #{articles[row].price ? articles[row].price : ''}
-                            td #{articles[row].qt ? articles[row].qt : ''}
-                            td #{articles[row].total_product_without_taxes ? articles[row].total_product_without_taxes : ''}
+                            tr
+                                td #{articles[rowCounter] && articles[rowCounter].description ? articles[rowCounter].description : ''}
+                                td #{articles[rowCounter] && articles[rowCounter].tax ? articles[rowCounter].tax + '%': ''}
+                                td #{articles[rowCounter] && articles[rowCounter].price ? articles[rowCounter].price : ''}
+                                td #{articles[rowCounter] && articles[rowCounter].qt ? articles[rowCounter].qt : ''}
+                                td #{articles[rowCounter] && articles[rowCounter].total_product_without_taxes ? articles[rowCounter].total_product_without_taxes : ''}
+                            - rowCounter++
                         - }
 
-                    if loopTable > 0
-                        div(style='page-break-before:always')
-
+                        if loopTable > 0
+                            div(style='page-break-after:always')
                 - }
 
-
-    //#summary
-    //    #note
-    //        h4=table_note
-    //        p=table_note_content
-    //    #total
-    //        table(border='1')
-    //            tr
-    //                td=table_total_without_taxes
-    //                td=table_total_without_taxes_value
-    //            tr
-    //                td=table_total_taxes
-    //                td=table_total_taxes_value
-    //            tr
-    //                td=table_total_with_taxes
-    //                td=table_total_with_taxes_value
-    //#footer
-    //    p!=footer
+            #summary
+                #note
+                    h4=table_note
+                    p=table_note_content
+                #total
+                    table(border='1')
+                        tr
+                            td=table_total_without_taxes
+                            td=table_total_without_taxes_value
+                        tr
+                            td=table_total_taxes
+                            td=table_total_taxes_value
+                        tr
+                            td=table_total_with_taxes
+                            td=table_total_with_taxes_value
+            #footer
+                p!=footer
