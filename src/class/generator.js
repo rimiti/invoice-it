@@ -34,6 +34,8 @@ export default class Generator extends Common {
   }
 
   set lang(value) {
+    value = value.toLowerCase()
+    if (!['en', 'fr'].includes(value)) throw new Error(`Wrong lang, please set 'en' or 'fr'`)
     this._lang = value
   }
 
