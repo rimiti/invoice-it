@@ -16,7 +16,9 @@ generator.configure({
       "order_reference_pattern": "$prefix{OR}$date{YYMM}$separator{-}$id{00000}",
       "invoice_reference_pattern": "$prefix{IN}$date{YYMM}$separator{-}$id{00000}",
       "order_template": "./static/order.pug",
+      "order_note": "",
       "invoice_template": "./static/invoice.pug",
+      "invoice_note": "",
       "date_format": "DD/MM/YYYY"
     }
   }
