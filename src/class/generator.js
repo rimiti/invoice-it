@@ -317,7 +317,7 @@ export default class Generator extends Common {
       invoice_header_date: i18n.__({phrase: 'invoice_header_date', locale: this.lang}),
       table_note_content: this.invoice_note,
       note: (note) => {
-        this.invoice_note = note
+        return (note) ? this.invoice_note = note : this.invoice_note
       },
       filename: 'invoice'
     }
@@ -340,7 +340,7 @@ export default class Generator extends Common {
       order_header_date: i18n.__({phrase: 'order_header_date', locale: this.lang}),
       table_note_content: this.order_note,
       note: (note) => {
-        this.order_note = note
+        return (note) ? this.order_note = note : this.order_note
       },
       filename: 'order'
     }
