@@ -187,7 +187,7 @@ html(lang='en')
             }
 
             #summary {
-                height: 170px;
+                height: 155px;
                 margin-top: 30px
             }
 
@@ -230,7 +230,7 @@ html(lang='en')
                 margin: auto;
                 position: absolute;
                 left: 4%;
-                bottom: 4%;
+                bottom: 20px;
                 right: 4%;
                 border-top: solid grey 1px
             }
@@ -240,6 +240,10 @@ html(lang='en')
                 font-size: 65%;
                 line-height: 140%;
                 text-align: center
+            }
+
+            .padding-table {
+                margin-top: 60px;
             }
         #container
             #header
@@ -281,127 +285,39 @@ html(lang='en')
                         |       #{recipient_mail ? fromto_mail : ''} #{recipient_mail}
             #items
                 p=table_information
-                table
+
+                - var rowCounter = 0
+                - for(var loopTable = 0; loopTable < template_configuration.loop_table; loopTable++) {
+                table(class=(loopTable === 0 ? '' : 'padding-table'))
                     tr
                         th=table_description
                         th=table_tax
                         th=table_price_without_taxes_unit
                         th=table_quantity
                         th=table_price_without_taxes
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
+
+                        - var rowPerPage = 0
+                        if loopTable === 0
+                            - rowPerPage = template_configuration.rows_in_first_page
+                        else if loopTable === (template_configuration.loop_table - 1)
+                            - rowPerPage = template_configuration.rows_in_last_page
+                        else
+                            - rowPerPage = template_configuration.rows_per_pages
+
+                        - for(var row = 0; row <= rowPerPage; row++) {
+                        tr
+                            td #{articles[rowCounter] && articles[rowCounter].description ? articles[rowCounter].description : ''}
+                            td #{articles[rowCounter] && articles[rowCounter].tax ? articles[rowCounter].tax + '%': ''}
+                            td #{articles[rowCounter] && articles[rowCounter].price ? articles[rowCounter].price : ''}
+                            td #{articles[rowCounter] && articles[rowCounter].qt ? articles[rowCounter].qt : ''}
+                            td #{articles[rowCounter] && articles[rowCounter].total_product_without_taxes ? articles[rowCounter].total_product_without_taxes : ''}
+                        - rowCounter++
+                        - }
+
+                        if loopTable > 0
+                            div(style='page-break-after:always')
+                - }
+
             #summary
                 #note
                     h4=table_note
