@@ -145,9 +145,9 @@ export default class Generator extends Common {
         value[i].total_product_with_taxes = this.formatOutputNumber(this.round(parseInt(value[i].total_product_without_taxes) + parseInt(value[i].total_product_taxes)))
         value[i].price = this.formatOutputNumber(value[i].price)
         value[i].tax = this.formatOutputNumber(value[i].tax)
-        this.total_exc_taxes += this.formatOutputNumber(value[i].total_product_without_taxes)
-        this.total_inc_taxes += this.formatOutputNumber(value[i].total_product_with_taxes)
-        this.total_taxes += this.formatOutputNumber(value[i].total_product_taxes)
+        this.total_exc_taxes += parseInt(value[i].total_product_without_taxes)
+        this.total_inc_taxes += parseInt(value[i].total_product_with_taxes)
+        this.total_taxes += parseInt(value[i].total_product_taxes)
       }
     } else {
       this._checkArticle(value)
@@ -156,9 +156,9 @@ export default class Generator extends Common {
       value.total_product_with_taxes = this.formatOutputNumber(this.round(parseInt(value.total_product_without_taxes) + parseInt(value.total_product_taxes)))
       value.price = this.formatOutputNumber(value.price)
       value.tax = this.formatOutputNumber(value.tax)
-      this.total_exc_taxes += this.formatOutputNumber(value.total_product_without_taxes)
-      this.total_inc_taxes += this.formatOutputNumber(value.total_product_taxes)
-      this.total_taxes += this.formatOutputNumber(value.total_product_with_taxes)
+      this.total_exc_taxes += parseInt(value.total_product_without_taxes)
+      this.total_inc_taxes += parseInt(value.total_product_taxes)
+      this.total_taxes += parseInt(value.total_product_with_taxes)
     }
     this._article = (this._article) ? this._article.concat(value) : [].concat(value)
   }
