@@ -187,36 +187,36 @@ describe('Order', () => {
     order.article = article2
     order.article.length.should.be.equal(2)
     order.article[0].description.should.be.equal('Apple - Macbook Pro')
-    order.article[0].tax.should.be.equal(20.00)
-    order.article[0].price.should.be.equal(1200.00)
+    order.article[0].tax.should.be.equal('20.00')
+    order.article[0].price.should.be.equal('1200.00')
     order.article[0].qt.should.be.equal(1)
-    order.article[0].total_product_without_taxes.should.be.equal(1200.00)
-    order.article[0].total_product_taxes.should.be.equal(240)
-    order.article[0].total_product_with_taxes.should.be.equal(1440)
+    order.article[0].total_product_without_taxes.should.be.equal('1200.00')
+    order.article[0].total_product_taxes.should.be.equal('240.00')
+    order.article[0].total_product_with_taxes.should.be.equal('1440.00')
     order.article[1].description.should.be.equal('Github licence')
-    order.article[1].tax.should.be.equal(10)
-    order.article[1].price.should.be.equal(79)
+    order.article[1].tax.should.be.equal('10.00')
+    order.article[1].price.should.be.equal('79.00')
     order.article[1].qt.should.be.equal(1)
-    order.article[1].total_product_without_taxes.should.be.equal(79)
-    order.article[1].total_product_taxes.should.be.equal(7.9)
-    order.article[1].total_product_with_taxes.should.be.equal(86.9)
+    order.article[1].total_product_without_taxes.should.be.equal('79.00')
+    order.article[1].total_product_taxes.should.be.equal('7.90')
+    order.article[1].total_product_with_taxes.should.be.equal('86.00')
     order.article = [article3]
     order.article = [article1, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3]
     order.article = [article1, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3]
     order.article = [article1, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3, article2, article3]
     order.article[2].description.should.be.equal('Apple care 1 year')
-    order.article[2].tax.should.be.equal(20)
-    order.article[2].price.should.be.equal(100)
+    order.article[2].tax.should.be.equal('20.00')
+    order.article[2].price.should.be.equal('100.00')
     order.article[2].qt.should.be.equal(3)
-    order.article[2].total_product_without_taxes.should.be.equal(300)
-    order.article[2].total_product_taxes.should.be.equal(60)
-    order.article[2].total_product_with_taxes.should.be.equal(360)
+    order.article[2].total_product_without_taxes.should.be.equal('300.00')
+    order.article[2].total_product_taxes.should.be.equal('60.00')
+    order.article[2].total_product_with_taxes.should.be.equal('360.00')
     order.getOrder().toPDF().toFile(pdfPathfile) // only during developments
     order.getOrder().toHTML().toFile(htmlPathfile) // only during developments
     setTimeout(() => {
       fs.existsSync(pdfPathfile).should.be.ok
       done()
-    }, 6800)
+    }, 8000)
   }).timeout(12000)
 
   // it(`Delete all articles`, (done) => {
