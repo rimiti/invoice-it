@@ -157,8 +157,8 @@ export default class Generator extends Common {
       value.price = this.formatOutputNumber(value.price)
       value.tax = this.formatOutputNumber(value.tax)
       this.total_exc_taxes += parseInt(value.total_product_without_taxes)
-      this.total_inc_taxes += parseInt(value.total_product_taxes)
-      this.total_taxes += parseInt(value.total_product_with_taxes)
+      this.total_inc_taxes += parseInt(value.total_product_with_taxes)
+      this.total_taxes += parseInt(value.total_product_taxes)
     }
     this._article = (this._article) ? this._article.concat(value) : [].concat(value)
   }
