@@ -60,3 +60,7 @@ typings/
 .env
 
 
+/package-lock.json
+.idea/
+dist/
+package-lock.json
