@@ -4,6 +4,7 @@
   "description": "Order and invoice generator",
   "main": "index.js",
   "scripts": {
+    "prepublish": "gulp",
     "test": "gulp mocha"
   },
   "repository": {
@@ -18,7 +19,10 @@
     "pdf",
     "generator"
   ],
-  "author": "Dimitri DO BAIRRO",
+  "author": {
+    "name": "Dimitri DO BAIRRO",
+    "email": "dimitri.dobairro@dimsolution.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/rimiti/invoice-generator/issues"
