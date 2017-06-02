@@ -383,12 +383,15 @@ export default class Generator extends Common {
    * @description Save content into file from toHTML() method
    * @param content
    * @param filepath
-   * @returns {*}
+   * @returns {Promise}
    * @private
    */
   _toFileFromHTML(content, filepath) {
-    return fs.writeFile(filepath, content, (err) => {
-      if (err) throw err
+    return new Promise((resolve, reject) => {
+      return fs.writeFile(filepath, content, (err) => {
+        if (err) reject(err)
+        return resolve()
+      })
     })
   }
 
@@ -396,7 +399,7 @@ export default class Generator extends Common {
    * @description Save content into file from toPDF() method
    * @param content
    * @param filepath
-   * @returns {*}
+   * @returns {Promise}
    * @private
    */
   _toFileFromPDF(content, filepath) {
