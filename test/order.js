@@ -112,45 +112,37 @@ describe('Order', () => {
 
   it(`Export to HTML file`, (done) => {
     let order = generator.create(recipient, emitter)
-    order.getOrder().toHTML().toFile(htmlPathfile)
-    setTimeout(() => {
-      fs.existsSync(htmlPathfile).should.be.ok
-      done()
-    }, 1500)
-  }).timeout(2000)
+    order.getOrder().toHTML().toFile(htmlPathfile).then(() => done())
+  }).timeout(15000)
 
   it(`Check HTML content file`, (done) => {
     let order = generator.create(recipient, emitter)
     order.getOrder().toHTML().toFile(htmlPathfile)
-    setTimeout(() => {
-      fs.readFile(htmlPathfile, 'utf8', (err, data) => {
-        should.not.exist(err)
-        data.should.be.html
-        done()
+      .then(() => {
+        fs.readFile(htmlPathfile, 'utf8', (err, data) => {
+          should.not.exist(err)
+          data.should.be.html
+          done()
+        })
       })
-    }, 1500)
-  }).timeout(2000)
+  }).timeout(15000)
 
   it(`Export to PDF file`, (done) => {
     let order = generator.create(recipient, emitter)
-    order.getOrder().toPDF().toFile(pdfPathfile)
-    setTimeout(() => {
-      fs.existsSync(pdfPathfile).should.be.ok
-      done()
-    }, 15000)
-  }).timeout(17000)
+    order.getOrder().toPDF().toFile(pdfPathfile).then(() => done())
+  }).timeout(15000)
 
   it(`Check PDF content file`, (done) => {
     let order = generator.create(recipient, emitter)
-    order.getOrder().toPDF().toFile(pdfPathfile)
-    setTimeout(() => {
+    order.getOrder().toPDF().toFile(pdfPathfile).then(() => {
       fs.readFile(pdfPathfile, 'utf8', (err, data) => {
         should.not.exist(err)
         data.should.be.ok
         done()
       })
-    }, 10000)
-  }).timeout(12000)
+    })
+
+  }).timeout(15000)
 
   it(`Add multiple articles from array`, (done) => {
     let order = generator.create(recipient, emitter)
@@ -211,10 +203,11 @@ describe('Order', () => {
     order.total_inc_taxes.should.be.equal(3863)
     order.total_exc_taxes.should.be.equal(3235.27)
     order.total_taxes.should.be.equal(627.73)
-    order.getOrder().toHTML().toFile(htmlPathfile)
-    order.getOrder().toPDF().toFile(pdfPathfile)
-      .then(() => done())
-  })
+    order.getOrder().toHTML().toFile(htmlPathfile).then(() => {
+      return order.getOrder().toPDF().toFile(pdfPathfile)
+        .then(() => done())
+    })
+  }).timeout(15000)
 
   it(`Delete all articles`, (done) => {
     let order = generator.create(recipient, emitter)
