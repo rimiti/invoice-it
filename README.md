@@ -80,11 +80,17 @@ order.getOrder().toHTML()
 Save html order into file (default filepath: 'order.html')
 ```js
 order.getOrder().toHTML().toFile('./order.html')
+  .then(() => {
+      console.log('HTML file created.')
+  })
 ```
 
 Save html order into file (default filepath: 'order.pdf')
 ```js
 order.getOrder().toPDF().toFile('./order.pdf')
+  .then(() => {
+     console.log('PDF file created.')
+  })
 ```
 
 ### Invoice
@@ -162,11 +168,17 @@ invoice.getInvoice().toHTML()
 Save html invoice into file (default filepath: 'invoice.html')
 ```js
 invoice.getInvoice().toHTML().toFile('./invoice.html')
+  .then(() => {
+      console.log('HTML file created.')
+  })
 ```
 
 Save html invoice into file (default filepath: 'invoice.pdf')
 ```js
 invoice.getInvoice().toPDF().toFile('./invoice.pdf')
+  .then(() => {
+      console.log('PDF file created.')
+  })
 ```
 
 ## Tests
