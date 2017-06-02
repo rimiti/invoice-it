@@ -5,6 +5,7 @@
   "license": "MIT",
   "main": "dist/lib/generator.js",
   "scripts": {
+    "postlocalinstall": "gulp",
     "prepublish": "gulp",
     "test": "gulp mocha"
   },
