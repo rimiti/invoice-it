@@ -14,9 +14,6 @@ _i18n2.default.configure({
     locales: ['en', 'fr'],
     directory: __dirname + '/../config/locales',
     defaultLocale: 'en',
-    logDebugFn: function logDebugFn(message) {
-        return console.log('debug', message);
-    },
     logWarnFn: function logWarnFn(message) {
         return console.warn('warn', message);
     },
