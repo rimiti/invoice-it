@@ -2,7 +2,8 @@
   "name": "invoice-generator",
   "version": "1.0.0",
   "description": "Order and invoice generator",
-  "main": "index.js",
+  "license": "MIT",
+  "main": "dist/lib/generator.js",
   "scripts": {
     "prepublish": "gulp",
     "test": "gulp mocha"
@@ -21,11 +22,14 @@
   ],
   "author": {
     "name": "Dimitri DO BAIRRO",
-    "email": "dimitri.dobairro@dimsolution.com"
+    "email": "dimitri.dobairro@dimsolution.com",
+    "url": "dimsolution.com"
   },
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/rimiti/invoice-generator/issues"
+  },
+  "engines": {
+    "node": ">=6"
   },
   "homepage": "https://github.com/rimiti/invoice-generator#readme",
   "dependencies": {
