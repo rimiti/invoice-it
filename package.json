@@ -1,15 +1,11 @@
 {
   "name": "invoice-generator",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Order and invoice generator",
   "license": "MIT",
   "main": "dist/lib/generator.js",
   "scripts": {
-    "preinstall": "echo Depuis preinstall",
-    "postinstall": "echo Depuis postinstall",
-    "prepublish": "echo Depuis prepublish",
-    "prepare": "echo Depuis prepare",
-    "install": "gulp",
+    "prepublish": "gulp",
     "test": "gulp mocha"
   },
   "repository": {
