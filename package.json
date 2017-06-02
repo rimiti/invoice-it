@@ -6,6 +6,7 @@
   "main": "dist/lib/generator.js",
   "scripts": {
     "prepare": "gulp",
+    "prepublish": "gulp",
     "test": "gulp mocha"
   },
   "repository": {
