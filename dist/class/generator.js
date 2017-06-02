@@ -320,15 +320,18 @@ var Generator = function (_Common) {
      * @description Save content into file from toHTML() method
      * @param content
      * @param filepath
-     * @returns {*}
+     * @returns {Promise}
      * @private
      */
 
   }, {
     key: '_toFileFromHTML',
     value: function _toFileFromHTML(content, filepath) {
-      return _fs2.default.writeFile(filepath, content, function (err) {
-        if (err) throw err;
+      return new Promise(function (resolve, reject) {
+        return _fs2.default.writeFile(filepath, content, function (err) {
+          if (err) reject(err);
+          return resolve();
+        });
       });
     }
 
@@ -336,16 +339,18 @@ var Generator = function (_Common) {
      * @description Save content into file from toPDF() method
      * @param content
      * @param filepath
-     * @returns {*}
+     * @returns {Promise}
      * @private
      */
 
   }, {
     key: '_toFileFromPDF',
     value: function _toFileFromPDF(content, filepath) {
-      return content.toFile(filepath, function (err, res) {
-        if (err) return console.error(err);
-        return res;
+      return new Promise(function (resolve, reject) {
+        return content.toFile(filepath, function (err, res) {
+          if (err) return reject(err);
+          return resolve(res);
+        });
       });
     }
 
