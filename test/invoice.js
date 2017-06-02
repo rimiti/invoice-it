@@ -112,45 +112,37 @@ describe('Invoice', () => {
 
   it(`Export to HTML file`, (done) => {
     let invoice = generator.create(recipient, emitter)
-    invoice.getInvoice().toHTML().toFile(htmlPathfile)
-    setTimeout(() => {
-      fs.existsSync(htmlPathfile).should.be.ok
-      done()
-    }, 1500)
-  }).timeout(2000)
+    invoice.getInvoice().toHTML().toFile(htmlPathfile).then(() => done())
+  }).timeout(15000)
 
   it(`Check HTML content file`, (done) => {
     let invoice = generator.create(recipient, emitter)
     invoice.getInvoice().toHTML().toFile(htmlPathfile)
-    setTimeout(() => {
-      fs.readFile(htmlPathfile, 'utf8', (err, data) => {
-        should.not.exist(err)
-        data.should.be.html
-        done()
+      .then(() => {
+        fs.readFile(htmlPathfile, 'utf8', (err, data) => {
+          should.not.exist(err)
+          data.should.be.html
+          done()
+        })
       })
-    }, 1500)
-  }).timeout(2000)
+  }).timeout(15000)
 
   it(`Export to PDF file`, (done) => {
     let invoice = generator.create(recipient, emitter)
-    invoice.getInvoice().toPDF().toFile(pdfPathfile)
-    setTimeout(() => {
-      fs.existsSync(pdfPathfile).should.be.ok
-      done()
-    }, 15000)
-  }).timeout(17000)
+    invoice.getInvoice().toPDF().toFile(pdfPathfile).then(() => done())
+  }).timeout(15000)
 
   it(`Check PDF content file`, (done) => {
     let invoice = generator.create(recipient, emitter)
-    invoice.getInvoice().toPDF().toFile(pdfPathfile)
-    setTimeout(() => {
+    invoice.getInvoice().toPDF().toFile(pdfPathfile).then(() => {
       fs.readFile(pdfPathfile, 'utf8', (err, data) => {
         should.not.exist(err)
         data.should.be.ok
         done()
       })
-    }, 10000)
-  }).timeout(12000)
+    })
+
+  }).timeout(15000)
 
   it(`Add multiple articles from array`, (done) => {
     let invoice = generator.create(recipient, emitter)
@@ -211,13 +203,11 @@ describe('Invoice', () => {
     invoice.total_inc_taxes.should.be.equal(3863)
     invoice.total_exc_taxes.should.be.equal(3235.27)
     invoice.total_taxes.should.be.equal(627.73)
-    invoice.getInvoice().toHTML().toFile(htmlPathfile)
-    invoice.getInvoice().toPDF().toFile(pdfPathfile)
-    setTimeout(() => {
-      fs.existsSync(pdfPathfile).should.be.ok
-      done()
-    }, 15000)
-  }).timeout(17000)
+    invoice.getInvoice().toHTML().toFile(htmlPathfile).then(() => {
+      return invoice.getInvoice().toPDF().toFile(pdfPathfile)
+        .then(() => done())
+    })
+  }).timeout(15000)
 
   it(`Delete all articles`, (done) => {
     let invoice = generator.create(recipient, emitter)
