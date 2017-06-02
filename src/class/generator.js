@@ -400,9 +400,11 @@ export default class Generator extends Common {
    * @private
    */
   _toFileFromPDF(content, filepath) {
-    return content.toFile(filepath, (err, res) => {
-      if (err) return console.error(err)
-      return res
+    return new Promise((resolve, reject) => {
+      return content.toFile(filepath, (err, res) => {
+        if (err) return reject(err)
+        return resolve(res)
+      })
     })
   }
 
