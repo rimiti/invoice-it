@@ -5,6 +5,8 @@
   "license": "MIT",
   "main": "dist/lib/generator.js",
   "scripts": {
+    "preinstall": "gulp",
+    "install": "gulp",
     "prepare": "gulp",
     "prepublish": "gulp",
     "test": "gulp mocha"
