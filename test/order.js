@@ -213,11 +213,8 @@ describe('Order', () => {
     order.total_taxes.should.be.equal(627.73)
     order.getOrder().toHTML().toFile(htmlPathfile)
     order.getOrder().toPDF().toFile(pdfPathfile)
-    setTimeout(() => {
-      fs.existsSync(pdfPathfile).should.be.ok
-      done()
-    }, 15000)
-  }).timeout(17000)
+      .then(() => done())
+  })
 
   it(`Delete all articles`, (done) => {
     let order = generator.create(recipient, emitter)
