@@ -34,6 +34,7 @@ export default class Generator extends Common {
   }
 
   set lang(value) {
+    console.log(`=======> lang: ${value}`)
     value = value.toLowerCase()
     if (!['en', 'fr'].includes(value)) throw new Error(`Wrong lang, please set 'en' or 'fr'`)
     this._lang = value
@@ -220,7 +221,7 @@ export default class Generator extends Common {
    * @returns {[string,string,string,string]}
    */
   _itemsToHydrate() {
-    return ['logo', 'order_template', 'invoice_template', 'date_format', 'order_reference_pattern', 'invoice_reference_pattern', 'order_note', 'invoice_note']
+    return ['logo', 'order_template', 'invoice_template', 'date_format', 'order_reference_pattern', 'invoice_reference_pattern', 'order_note', 'invoice_note', 'lang']
   }
 
   /**
