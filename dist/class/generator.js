@@ -109,7 +109,7 @@ var Generator = function (_Common) {
   }, {
     key: '_itemsToHydrate',
     value: function _itemsToHydrate() {
-      return ['logo', 'order_template', 'invoice_template', 'date_format', 'order_reference_pattern', 'invoice_reference_pattern', 'order_note', 'invoice_note'];
+      return ['logo', 'order_template', 'invoice_template', 'date_format', 'order_reference_pattern', 'invoice_reference_pattern', 'order_note', 'invoice_note', 'lang'];
     }
 
     /**
@@ -219,7 +219,7 @@ var Generator = function (_Common) {
         invoice_header_title: _i18n2.default.__({ phrase: 'invoice_header_title', locale: this.lang }),
         invoice_header_subject: _i18n2.default.__({ phrase: 'invoice_header_subject', locale: this.lang }),
         invoice_header_reference: _i18n2.default.__({ phrase: 'invoice_header_reference', locale: this.lang }),
-        invoice_header_reference_value: this.reference ? this.reference : this._getReferenceFromPattern(this.invoice_reference_pattern),
+        invoice_header_reference_value: this.getReferenceFromPattern('invoice'),
         invoice_header_date: _i18n2.default.__({ phrase: 'invoice_header_date', locale: this.lang }),
         table_note_content: this.invoice_note,
         note: function note(_note) {
@@ -251,7 +251,7 @@ var Generator = function (_Common) {
         order_header_title: _i18n2.default.__({ phrase: 'order_header_title', locale: this.lang }),
         order_header_subject: _i18n2.default.__({ phrase: 'order_header_subject', locale: this.lang }),
         order_header_reference: _i18n2.default.__({ phrase: 'order_header_reference', locale: this.lang }),
-        order_header_reference_value: this.reference ? this.reference : this._getReferenceFromPattern(this.order_reference_pattern),
+        order_header_reference_value: this.getReferenceFromPattern('order'),
         order_header_date: _i18n2.default.__({ phrase: 'order_header_date', locale: this.lang }),
         table_note_content: this.order_note,
         note: function note(_note2) {
@@ -267,6 +267,65 @@ var Generator = function (_Common) {
           return _this3._toPDF(keys);
         }
       }, this._preCompileCommonTranslations());
+    }
+
+    /**
+     * @description Return reference from pattern
+     * @param type
+     * @return {*}
+     */
+
+  }, {
+    key: 'getReferenceFromPattern',
+    value: function getReferenceFromPattern(type) {
+      if (!['order', 'invoice'].includes(type)) throw new Error('Type have to be "order" or "invoice"');
+      if (this.reference) return this.reference;
+      return this.setReferenceFromPattern(type === 'order' ? this.order_reference_pattern : this.invoice_reference_pattern);
+    }
+
+    /**
+     * @description Set reference
+     * @param item
+     * @return {*}
+     * @private
+     */
+
+  }, {
+    key: 'setReferenceFromPattern',
+    value: function setReferenceFromPattern(pattern) {
+      var tmp = pattern.split('$').slice(1);
+      var output = '';
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = tmp[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var item = _step.value;
+
+          if (!item.endsWith('}')) throw new Error('Wrong pattern type');
+          if (item.startsWith('prefix{')) output += item.replace('prefix{', '').slice(0, -1);else if (item.startsWith('separator{')) output += item.replace('separator{', '').slice(0, -1);else if (item.startsWith('date{')) output += (0, _moment2.default)().format(item.replace('date{', '').slice(0, -1));else if (item.startsWith('id{')) {
+            var id = item.replace('id{', '').slice(0, -1);
+            if (!/^\d+$/.test(id)) throw new Error('Id must be an integer (' + id + ')');
+            output += this._id ? this.pad(this._id, id.length) : this.pad(0, id.length);
+          } else throw new Error(item + ' pattern reference unknown');
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      return output;
     }
 
     /**
@@ -384,51 +443,6 @@ var Generator = function (_Common) {
       return content.toStream(function (err, stream) {
         return stream.pipe(_fs2.default.createWriteStream(filepath));
       });
-    }
-
-    /**
-     * @description Return reference
-     * @param item
-     * @return {*}
-     * @private
-     */
-
-  }, {
-    key: '_getReferenceFromPattern',
-    value: function _getReferenceFromPattern(pattern) {
-      var tmp = pattern.split('$').slice(1);
-      var output = '';
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = tmp[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var item = _step.value;
-
-          if (!item.endsWith('}')) throw new Error('Wrong pattern type');
-          if (item.startsWith('prefix{')) output += item.replace('prefix{', '').slice(0, -1);else if (item.startsWith('separator{')) output += item.replace('separator{', '').slice(0, -1);else if (item.startsWith('date{')) output += (0, _moment2.default)().format(item.replace('date{', '').slice(0, -1));else if (item.startsWith('id{')) {
-            var id = item.replace('id{', '').slice(0, -1);
-            if (!/^\d+$/.test(id)) throw new Error('Id must be an integer (' + id + ')');
-            output += this._id ? this.pad(this._id, id.length) : this.pad(0, id.length);
-          } else throw new Error(item + ' pattern reference unknown');
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-
-      return output;
     }
 
     /**

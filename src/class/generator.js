@@ -313,7 +313,7 @@ export default class Generator extends Common {
       invoice_header_title: i18n.__({phrase: 'invoice_header_title', locale: this.lang}),
       invoice_header_subject: i18n.__({phrase: 'invoice_header_subject', locale: this.lang}),
       invoice_header_reference: i18n.__({phrase: 'invoice_header_reference', locale: this.lang}),
-      invoice_header_reference_value: (this.reference) ? this.reference : this._getReferenceFromPattern(this.invoice_reference_pattern),
+      invoice_header_reference_value: this.getReferenceFromPattern('invoice'),
       invoice_header_date: i18n.__({phrase: 'invoice_header_date', locale: this.lang}),
       table_note_content: this.invoice_note,
       note: (note) => {
@@ -336,7 +336,7 @@ export default class Generator extends Common {
       order_header_title: i18n.__({phrase: 'order_header_title', locale: this.lang}),
       order_header_subject: i18n.__({phrase: 'order_header_subject', locale: this.lang}),
       order_header_reference: i18n.__({phrase: 'order_header_reference', locale: this.lang}),
-      order_header_reference_value: (this.reference) ? this.reference : this._getReferenceFromPattern(this.order_reference_pattern),
+      order_header_reference_value: this.getReferenceFromPattern('order'),
       order_header_date: i18n.__({phrase: 'order_header_date', locale: this.lang}),
       table_note_content: this.order_note,
       note: (note) => {
@@ -348,6 +348,41 @@ export default class Generator extends Common {
       toHTML: () => this._toHTML(keys),
       toPDF: () => this._toPDF(keys)
     }, this._preCompileCommonTranslations())
+  }
+
+  /**
+   * @description Return reference from pattern
+   * @param type
+   * @return {*}
+   */
+  getReferenceFromPattern(type) {
+    if (!['order', 'invoice'].includes(type)) throw new Error(`Type have to be "order" or "invoice"`)
+    if (this.reference) return this.reference
+    return this.setReferenceFromPattern((type === 'order') ? this.order_reference_pattern : this.invoice_reference_pattern)
+  }
+
+  /**
+   * @description Set reference
+   * @param item
+   * @return {*}
+   * @private
+   */
+  setReferenceFromPattern(pattern) {
+    let tmp = pattern.split('$').slice(1)
+    let output = ''
+    for (let item of tmp) {
+      if (!item.endsWith('}')) throw new Error(`Wrong pattern type`)
+      if (item.startsWith('prefix{')) output += item.replace('prefix{', '').slice(0, -1)
+      else if (item.startsWith('separator{')) output += item.replace('separator{', '').slice(0, -1)
+      else if (item.startsWith('date{')) output += moment().format(item.replace('date{', '').slice(0, -1))
+      else if (item.startsWith('id{')) {
+        const id = item.replace('id{', '').slice(0, -1)
+        if (!/^\d+$/.test(id)) throw new Error(`Id must be an integer (${id})`)
+        output += (this._id) ? this.pad(this._id, id.length) : this.pad(0, id.length)
+      }
+      else throw new Error(`${item} pattern reference unknown`)
+    }
+    return output
   }
 
   /**
@@ -435,30 +470,6 @@ export default class Generator extends Common {
     return content.toStream((err, stream) => {
       return stream.pipe(fs.createWriteStream(filepath))
     })
-  }
-
-  /**
-   * @description Return reference
-   * @param item
-   * @return {*}
-   * @private
-   */
-  _getReferenceFromPattern(pattern) {
-    let tmp = pattern.split('$').slice(1)
-    let output = ''
-    for (let item of tmp) {
-      if (!item.endsWith('}')) throw new Error(`Wrong pattern type`)
-      if (item.startsWith('prefix{')) output += item.replace('prefix{', '').slice(0, -1)
-      else if (item.startsWith('separator{')) output += item.replace('separator{', '').slice(0, -1)
-      else if (item.startsWith('date{')) output += moment().format(item.replace('date{', '').slice(0, -1))
-      else if (item.startsWith('id{')) {
-        const id = item.replace('id{', '').slice(0, -1)
-        if (!/^\d+$/.test(id)) throw new Error(`Id must be an integer (${id})`)
-        output += (this._id) ? this.pad(this._id, id.length) : this.pad(0, id.length)
-      }
-      else throw new Error(`${item} pattern reference unknown`)
-    }
-    return output
   }
 
   /**

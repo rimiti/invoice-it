@@ -29,7 +29,8 @@ _class2.default.configure({
     "order_note": "",
     "invoice_template": __dirname + "/../../static/invoice.pug",
     "invoice_note": "",
-    "date_format": "DD/MM/YYYY"
+    "date_format": "DD/MM/YYYY",
+    "lang": "en"
   }
 });
 
