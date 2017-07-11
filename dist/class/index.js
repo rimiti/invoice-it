@@ -8,6 +8,10 @@ var _generator = require('./generator');
 
 var _generator2 = _interopRequireDefault(_generator);
 
+var _jsonOverride = require('json-override');
+
+var _jsonOverride2 = _interopRequireDefault(_jsonOverride);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var configuration = void 0;
@@ -19,7 +23,7 @@ exports.default = {
    * @param config
    */
   configure: function configure(config) {
-    return configuration = config;
+    return configuration = (0, _jsonOverride2.default)(configuration, config);
   },
 
   /**

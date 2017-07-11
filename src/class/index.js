@@ -1,4 +1,5 @@
 import Generator from './generator'
+import jsonOverride from 'json-override'
 
 let configuration
 
@@ -8,7 +9,7 @@ export default {
    * @description Configure the generator with object config
    * @param config
    */
-  configure: (config) => configuration = config,
+  configure: (config) => configuration = jsonOverride(configuration, config),
 
   /**
    * @description Generate generator with configuration
