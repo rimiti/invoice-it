@@ -106,7 +106,7 @@ describe('Order', () => {
 
   it(`Convert to HTML`, (done) => {
     let order = generator.create(recipient, emitter)
-    order.getOrder().toHTML().should.be.html
+    order.getOrder().toHTML().should.not.be.empty
     done()
   })
 
@@ -121,7 +121,7 @@ describe('Order', () => {
       .then(() => {
         fs.readFile(htmlPathfile, 'utf8', (err, data) => {
           should.not.exist(err)
-          data.should.be.html
+          data.should.not.be.empty
           done()
         })
       })
