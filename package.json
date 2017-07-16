@@ -33,6 +33,7 @@
   "homepage": "https://github.com/rimiti/invoice-generator#readme",
   "dependencies": {
     "html-pdf": "^2.1.0",
+    "i18n-factory": "0.0.2",
     "json-override": "^0.2.0",
     "moment": "^2.18.1",
     "pug": "^2.0.0-rc.2",
