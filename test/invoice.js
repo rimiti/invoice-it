@@ -106,7 +106,7 @@ describe('Invoice', () => {
 
   it(`Convert to HTML`, (done) => {
     let invoice = generator.create(recipient, emitter)
-    invoice.getInvoice().toHTML().should.be.html
+    invoice.getInvoice().toHTML().should.not.be.empty
     done()
   })
 
@@ -121,7 +121,7 @@ describe('Invoice', () => {
       .then(() => {
         fs.readFile(htmlPathfile, 'utf8', (err, data) => {
           should.not.exist(err)
-          data.should.be.html
+          data.should.not.be.empty
           done()
         })
       })
