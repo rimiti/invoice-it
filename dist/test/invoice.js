@@ -119,7 +119,7 @@ describe('Invoice', function () {
 
   it('Convert to HTML', function (done) {
     var invoice = _generator2.default.create(recipient, emitter);
-    invoice.getInvoice().toHTML().should.be.html;
+    invoice.getInvoice().toHTML().should.not.be.empty;
     done();
   });
 
@@ -135,7 +135,7 @@ describe('Invoice', function () {
     invoice.getInvoice().toHTML().toFile(htmlPathfile).then(function () {
       _fs2.default.readFile(htmlPathfile, 'utf8', function (err, data) {
         should.not.exist(err);
-        data.should.be.html;
+        data.should.not.be.empty;
         done();
       });
     });

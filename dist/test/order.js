@@ -119,7 +119,7 @@ describe('Order', function () {
 
   it('Convert to HTML', function (done) {
     var order = _generator2.default.create(recipient, emitter);
-    order.getOrder().toHTML().should.be.html;
+    order.getOrder().toHTML().should.not.be.empty;
     done();
   });
 
@@ -135,7 +135,7 @@ describe('Order', function () {
     order.getOrder().toHTML().toFile(htmlPathfile).then(function () {
       _fs2.default.readFile(htmlPathfile, 'utf8', function (err, data) {
         should.not.exist(err);
-        data.should.be.html;
+        data.should.not.be.empty;
         done();
       });
     });
