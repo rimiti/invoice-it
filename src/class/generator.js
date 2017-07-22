@@ -111,6 +111,14 @@ export default class Generator extends Common {
     this._invoice_note = value
   }
 
+  get footer() {
+    return this._footer
+  }
+
+  set footer(value) {
+    this._footer = value
+  }
+
   get date_format() {
     return (!this._date_format) ? 'YYYY/MM/DD' : this._date_format
   }
@@ -220,7 +228,7 @@ export default class Generator extends Common {
    * @returns {[string,string,string,string]}
    */
   _itemsToHydrate() {
-    return ['logo', 'order_template', 'invoice_template', 'date_format', 'order_reference_pattern', 'invoice_reference_pattern', 'order_note', 'invoice_note', 'lang']
+    return ['logo', 'order_template', 'invoice_template', 'date_format', 'order_reference_pattern', 'invoice_reference_pattern', 'order_note', 'invoice_note', 'lang', 'footer']
   }
 
   /**
@@ -264,7 +272,7 @@ export default class Generator extends Common {
       table_total_with_taxes: i18n.__({phrase: 'table_total_with_taxes', locale: this.lang}),
       fromto_phone: i18n.__({phrase: 'fromto_phone', locale: this.lang}),
       fromto_mail: i18n.__({phrase: 'fromto_mail', locale: this.lang}),
-      footer: i18n.__({phrase: 'footer', locale: this.lang}),
+      footer: this.getFooter(),
       emitter_name: this.emitter().name,
       emitter_street_number: this.emitter().street_number,
       emitter_street_name: this.emitter().street_name,
@@ -348,6 +356,18 @@ export default class Generator extends Common {
       toHTML: () => this._toHTML(keys),
       toPDF: () => this._toPDF(keys)
     }, this._preCompileCommonTranslations())
+  }
+
+  /**
+   * @description Return right footer
+   * @returns {*}
+   */
+  getFooter() {
+    if (!this.footer) return i18n.__({phrase: 'footer', locale: this.lang})
+
+    if (this.lang === 'en') return this.footer.en
+    else if (this.lang === 'fr') return this.footer.fr
+    else throw Error(`This lang doesn't exist.`)
   }
 
   /**
