@@ -109,7 +109,7 @@ var Generator = function (_Common) {
   }, {
     key: '_itemsToHydrate',
     value: function _itemsToHydrate() {
-      return ['logo', 'order_template', 'invoice_template', 'date_format', 'order_reference_pattern', 'invoice_reference_pattern', 'order_note', 'invoice_note', 'lang'];
+      return ['logo', 'order_template', 'invoice_template', 'date_format', 'order_reference_pattern', 'invoice_reference_pattern', 'order_note', 'invoice_note', 'lang', 'footer'];
     }
 
     /**
@@ -162,7 +162,7 @@ var Generator = function (_Common) {
         table_total_with_taxes: _i18n2.default.__({ phrase: 'table_total_with_taxes', locale: this.lang }),
         fromto_phone: _i18n2.default.__({ phrase: 'fromto_phone', locale: this.lang }),
         fromto_mail: _i18n2.default.__({ phrase: 'fromto_mail', locale: this.lang }),
-        footer: _i18n2.default.__({ phrase: 'footer', locale: this.lang }),
+        footer: this.getFooter(),
         emitter_name: this.emitter().name,
         emitter_street_number: this.emitter().street_number,
         emitter_street_name: this.emitter().street_name,
@@ -267,6 +267,19 @@ var Generator = function (_Common) {
           return _this3._toPDF(keys);
         }
       }, this._preCompileCommonTranslations());
+    }
+
+    /**
+     * @description Return right footer
+     * @returns {*}
+     */
+
+  }, {
+    key: 'getFooter',
+    value: function getFooter() {
+      if (!this.footer) return _i18n2.default.__({ phrase: 'footer', locale: this.lang });
+
+      if (this.lang === 'en') return this.footer.en;else if (this.lang === 'fr') return this.footer.fr;else throw Error('This lang doesn\'t exist.');
     }
 
     /**
@@ -577,6 +590,14 @@ var Generator = function (_Common) {
     },
     set: function set(value) {
       this._invoice_note = value;
+    }
+  }, {
+    key: 'footer',
+    get: function get() {
+      return this._footer;
+    },
+    set: function set(value) {
+      this._footer = value;
     }
   }, {
     key: 'date_format',
