@@ -25,11 +25,11 @@ If you want some examples, check tests.
 
 ### Order
 
-[![order](static/images/order.png =250x)](https://github.com/rimiti/invoice-it/tree/master/static/images/order.png)
+[![order](static/images/order.png)](https://github.com/rimiti/invoice-it/tree/master/static/images/order.png)
 
 ### Invoice
 
-[![invoice](static/images/invoice.png  =250x)](https://github.com/rimiti/invoice-it/tree/master/static/images/invoice.png)
+[![invoice](static/images/invoice.png)](https://github.com/rimiti/invoice-it/tree/master/static/images/invoice.png)
 
 ## Usage
 
