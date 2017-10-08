@@ -6,10 +6,7 @@
   "main": "dist/lib/generator.js",
   "scripts": {
     "clean": "rm -rf coverage dist tmp",
-    "lint": "eslint .",
-    "pretest": "npm run lint",
-    "test": "npm run test-only",
-    "test-only": "jest --coverage",
+    "test": "jest --coverage",
     "test:watch": "jest --watch",
     "build": "babel src/**/*.js -d dist",
     "build:watch": "babel --watch src/**/*.js -d dist"
@@ -54,8 +51,6 @@
     "babel-plugin-transform-es2015-modules-commonjs": "~6.26.0",
     "babel-plugin-transform-runtime": "~6.23.0",
     "babel-preset-stage-3": "~6.24.1",
-    "eslint-config-airbnb-base": "~12.0.2",
-    "eslint-plugin-import": "~2.7.0",
     "jest": "~21.2.1"
   },
   "jest": {
