@@ -1,10 +1,10 @@
-import generator from '../src/lib/generator'
+import invoiceIt from '../src/lib/generator'
 import fs from 'fs'
 
 describe('Order', () => {
 
-  const htmlPathfile = 'dist/order.html';
-  const pdfPathfile = 'dist/order.pdf';
+  const htmlPathfile = './order.html';
+  const pdfPathfile = './order.pdf';
 
   const recipient = {
     company_name: 'Receiver company',
@@ -53,7 +53,7 @@ describe('Order', () => {
   };
 
   it(`Object auto-filled`, (done) => {
-    const order = generator.create(recipient, emitter);
+    const order = invoiceIt.create(recipient, emitter);
     expect(order.recipient().company_name).toEqual('Receiver company');
     expect(order.recipient().first_name).toEqual('Will');
     expect(order.recipient().last_name).toEqual('Jameson');
@@ -77,7 +77,7 @@ describe('Order', () => {
   });
 
   it(`Object not auto-filled`, (done) => {
-    const order = generator.create();
+    const order = invoiceIt.create();
     order.emitter(emitter);
     order.recipient(recipient);
     expect(order.recipient().company_name).toEqual('Receiver company');
@@ -103,18 +103,18 @@ describe('Order', () => {
   });
 
   it(`Convert to HTML`, (done) => {
-    const order = generator.create(recipient, emitter);
+    const order = invoiceIt.create(recipient, emitter);
     expect(order.getOrder().toHTML());
     done();
   });
 
   it(`Export to HTML file`, (done) => {
-    const order = generator.create(recipient, emitter);
+    const order = invoiceIt.create(recipient, emitter);
     order.getOrder().toHTML().toFile(htmlPathfile).then(() => done());
   });
 
   it(`Check HTML content file`, (done) => {
-    const order = generator.create(recipient, emitter);
+    const order = invoiceIt.create(recipient, emitter);
     order.getOrder().toHTML().toFile(htmlPathfile)
       .then(() => {
         fs.readFile(htmlPathfile, 'utf8', (err, data) => {
@@ -126,12 +126,12 @@ describe('Order', () => {
   });
 
   it(`Export to PDF file`, (done) => {
-    const order = generator.create(recipient, emitter);
+    const order = invoiceIt.create(recipient, emitter);
     order.getOrder().toPDF().toFile(pdfPathfile).then(() => done())
   });
 
   it(`Check PDF content file`, (done) => {
-    const order = generator.create(recipient, emitter);
+    const order = invoiceIt.create(recipient, emitter);
     order.getOrder().toPDF().toFile(pdfPathfile).then(() => {
       fs.readFile(pdfPathfile, 'utf8', (err, data) => {
         expect(!err);
@@ -142,7 +142,7 @@ describe('Order', () => {
   });
 
   it(`Add multiple articles from array`, (done) => {
-    const order = generator.create(recipient, emitter);
+    const order = invoiceIt.create(recipient, emitter);
     order.article = [article1, article2];
     expect(order.article).toHaveLength(2);
     expect(order.article[0].description).toEqual('Apple - Macbook Pro');
@@ -171,7 +171,7 @@ describe('Order', () => {
   });
 
   it(`Add article from article object`, (done) => {
-    const order = generator.create(recipient, emitter);
+    const order = invoiceIt.create(recipient, emitter);
     order.article = article1;
     order.article = article2;
     expect(order.article).toHaveLength(2);
@@ -207,7 +207,7 @@ describe('Order', () => {
   });
 
   it(`Delete all articles`, (done) => {
-    const order = generator.create(recipient, emitter);
+    const order = invoiceIt.create(recipient, emitter);
     order.article = article1;
     order.article = article2;
     expect(order.article).toHaveLength(2);
@@ -217,7 +217,7 @@ describe('Order', () => {
   });
 
   it(`Get totals from array`, (done) => {
-    const order = generator.create(recipient, emitter);
+    const order = invoiceIt.create(recipient, emitter);
     order.article = [article1, article2];
     expect(order.total_exc_taxes).toEqual(2935.27);
     expect(order.total_taxes).toEqual(567.73);

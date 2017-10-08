@@ -1,9 +1,9 @@
-import generator from '../src/lib/generator'
+import invoiceIt from '../src/lib/generator'
 import fs from 'fs'
 
 describe('Invoice', () => {
-  const htmlPathfile = 'dist/invoice.html';
-  const pdfPathfile = 'dist/invoice.pdf';
+  const htmlPathfile = './invoice.html';
+  const pdfPathfile = './invoice.pdf';
 
   const recipient = {
     company_name: 'Receiver company',
@@ -52,7 +52,7 @@ describe('Invoice', () => {
   };
 
   it(`Object auto-filled`, (done) => {
-    const invoice = generator.create(recipient, emitter);
+    const invoice = invoiceIt.create(recipient, emitter);
     expect(invoice.recipient().company_name).toEqual('Receiver company');
     expect(invoice.recipient().first_name).toEqual('Will');
     expect(invoice.recipient().last_name).toEqual('Jameson');
@@ -76,7 +76,7 @@ describe('Invoice', () => {
   });
 
   it(`Object not auto-filled`, (done) => {
-    const invoice = generator.create();
+    const invoice = invoiceIt.create();
     invoice.emitter(emitter);
     invoice.recipient(recipient);
     expect(invoice.recipient().company_name).toEqual('Receiver company');
@@ -102,19 +102,19 @@ describe('Invoice', () => {
   });
 
   it(`Convert to HTML`, (done) => {
-    const invoice = generator.create(recipient, emitter);
+    const invoice = invoiceIt.create(recipient, emitter);
     expect(typeof invoice.getInvoice().toHTML() === 'object');
     done();
   });
 
   it(`Export to HTML file`, (done) => {
-    const invoice = generator.create(recipient, emitter);
+    const invoice = invoiceIt.create(recipient, emitter);
     invoice.getInvoice().toHTML().toFile(htmlPathfile)
       .then(() => done());
   });
 
   it(`Check HTML content file`, (done) => {
-    const invoice = generator.create(recipient, emitter);
+    const invoice = invoiceIt.create(recipient, emitter);
     invoice.getInvoice().toHTML().toFile(htmlPathfile)
       .then(() => {
         fs.readFile(htmlPathfile, 'utf8', (err, data) => {
@@ -126,12 +126,12 @@ describe('Invoice', () => {
   });
 
   it(`Export to PDF file`, (done) => {
-    const invoice = generator.create(recipient, emitter);
+    const invoice = invoiceIt.create(recipient, emitter);
     invoice.getInvoice().toPDF().toFile(pdfPathfile).then(() => done());
   });
 
   it(`Check PDF content file`, (done) => {
-    const invoice = generator.create(recipient, emitter);
+    const invoice = invoiceIt.create(recipient, emitter);
     invoice.getInvoice().toPDF().toFile(pdfPathfile).then(() => {
       fs.readFile(pdfPathfile, 'utf8', (err, data) => {
         expect(!err);
@@ -142,7 +142,7 @@ describe('Invoice', () => {
   });
 
   it(`Add multiple articles from array`, (done) => {
-    const invoice = generator.create(recipient, emitter);
+    const invoice = invoiceIt.create(recipient, emitter);
     invoice.article = [article1, article2];
     expect(invoice.article).toHaveLength(2);
     expect(invoice.article[0].description).toEqual('Apple - Macbook Pro');
@@ -171,7 +171,7 @@ describe('Invoice', () => {
   });
 
   it(`Add article from article object`, (done) => {
-    const invoice = generator.create(recipient, emitter);
+    const invoice = invoiceIt.create(recipient, emitter);
     invoice.article = article1;
     invoice.article = article2;
     expect(invoice.article).toHaveLength(2);
@@ -207,7 +207,7 @@ describe('Invoice', () => {
   });
 
   it(`Delete all articles`, (done) => {
-    const invoice = generator.create(recipient, emitter);
+    const invoice = invoiceIt.create(recipient, emitter);
     invoice.article = article1;
     invoice.article = article2;
     expect(invoice.article).toHaveLength(2);
@@ -217,7 +217,7 @@ describe('Invoice', () => {
   });
 
   it(`Get totals from array`, (done) => {
-    const invoice = generator.create(recipient, emitter);
+    const invoice = invoiceIt.create(recipient, emitter);
     invoice.article = [article1, article2];
     expect(invoice.total_exc_taxes).toEqual(2935.27);
     expect(invoice.total_taxes).toEqual(567.73);
