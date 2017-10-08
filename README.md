@@ -1,4 +1,4 @@
-# invoice-generator
+# invoicing
 
 [![Dependencies][prod-dependencies-badge]][prod-dependencies]
 [![Dependencies][dev-dependencies-badge]][dev-dependencies]
@@ -28,7 +28,7 @@ If you want some examples, check tests.
 To generate an order:
 
 ```js
-import ig from 'invoice-generator'
+import ig from 'invoicing'
 
   let recipient = {
     company_name: 'Receiver company',
@@ -116,7 +116,7 @@ order.getOrder().toPDF().toFile('./order.pdf')
 To generate an invoice:
 
 ```js
-import ig from 'invoice-generator'
+import ig from 'invoicing'
 
   let recipient = {
     company_name: 'Receiver company',
@@ -207,26 +207,26 @@ gulp mocha
 ```
 
 ## License
-MIT © [Dimitri DO BAIRRO](https://github.com/rimiti/invoice-generator/blob/master/LICENSE)
+MIT © [Dimitri DO BAIRRO](https://github.com/rimiti/invoicing/blob/master/LICENSE)
 
-[prod-dependencies-badge]: https://david-dm.org/rimiti/invoice-generator/status.svg
-[prod-dependencies]: https://david-dm.org/rimiti/invoice-generator
-[dev-dependencies-badge]: https://david-dm.org/rimiti/invoice-generator/dev-status.svg
-[dev-dependencies]: https://david-dm.org/rimiti/invoice-generator?type=dev
-[codeclimate-score-badge]: https://codeclimate.com/github/rimiti/invoice-generator/badges/gpa.svg
-[codeclimate-score]: https://codeclimate.com/github/rimiti/invoice-generator
-[codeclimate-coverage-badge]: https://codeclimate.com/github/rimiti/invoice-generator/badges/coverage.svg
-[codeclimate-coverage]: https://codeclimate.com/github/rimiti/invoice-generator/coverage
-[codeclimate-issues-badge]: https://codeclimate.com/github/rimiti/invoice-generator/badges/issue_count.svg
-[codeclimate-issues]: https://codeclimate.com/github/rimiti/invoice-generator
+[prod-dependencies-badge]: https://david-dm.org/rimiti/invoicing/status.svg
+[prod-dependencies]: https://david-dm.org/rimiti/invoicing
+[dev-dependencies-badge]: https://david-dm.org/rimiti/invoicing/dev-status.svg
+[dev-dependencies]: https://david-dm.org/rimiti/invoicing?type=dev
+[codeclimate-score-badge]: https://codeclimate.com/github/rimiti/invoicing/badges/gpa.svg
+[codeclimate-score]: https://codeclimate.com/github/rimiti/invoicing
+[codeclimate-coverage-badge]: https://codeclimate.com/github/rimiti/invoicing/badges/coverage.svg
+[codeclimate-coverage]: https://codeclimate.com/github/rimiti/invoicing/coverage
+[codeclimate-issues-badge]: https://codeclimate.com/github/rimiti/invoicing/badges/issue_count.svg
+[codeclimate-issues]: https://codeclimate.com/github/rimiti/invoicing
 [nodejs-badge]: https://img.shields.io/badge/node->=%206.9.0-blue.svg?style=flat-square
 [nodejs]: https://nodejs.org/dist/latest-v6.x/docs/api/
 [npm-badge]: https://img.shields.io/badge/npm->=%203.10.8-blue.svg?style=flat-square
 [npm]: https://docs.npmjs.com/
 [node_acl]: https://github.com/OptimalBits/node_acl
-[travis-badge]: https://travis-ci.org/rimiti/invoice-generator.svg?branch=master
-[travis-ci]: https://travis-ci.org/rimiti/invoice-generator
+[travis-badge]: https://travis-ci.org/rimiti/invoicing.svg?branch=master
+[travis-ci]: https://travis-ci.org/rimiti/invoicing
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
-[license]: https://github.com/rimiti/invoice-generator/blob/master/LICENSE
+[license]: https://github.com/rimiti/invoicing/blob/master/LICENSE
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com

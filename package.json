@@ -1,5 +1,5 @@
 {
-  "name": "invoice-generator",
+  "name": "invoicing",
   "version": "1.5.1",
   "description": "Order and invoice generator",
   "license": "MIT",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rimiti/invoice-generator.git"
+    "url": "git+https://github.com/rimiti/invoicing.git"
   },
   "keywords": [
     "node",
@@ -25,12 +25,12 @@
     "url": "dimsolution.com"
   },
   "bugs": {
-    "url": "https://github.com/rimiti/invoice-generator/issues"
+    "url": "https://github.com/rimiti/invoicing/issues"
   },
   "engines": {
     "node": ">=6"
   },
-  "homepage": "https://github.com/rimiti/invoice-generator#readme",
+  "homepage": "https://github.com/rimiti/invoicing#readme",
   "dependencies": {
     "html-pdf": "^2.2.0",
     "i18n-factory": "0.0.2",
