@@ -1,11 +1,7 @@
 import generator from '../src/lib/generator'
 import fs from 'fs'
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
-
 describe('Invoice', () => {
-  jest.setTimeout(15000)
-
   const htmlPathfile = 'dist/invoice.html';
   const pdfPathfile = 'dist/invoice.pdf';
 

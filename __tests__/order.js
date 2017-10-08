@@ -3,10 +3,10 @@ import fs from 'fs'
 
 describe('Order', () => {
 
-  let htmlPathfile = 'dist/order.html'
-  let pdfPathfile = 'dist/order.pdf'
+  const htmlPathfile = 'dist/order.html';
+  const pdfPathfile = 'dist/order.pdf';
 
-  let recipient = {
+  const recipient = {
     company_name: 'Receiver company',
     first_name: 'Will',
     last_name: 'Jameson',
@@ -17,9 +17,9 @@ describe('Order', () => {
     country: 'France',
     phone: '06 00 00 00 00',
     mail: 'will.jameson@test.com'
-  }
+  };
 
-  let emitter = {
+  const emitter = {
     name: 'Dim Solution',
     street_number: '15',
     street_name: 'Rue Jean Jaures',
@@ -29,208 +29,206 @@ describe('Order', () => {
     phone: '01 00 00 00 00',
     mail: 'contact@dimsolution.com',
     website: 'www.dimsolution.com'
-  }
+  };
 
-  let article1 = {
+  const article1 = {
     description: 'Apple - Macbook Pro',
     tax: 19.60,
     price: 952.09,
     qt: 3
-  }
+  };
 
-  let article2 = {
+  const article2 = {
     description: 'Github licence',
     tax: 10,
     price: 79,
     qt: 1
-  }
+  };
 
-  let article3 = {
+  const article3 = {
     description: 'Apple care 1 year',
     tax: 20,
     price: 100,
     qt: 3
-  }
+  };
 
   it(`Object auto-filled`, (done) => {
-    let order = generator.create(recipient, emitter)
-    order.recipient().company_name.should.be.equal('Receiver company')
-    order.recipient().first_name.should.be.equal('Will')
-    order.recipient().last_name.should.be.equal('Jameson')
-    order.recipient().street_number.should.be.equal('20')
-    order.recipient().street_name.should.be.equal('Rue Victor Hugo')
-    order.recipient().zip_code.should.be.equal('77340')
-    order.recipient().city.should.be.equal('Pontault-Combault')
-    order.recipient().country.should.be.equal('France')
-    order.recipient().phone.should.be.equal('06 00 00 00 00')
-    order.recipient().mail.should.be.equal('will.jameson@test.com')
-    order.emitter().name.should.be.equal(`Dim Solution`)
-    order.emitter().street_number.should.be.equal('15')
-    order.emitter().street_name.should.be.equal('Rue Jean Jaures')
-    order.emitter().zip_code.should.be.equal('75012')
-    order.emitter().city.should.be.equal('Paris')
-    order.emitter().country.should.be.equal('France')
-    order.emitter().phone.should.be.equal('01 00 00 00 00')
-    order.emitter().mail.should.be.equal('contact@dimsolution.com')
-    order.emitter().website.should.be.equal('www.dimsolution.com')
-    done()
-  })
+    const order = generator.create(recipient, emitter);
+    expect(order.recipient().company_name).toEqual('Receiver company');
+    expect(order.recipient().first_name).toEqual('Will');
+    expect(order.recipient().last_name).toEqual('Jameson');
+    expect(order.recipient().street_number).toEqual('20');
+    expect(order.recipient().street_name).toEqual('Rue Victor Hugo');
+    expect(order.recipient().zip_code).toEqual('77340');
+    expect(order.recipient().city).toEqual('Pontault-Combault');
+    expect(order.recipient().country).toEqual('France');
+    expect(order.recipient().phone).toEqual('06 00 00 00 00');
+    expect(order.recipient().mail).toEqual('will.jameson@test.com');
+    expect(order.emitter().name).toEqual(`Dim Solution`);
+    expect(order.emitter().street_number).toEqual('15');
+    expect(order.emitter().street_name).toEqual('Rue Jean Jaures');
+    expect(order.emitter().zip_code).toEqual('75012');
+    expect(order.emitter().city).toEqual('Paris');
+    expect(order.emitter().country).toEqual('France');
+    expect(order.emitter().phone).toEqual('01 00 00 00 00');
+    expect(order.emitter().mail).toEqual('contact@dimsolution.com');
+    expect(order.emitter().website).toEqual('www.dimsolution.com');
+    done();
+  });
 
   it(`Object not auto-filled`, (done) => {
-    let order = generator.create()
-    order.emitter(emitter)
-    order.recipient(recipient)
-    order.recipient().company_name.should.be.equal('Receiver company')
-    order.recipient().first_name.should.be.equal('Will')
-    order.recipient().last_name.should.be.equal('Jameson')
-    order.recipient().street_number.should.be.equal('20')
-    order.recipient().street_name.should.be.equal('Rue Victor Hugo')
-    order.recipient().zip_code.should.be.equal('77340')
-    order.recipient().city.should.be.equal('Pontault-Combault')
-    order.recipient().country.should.be.equal('France')
-    order.recipient().phone.should.be.equal('06 00 00 00 00')
-    order.recipient().mail.should.be.equal('will.jameson@test.com')
-    order.emitter().name.should.be.equal(`Dim Solution`)
-    order.emitter().street_number.should.be.equal('15')
-    order.emitter().street_name.should.be.equal('Rue Jean Jaures')
-    order.emitter().zip_code.should.be.equal('75012')
-    order.emitter().city.should.be.equal('Paris')
-    order.emitter().country.should.be.equal('France')
-    order.emitter().phone.should.be.equal('01 00 00 00 00')
-    order.emitter().mail.should.be.equal('contact@dimsolution.com')
-    order.emitter().website.should.be.equal('www.dimsolution.com')
-    done()
-  })
+    const order = generator.create();
+    order.emitter(emitter);
+    order.recipient(recipient);
+    expect(order.recipient().company_name).toEqual('Receiver company');
+    expect(order.recipient().first_name).toEqual('Will');
+    expect(order.recipient().last_name).toEqual('Jameson');
+    expect(order.recipient().street_number).toEqual('20');
+    expect(order.recipient().street_name).toEqual('Rue Victor Hugo');
+    expect(order.recipient().zip_code).toEqual('77340');
+    expect(order.recipient().city).toEqual('Pontault-Combault');
+    expect(order.recipient().country).toEqual('France');
+    expect(order.recipient().phone).toEqual('06 00 00 00 00');
+    expect(order.recipient().mail).toEqual('will.jameson@test.com');
+    expect(order.emitter().name).toEqual(`Dim Solution`);
+    expect(order.emitter().street_number).toEqual('15');
+    expect(order.emitter().street_name).toEqual('Rue Jean Jaures');
+    expect(order.emitter().zip_code).toEqual('75012');
+    expect(order.emitter().city).toEqual('Paris');
+    expect(order.emitter().country).toEqual('France');
+    expect(order.emitter().phone).toEqual('01 00 00 00 00');
+    expect(order.emitter().mail).toEqual('contact@dimsolution.com');
+    expect(order.emitter().website).toEqual('www.dimsolution.com');
+    done();
+  });
 
   it(`Convert to HTML`, (done) => {
-    let order = generator.create(recipient, emitter)
-    order.getOrder().toHTML().should.not.be.empty
-    done()
-  })
+    const order = generator.create(recipient, emitter);
+    expect(order.getOrder().toHTML());
+    done();
+  });
 
   it(`Export to HTML file`, (done) => {
-    let order = generator.create(recipient, emitter)
-    order.getOrder().toHTML().toFile(htmlPathfile).then(() => done())
-  }).timeout(15000)
+    const order = generator.create(recipient, emitter);
+    order.getOrder().toHTML().toFile(htmlPathfile).then(() => done());
+  });
 
   it(`Check HTML content file`, (done) => {
-    let order = generator.create(recipient, emitter)
+    const order = generator.create(recipient, emitter);
     order.getOrder().toHTML().toFile(htmlPathfile)
       .then(() => {
         fs.readFile(htmlPathfile, 'utf8', (err, data) => {
-          should.not.exist(err)
-          data.should.not.be.empty
-          done()
-        })
-      })
-  }).timeout(15000)
+          expect(!err);
+          expect(data);
+          done();
+        });
+      });
+  });
 
   it(`Export to PDF file`, (done) => {
-    let order = generator.create(recipient, emitter)
+    const order = generator.create(recipient, emitter);
     order.getOrder().toPDF().toFile(pdfPathfile).then(() => done())
-  }).timeout(15000)
+  });
 
   it(`Check PDF content file`, (done) => {
-    let order = generator.create(recipient, emitter)
+    const order = generator.create(recipient, emitter);
     order.getOrder().toPDF().toFile(pdfPathfile).then(() => {
       fs.readFile(pdfPathfile, 'utf8', (err, data) => {
-        should.not.exist(err)
-        data.should.be.ok
-        done()
-      })
-    })
-
-  }).timeout(15000)
+        expect(!err);
+        expect(data);
+        done();
+      });
+    });
+  });
 
   it(`Add multiple articles from array`, (done) => {
-    let order = generator.create(recipient, emitter)
-    order.article = [article1, article2]
-    order.article.length.should.be.equal(2)
-    order.article[0].description.should.be.equal('Apple - Macbook Pro')
-    order.article[0].tax.should.be.equal('19.60')
-    order.article[0].price.should.be.equal('952.09')
-    order.article[0].qt.should.be.equal(3)
-    order.article[0].total_product_without_taxes.should.be.equal('2856.27')
-    order.article[0].total_product_taxes.should.be.equal('559.83')
-    order.article[0].total_product_with_taxes.should.be.equal('3416.10')
-    order.article[1].description.should.be.equal('Github licence')
-    order.article[1].tax.should.be.equal('10.00')
-    order.article[1].price.should.be.equal('79.00')
-    order.article[1].qt.should.be.equal(1)
-    order.article[1].total_product_without_taxes.should.be.equal('79.00')
-    order.article[1].total_product_taxes.should.be.equal('7.90')
-    order.article[1].total_product_with_taxes.should.be.equal('86.90')
-    order.article = article3
-    order.article[2].description.should.be.equal('Apple care 1 year')
-    order.article[2].tax.should.be.equal('20.00')
-    order.article[2].price.should.be.equal('100.00')
-    order.article[2].qt.should.be.equal(3)
-    order.article[2].total_product_without_taxes.should.be.equal('300.00')
-    order.article[2].total_product_taxes.should.be.equal('60.00')
-    order.article[2].total_product_with_taxes.should.be.equal('360.00')
-    done()
-  })
+    const order = generator.create(recipient, emitter);
+    order.article = [article1, article2];
+    expect(order.article).toHaveLength(2);
+    expect(order.article[0].description).toEqual('Apple - Macbook Pro');
+    expect(order.article[0].tax).toEqual('19.60');
+    expect(order.article[0].price).toEqual('952.09');
+    expect(order.article[0].qt).toEqual(3);
+    expect(order.article[0].total_product_without_taxes).toEqual('2856.27');
+    expect(order.article[0].total_product_taxes).toEqual('559.83');
+    expect(order.article[0].total_product_with_taxes).toEqual('3416.10');
+    expect(order.article[1].description).toEqual('Github licence');
+    expect(order.article[1].tax).toEqual('10.00');
+    expect(order.article[1].price).toEqual('79.00');
+    expect(order.article[1].qt).toEqual(1);
+    expect(order.article[1].total_product_without_taxes).toEqual('79.00');
+    expect(order.article[1].total_product_taxes).toEqual('7.90');
+    expect(order.article[1].total_product_with_taxes).toEqual('86.90');
+    order.article = article3;
+    expect(order.article[2].description).toEqual('Apple care 1 year');
+    expect(order.article[2].tax).toEqual('20.00');
+    expect(order.article[2].price).toEqual('100.00');
+    expect(order.article[2].qt).toEqual(3);
+    expect(order.article[2].total_product_without_taxes).toEqual('300.00');
+    expect(order.article[2].total_product_taxes).toEqual('60.00');
+    expect(order.article[2].total_product_with_taxes).toEqual('360.00');
+    done();
+  });
 
   it(`Add article from article object`, (done) => {
-    let order = generator.create(recipient, emitter)
-    order.article = article1
-    order.article = article2
-    order.article.length.should.be.equal(2)
-    order.article[0].description.should.be.equal('Apple - Macbook Pro')
-    order.article[0].tax.should.be.equal('19.60')
-    order.article[0].price.should.be.equal('952.09')
-    order.article[0].qt.should.be.equal(3)
-    order.article[0].total_product_without_taxes.should.be.equal('2856.27')
-    order.article[0].total_product_taxes.should.be.equal('559.83')
-    order.article[0].total_product_with_taxes.should.be.equal('3416.10')
-    order.article[1].description.should.be.equal('Github licence')
-    order.article[1].tax.should.be.equal('10.00')
-    order.article[1].price.should.be.equal('79.00')
-    order.article[1].qt.should.be.equal(1)
-    order.article[1].total_product_without_taxes.should.be.equal('79.00')
-    order.article[1].total_product_taxes.should.be.equal('7.90')
-    order.article[1].total_product_with_taxes.should.be.equal('86.90')
-    order.article = [article3]
-    order.article[2].description.should.be.equal('Apple care 1 year')
-    order.article[2].tax.should.be.equal('20.00')
-    order.article[2].price.should.be.equal('100.00')
-    order.article[2].qt.should.be.equal(3)
-    order.article[2].total_product_without_taxes.should.be.equal('300.00')
-    order.article[2].total_product_taxes.should.be.equal('60.00')
-    order.article[2].total_product_with_taxes.should.be.equal('360.00')
-    order.total_inc_taxes.should.be.equal(3863)
-    order.total_exc_taxes.should.be.equal(3235.27)
-    order.total_taxes.should.be.equal(627.73)
+    const order = generator.create(recipient, emitter);
+    order.article = article1;
+    order.article = article2;
+    expect(order.article).toHaveLength(2);
+    expect(order.article[0].description).toEqual('Apple - Macbook Pro');
+    expect(order.article[0].tax).toEqual('19.60');
+    expect(order.article[0].price).toEqual('952.09');
+    expect(order.article[0].qt).toEqual(3);
+    expect(order.article[0].total_product_without_taxes).toEqual('2856.27');
+    expect(order.article[0].total_product_taxes).toEqual('559.83');
+    expect(order.article[0].total_product_with_taxes).toEqual('3416.10');
+    expect(order.article[1].description).toEqual('Github licence');
+    expect(order.article[1].tax).toEqual('10.00');
+    expect(order.article[1].price).toEqual('79.00');
+    expect(order.article[1].qt).toEqual(1);
+    expect(order.article[1].total_product_without_taxes).toEqual('79.00');
+    expect(order.article[1].total_product_taxes).toEqual('7.90');
+    expect(order.article[1].total_product_with_taxes).toEqual('86.90');
+    order.article = [article3];
+    expect(order.article[2].description).toEqual('Apple care 1 year');
+    expect(order.article[2].tax).toEqual('20.00');
+    expect(order.article[2].price).toEqual('100.00');
+    expect(order.article[2].qt).toEqual(3);
+    expect(order.article[2].total_product_without_taxes).toEqual('300.00');
+    expect(order.article[2].total_product_taxes).toEqual('60.00');
+    expect(order.article[2].total_product_with_taxes).toEqual('360.00');
+    expect(order.total_inc_taxes).toEqual(3863);
+    expect(order.total_exc_taxes).toEqual(3235.27);
+    expect(order.total_taxes).toEqual(627.73);
     order.getOrder().toHTML().toFile(htmlPathfile).then(() => {
       return order.getOrder().toPDF().toFile(pdfPathfile)
-        .then(() => done())
-    })
-  }).timeout(15000)
+        .then(() => done());
+    });
+  });
 
   it(`Delete all articles`, (done) => {
-    let order = generator.create(recipient, emitter)
-    order.article = article1
-    order.article = article2
-    order.article.length.should.be.equal(2)
-    order.deleteArticles()
-    order.article.length.should.be.equal(0)
-    done()
-  })
+    const order = generator.create(recipient, emitter);
+    order.article = article1;
+    order.article = article2;
+    expect(order.article).toHaveLength(2);
+    order.deleteArticles();
+    expect(order.article).toHaveLength(0);
+    done();
+  });
 
   it(`Get totals from array`, (done) => {
-    let order = generator.create(recipient, emitter)
-    order.article = [article1, article2]
-    order.total_exc_taxes.should.be.equal(2935.27)
-    order.total_taxes.should.be.equal(567.73)
-    order.total_inc_taxes.should.be.equal(3503)
-    order.article = [article3]
-    order.total_exc_taxes.should.be.equal(3235.27)
-    order.total_taxes.should.be.equal(627.73)
-    order.total_inc_taxes.should.be.equal(3863)
-    order.formatOutputNumber(order.total_exc_taxes).should.be.equal('3235.27')
-    order.formatOutputNumber(order.total_taxes).should.be.equal('627.73')
-    order.formatOutputNumber(order.total_inc_taxes).should.be.equal('3863.00')
-    done()
-  })
-
-})
+    const order = generator.create(recipient, emitter);
+    order.article = [article1, article2];
+    expect(order.total_exc_taxes).toEqual(2935.27);
+    expect(order.total_taxes).toEqual(567.73);
+    expect(order.total_inc_taxes).toEqual(3503);
+    order.article = [article3];
+    expect(order.total_exc_taxes).toEqual(3235.27);
+    expect(order.total_taxes).toEqual(627.73);
+    expect(order.total_inc_taxes).toEqual(3863);
+    expect(order.formatOutputNumber(order.total_exc_taxes)).toEqual('3235.27');
+    expect(order.formatOutputNumber(order.total_taxes)).toEqual('627.73');
+    expect(order.formatOutputNumber(order.total_inc_taxes)).toEqual('3863.00');
+    done();
+  });
+});
