@@ -1,7 +1,25 @@
 # invoice-generator
 
+[![Dependencies][prod-dependencies-badge]][prod-dependencies]
+[![Dependencies][dev-dependencies-badge]][dev-dependencies]
+[![Code Climate score][codeclimate-score-badge]][codeclimate-score]
+[![Code Climate coverage][codeclimate-coverage-badge]][codeclimate-coverage]
+[![Code Climate coverage][codeclimate-issues-badge]][codeclimate-issues]
+[![Node.js version][nodejs-badge]][nodejs]
+[![NPM version][npm-badge]][npm]
+[![Build Status][travis-badge]][travis-ci]
+[![MIT License][license-badge]][LICENSE]
+[![PRs Welcome][prs-badge]][prs]
+
 Generate your orders and you invoices and export them easily.
 If you want some examples, check tests.
+
+## Features
+
+- Generate order / invoice
+- Export to HTML / PDF / Stream
+- Easy to use it
+- Robust implementation with good unit test coverage.
 
 ## Usage
 
@@ -189,4 +207,26 @@ gulp mocha
 ```
 
 ## License
-MIT © [Dimitri DO BAIRRO](https://dimsolution.com)
+MIT © [Dimitri DO BAIRRO](https://github.com/rimiti/invoice-generator/blob/master/LICENSE)
+
+[prod-dependencies-badge]: https://david-dm.org/rimiti/invoice-generator/status.svg
+[prod-dependencies]: https://david-dm.org/rimiti/invoice-generator
+[dev-dependencies-badge]: https://david-dm.org/rimiti/invoice-generator/dev-status.svg
+[dev-dependencies]: https://david-dm.org/rimiti/invoice-generator?type=dev
+[codeclimate-score-badge]: https://codeclimate.com/github/rimiti/invoice-generator/badges/gpa.svg
+[codeclimate-score]: https://codeclimate.com/github/rimiti/invoice-generator
+[codeclimate-coverage-badge]: https://codeclimate.com/github/rimiti/invoice-generator/badges/coverage.svg
+[codeclimate-coverage]: https://codeclimate.com/github/rimiti/invoice-generator/coverage
+[codeclimate-issues-badge]: https://codeclimate.com/github/rimiti/invoice-generator/badges/issue_count.svg
+[codeclimate-issues]: https://codeclimate.com/github/rimiti/invoice-generator
+[nodejs-badge]: https://img.shields.io/badge/node->=%206.9.0-blue.svg?style=flat-square
+[nodejs]: https://nodejs.org/dist/latest-v6.x/docs/api/
+[npm-badge]: https://img.shields.io/badge/npm->=%203.10.8-blue.svg?style=flat-square
+[npm]: https://docs.npmjs.com/
+[node_acl]: https://github.com/OptimalBits/node_acl
+[travis-badge]: https://travis-ci.org/rimiti/invoice-generator.svg?branch=master
+[travis-ci]: https://travis-ci.org/rimiti/invoice-generator
+[license-badge]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
+[license]: https://github.com/rimiti/invoice-generator/blob/master/LICENSE
+[prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
+[prs]: http://makeapullrequest.com
