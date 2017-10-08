@@ -1,7 +1,5 @@
-import chai from 'chai'
-import generator from '../lib/generator'
+import generator from '../src/lib/generator'
 import fs from 'fs'
-let should = chai.should()
 
 describe('Order', () => {
 
