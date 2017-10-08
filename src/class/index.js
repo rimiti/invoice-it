@@ -6,13 +6,13 @@ let configuration
 export default {
 
   /**
-   * @description Configure the generator with object config
+   * @description Configure invoiceIt with object config
    * @param config
    */
   configure: (config) => configuration = jsonOverride(configuration, config),
 
   /**
-   * @description Generate generator with configuration
+   * @description Generate invoiceIt with configuration
    * @param emitter
    * @param recipient
    * @returns {Generator}

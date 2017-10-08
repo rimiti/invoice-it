@@ -21,6 +21,16 @@ If you want some examples, check tests.
 - Easy to use it
 - Robust implementation with good unit test coverage.
 
+## Demonstration
+
+### Order
+
+[![order](static/images/order.png =250x)](https://github.com/rimiti/invoice-it/tree/master/static/images/order.png)
+
+### Invoice
+
+[![invoice](static/images/invoice.png  =250x)](https://github.com/rimiti/invoice-it/tree/master/static/images/invoice.png)
+
 ## Usage
 
 ### Order
@@ -28,9 +38,9 @@ If you want some examples, check tests.
 To generate an order:
 
 ```js
-import ig from 'invoice-it'
+import invoiceIt from 'invoice-it';
 
-  let recipient = {
+  const recipient = {
     company_name: 'Receiver company',
     first_name: 'Will',
     last_name: 'Jameson',
@@ -41,9 +51,9 @@ import ig from 'invoice-it'
     country: 'France',
     phone: '06 00 00 00 00',
     mail: 'will.jameson@test.com'
-  }
+  };
 
-  let emitter = {
+  const emitter = {
     name: 'Dim Solution',
     street_number: '15',
     street_name: 'Rue Jean Jaures',
@@ -53,62 +63,62 @@ import ig from 'invoice-it'
     phone: '01 00 00 00 00',
     mail: 'contact@dimsolution.com',
     website: 'www.dimsolution.com'
-  }
+  };
 
-  let order = generator.create(recipient, emitter)
+  const order = invoiceIt.create(recipient, emitter);
 ```
 
 You can also use getter / setters like that
 
 ```js
-let order = generator.create()
+const order = invoiceIt.create();
 
-order.recipient.company_name = 'Receiver company'
-order.recipient.first_name = 'Will'
-order.recipient.last_name = 'Jameson'
-order.recipient.street_number = '20'
-order.recipient.street_name = 'Rue Victor Hugo'
-order.recipient.zip_code = '77340'
-order.recipient.city = 'Pontault-Combault'
-order.recipient.country = 'France'
-order.recipient.phone = '06 00 00 00 00'
-order.recipient.mail = 'will.jameson@test.com'
+order.recipient.company_name = 'Receiver company';
+order.recipient.first_name = 'Will';
+order.recipient.last_name = 'Jameson';
+order.recipient.street_number = '20';
+order.recipient.street_name = 'Rue Victor Hugo';
+order.recipient.zip_code = '77340';
+order.recipient.city = 'Pontault-Combault';
+order.recipient.country = 'France';
+order.recipient.phone = '06 00 00 00 00';
+order.recipient.mail = 'will.jameson@test.com';
 
-order.emitter.name = 'Dim Solution'
-order.emitter.street_number = '15'
-order.emitter.street_name = 'Rue Jean Jaures'
-order.emitter.zip_code = '75012'
-order.emitter.city = 'Paris'
-order.emitter.country = 'France'
-order.emitter.phone = '01 00 00 00 00'
-order.emitter.mail = 'contact@dimsolution.com'
-order.emitter.website = 'www.dimsolution.com'
+order.emitter.name = 'Dim Solution';
+order.emitter.street_number = '15';
+order.emitter.street_name = 'Rue Jean Jaures';
+order.emitter.zip_code = '75012';
+order.emitter.city = 'Paris';
+order.emitter.country = 'France';
+order.emitter.phone = '01 00 00 00 00';
+order.emitter.mail = 'contact@dimsolution.com';
+order.emitter.website = 'www.dimsolution.com';
 ```
 
 Return order object
 ```js
-order.getOrder()
+order.getOrder();
 ```
 
 Return html order
 ```js
-order.getOrder().toHTML()
+order.getOrder().toHTML();
 ```
 
 Save html order into file (default filepath: 'order.html')
 ```js
 order.getOrder().toHTML().toFile('./order.html')
   .then(() => {
-      console.log('HTML file created.')
-  })
+      console.log('HTML file created.');
+  });
 ```
 
 Save html order into file (default filepath: 'order.pdf')
 ```js
 order.getOrder().toPDF().toFile('./order.pdf')
   .then(() => {
-     console.log('PDF file created.')
-  })
+     console.log('PDF file created.');
+  });
 ```
 
 ### Invoice
@@ -116,9 +126,9 @@ order.getOrder().toPDF().toFile('./order.pdf')
 To generate an invoice:
 
 ```js
-import ig from 'invoice-it'
+import invoiceIt from 'invoice-it';
 
-  let recipient = {
+  const recipient = {
     company_name: 'Receiver company',
     first_name: 'Will',
     last_name: 'Jameson',
@@ -129,9 +139,9 @@ import ig from 'invoice-it'
     country: 'France',
     phone: '06 00 00 00 00',
     mail: 'will.jameson@test.com'
-  }
+  };
 
-  let emitter = {
+  const emitter = {
     name: 'Dim Solution',
     street_number: '15',
     street_name: 'Rue Jean Jaures',
@@ -141,62 +151,62 @@ import ig from 'invoice-it'
     phone: '01 00 00 00 00',
     mail: 'contact@dimsolution.com',
     website: 'www.dimsolution.com'
-  }
+  };
 
-  let invoice = generator.create(recipient, emitter)
+  const invoice = invoiceIt.create(recipient, emitter);
 ```
 
 You can also use getter / setters like that
 
 ```js
-let invoice = generator.create()
+const invoice = invoiceIt.create();
 
-invoice.recipient.company_name = 'Receiver company'
-invoice.recipient.first_name = 'Will'
-invoice.recipient.last_name = 'Jameson'
-invoice.recipient.street_number = '20'
-invoice.recipient.street_name = 'Rue Victor Hugo'
-invoice.recipient.zip_code = '77340'
-invoice.recipient.city = 'Pontault-Combault'
-invoice.recipient.country = 'France'
-invoice.recipient.phone = '06 00 00 00 00'
-invoice.recipient.mail = 'will.jameson@test.com'
+invoice.recipient.company_name = 'Receiver company';
+invoice.recipient.first_name = 'Will';
+invoice.recipient.last_name = 'Jameson';
+invoice.recipient.street_number = '20';
+invoice.recipient.street_name = 'Rue Victor Hugo';
+invoice.recipient.zip_code = '77340';
+invoice.recipient.city = 'Pontault-Combault';
+invoice.recipient.country = 'France';
+invoice.recipient.phone = '06 00 00 00 00';
+invoice.recipient.mail = 'will.jameson@test.com';
 
-invoice.emitter.name = 'Dim Solution'
-invoice.emitter.street_number = '15'
-invoice.emitter.street_name = 'Rue Jean Jaures'
-invoice.emitter.zip_code = '75012'
-invoice.emitter.city = 'Paris'
-invoice.emitter.country = 'France'
-invoice.emitter.phone = '01 00 00 00 00'
-invoice.emitter.mail = 'contact@dimsolution.com'
-invoice.emitter.website = 'www.dimsolution.com'
+invoice.emitter.name = 'Dim Solution';
+invoice.emitter.street_number = '15';
+invoice.emitter.street_name = 'Rue Jean Jaures';
+invoice.emitter.zip_code = '75012';
+invoice.emitter.city = 'Paris';
+invoice.emitter.country = 'France';
+invoice.emitter.phone = '01 00 00 00 00';
+invoice.emitter.mail = 'contact@dimsolution.com';
+invoice.emitter.website = 'www.dimsolution.com';
 ```
 
 Return invoice object
 ```js
-invoice.getInvoice()
+invoice.getInvoice();
 ```
 
 Return html invoice
 ```js
-invoice.getInvoice().toHTML()
+invoice.getInvoice().toHTML();
 ```
 
 Save html invoice into file (default filepath: 'invoice.html')
 ```js
 invoice.getInvoice().toHTML().toFile('./invoice.html')
   .then(() => {
-      console.log('HTML file created.')
-  })
+      console.log('HTML file created.');
+  });
 ```
 
 Save html invoice into file (default filepath: 'invoice.pdf')
 ```js
 invoice.getInvoice().toPDF().toFile('./invoice.pdf')
   .then(() => {
-      console.log('PDF file created.')
-  })
+      console.log('PDF file created.');
+  });
 ```
 
 ## Scripts
