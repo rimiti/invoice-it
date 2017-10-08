@@ -23,13 +23,7 @@ If you want some examples, check tests.
 
 ## Demonstration
 
-### Order
-
-[![order](static/images/order.png)](https://github.com/rimiti/invoice-it/tree/master/static/images/order.png)
-
-### Invoice
-
-[![invoice](static/images/invoice.png)](https://github.com/rimiti/invoice-it/tree/master/static/images/invoice.png)
+<img src="https://github.com/rimiti/invoice-it/blob/master/static/images/order.png" height="400"> <img src="https://github.com/rimiti/invoice-it/blob/master/static/images/invoice.png" height="400">
 
 ## Usage
 
