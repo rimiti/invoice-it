@@ -23,7 +23,7 @@ If you want some examples, check tests.
 
 ## Demonstration
 
-<img src="https://github.com/rimiti/invoice-it/blob/master/static/images/order.png" height="650"> <img src="https://github.com/rimiti/invoice-it/blob/master/static/images/invoice.png" height="650">
+<img src="https://github.com/rimiti/invoice-it/blob/master/static/images/order.png" height="550"> <img src="https://github.com/rimiti/invoice-it/blob/master/static/images/invoice.png" height="550">
 
 ## Usage
 
