@@ -14,6 +14,11 @@
 Generate your orders and you invoices and export them easily.
 If you want some examples, check tests.
 
+## Install
+```
+$ npm install invoice-it --save
+```
+
 ## Features
 
 - Generate order / invoice
