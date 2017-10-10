@@ -1,7 +1,8 @@
-import invoiceIt from '../dist/src/lib/generator'
+import invoiceIt from '../src/lib/generator'
 import fs from 'fs'
 
-jest.setTimeout(20000);
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 40000;
+jest.setTimeout(40000);
 
 describe('Order', () => {
   const htmlPathfile = './order.html';
