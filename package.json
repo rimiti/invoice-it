@@ -8,7 +8,8 @@
     "clean": "rm -rf coverage dist tmp",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
-    "build": "babel src/**/*.js -d dist",
+    "prepare": "npm run build",
+    "build": "babel src/**/*.js -d dist && babel index.js -d dist",
     "build:watch": "babel --watch src/**/*.js -d dist"
   },
   "repository": {
@@ -44,6 +45,7 @@
     "source-map-support": "^0.5.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "~6.26.0",
     "babel-eslint": "~8.0.1",
     "babel-jest": "~21.2.0",
