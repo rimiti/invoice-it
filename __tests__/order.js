@@ -1,8 +1,9 @@
-import invoiceIt from '../src/lib/generator'
+import invoiceIt from '../dist/src/lib/generator'
 import fs from 'fs'
 
-describe('Order', () => {
+jest.setTimeout(20000);
 
+describe('Order', () => {
   const htmlPathfile = './order.html';
   const pdfPathfile = './order.pdf';
 
