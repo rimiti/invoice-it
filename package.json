@@ -3,7 +3,7 @@
   "version": "1.7.1",
   "description": "Order and invoice generator",
   "license": "MIT",
-  "main": "dist/lib/generator.js",
+  "main": "dist/src/lib/generator.js",
   "scripts": {
     "clean": "rm -rf coverage dist tmp",
     "test": "jest --coverage",
