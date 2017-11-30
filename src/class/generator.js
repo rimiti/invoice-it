@@ -18,8 +18,8 @@ export default class Generator extends Common {
     this._total_taxes = 0
     this._total_inc_taxes = 0
     this._article = []
-    this.hydrate(config.global, this._itemsToHydrate())
     this._i18nConfigure(config.language)
+    this.hydrate(config.global, this._itemsToHydrate())
   }
 
   get template() {
