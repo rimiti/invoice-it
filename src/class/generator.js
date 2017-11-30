@@ -18,11 +18,8 @@ export default class Generator extends Common {
     this._total_taxes = 0
     this._total_inc_taxes = 0
     this._article = []
-    this._defaultLocale = (config.language && config.language.defaultLocale) ? config.language.defaultLocale : 'en';
-    this._availableLocale = (config.language && config.language.locales) ? config.language.locales : ['en', 'fr'];
     this.hydrate(config.global, this._itemsToHydrate())
-
-    config.language && i18n.configure(config.language);
+    this._i18nConfigure(config.language)
   }
 
   get template() {
@@ -537,4 +534,15 @@ export default class Generator extends Common {
     }
   }
 
+  /**
+   * @description Overrides i18n configuration
+   * @param config
+   * @private
+   */
+  _i18nConfigure(config) {
+    this._defaultLocale = (config && config.defaultLocale) ? config.defaultLocale : 'en';
+    this._availableLocale = (config && config.locales) ? config.locales : ['en', 'fr'];
+
+    config && i18n.configure(config);
+  }
 }
