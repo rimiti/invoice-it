@@ -18,7 +18,11 @@ export default class Generator extends Common {
     this._total_taxes = 0
     this._total_inc_taxes = 0
     this._article = []
+    this._defaultLocale = (config.language && config.language.defaultLocale) ? config.language.defaultLocale : 'en';
+    this._availableLocale = (config.language && config.language.locales) ? config.language.locales : ['en', 'fr'];
     this.hydrate(config.global, this._itemsToHydrate())
+
+    config.language && i18n.configure(config.language);
   }
 
   get template() {
@@ -30,12 +34,12 @@ export default class Generator extends Common {
   }
 
   get lang() {
-    return (!this._lang) ? 'en' : this._lang
+    return (!this._lang) ? this._defaultLocale : this._lang
   }
 
   set lang(value) {
     value = value.toLowerCase()
-    if (!['en', 'fr'].includes(value)) throw new Error(`Wrong lang, please set 'en' or 'fr'`)
+    if (!this._availableLocale.includes(value)) throw new Error(`Wrong lang, please set one of ${this._availableLocale.join(', ')}`)
     this._lang = value
   }
 

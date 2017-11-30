@@ -208,6 +208,22 @@ invoice.getInvoice().toPDF().toFile('./invoice.pdf')
   });
 ```
 
+### i18n
+
+To add more language:
+
+```js
+import invoiceIt from 'invoice-it';
+
+invoiceIt.configure({
+  language: {
+    locales: ['en', 'pl'],
+    directory: `${__dirname}/path/to/locales`,
+    defaultLocale: 'en'
+  }
+});
+```
+
 ## Scripts
 
 Run using npm run <script> command.
