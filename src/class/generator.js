@@ -17,6 +17,7 @@ export default class Generator extends Common {
     this._total_taxes = 0;
     this._total_inc_taxes = 0;
     this._article = [];
+    this._i18nConfigure(config.language);
     this.hydrate(config.global, this._itemsToHydrate());
   }
 
@@ -29,12 +30,12 @@ export default class Generator extends Common {
   }
 
   get lang() {
-    return (!this._lang) ? 'en' : this._lang;
+    return (!this._lang) ? this._defaultLocale : this._lang;
   }
 
   set lang(value) {
     const tmp = value.toLowerCase();
-    if (!['en', 'fr'].includes(tmp)) throw new Error('Wrong lang, please set \'en\' or \'fr\'');
+    if (!this._availableLocale.includes(tmp)) throw new Error(`Wrong lang, please set one of ${this._availableLocale.join(', ')}`);
     this._lang = tmp;
   }
 
@@ -525,5 +526,16 @@ export default class Generator extends Common {
       }
       loop += 1;
     }
+  }
+
+  /**
+   * @description Overrides i18n configuration
+   * @param config
+   * @private
+   */
+  _i18nConfigure(config) {
+    this._defaultLocale = (config && config.defaultLocale) ? config.defaultLocale : 'en';
+    this._availableLocale = (config && config.locales) ? config.locales : ['en', 'fr'];
+    if (config) i18n.configure(config);
   }
 }
