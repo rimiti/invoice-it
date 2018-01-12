@@ -17,7 +17,7 @@ export default class Generator extends Common {
     this._total_taxes = 0;
     this._total_inc_taxes = 0;
     this._article = [];
-    this._i18nConfigure(config.language)
+    this._i18nConfigure(config.language);
     this.hydrate(config.global, this._itemsToHydrate());
   }
 
@@ -30,13 +30,13 @@ export default class Generator extends Common {
   }
 
   get lang() {
-    return (!this._lang) ? this._defaultLocale : this._lang
+    return (!this._lang) ? this._defaultLocale : this._lang;
   }
 
   set lang(value) {
-    const tmp = value.toLowerCase()
-    if (!this._availableLocale.includes(tmp)) throw new Error(`Wrong lang, please set one of ${this._availableLocale.join(', ')}`)
-    this._lang = tmp
+    const tmp = value.toLowerCase();
+    if (!this._availableLocale.includes(tmp)) throw new Error(`Wrong lang, please set one of ${this._availableLocale.join(', ')}`);
+    this._lang = tmp;
   }
 
   get id() {
@@ -536,6 +536,6 @@ export default class Generator extends Common {
   _i18nConfigure(config) {
     this._defaultLocale = (config && config.defaultLocale) ? config.defaultLocale : 'en';
     this._availableLocale = (config && config.locales) ? config.locales : ['en', 'fr'];
-    config && i18n.configure(config);
+    if (config) i18n.configure(config);
   }
 }
