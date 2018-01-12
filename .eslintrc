@@ -1,0 +1,20 @@
+{
+  "extends": "airbnb-base",
+  "parser": "babel-eslint",
+  "env": {
+    "jest": true,
+    "jasmine": true
+  },
+  "rules": {
+    "object-curly-spacing": "off",
+    "max-len": [
+      2,
+      120
+    ],
+    "prefer-arrow-callback": 0,
+    "arrow-parens": [
+      2,
+      "always"
+    ]
+  }
+}
