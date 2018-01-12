@@ -1,167 +1,166 @@
-import Common from './common'
-import Recipient from './recipient'
-import Emitter from './emitter'
-import pug from 'pug'
-import path from 'path'
-import i18n from '../lib/i18n'
-import fs from 'fs'
-import moment from 'moment'
-import htmlToPdf from 'html-pdf'
+import moment from 'moment';
+import pug from 'pug';
+import fs from 'fs';
+import path from 'path';
+import htmlToPdf from 'html-pdf';
+import Common from './common';
+import Recipient from './recipient';
+import Emitter from './emitter';
+import i18n from '../lib/i18n';
 
 export default class Generator extends Common {
-
   constructor(config) {
-    super()
-    this._recipient = (config.recipient) ? new Recipient(config.recipient) : new Recipient()
-    this._emitter = (config.emitter) ? new Emitter(config.emitter) : new Emitter()
-    this._total_exc_taxes = 0
-    this._total_taxes = 0
-    this._total_inc_taxes = 0
-    this._article = []
-    this.hydrate(config.global, this._itemsToHydrate())
+    super();
+    this._recipient = (config.recipient) ? new Recipient(config.recipient) : new Recipient();
+    this._emitter = (config.emitter) ? new Emitter(config.emitter) : new Emitter();
+    this._total_exc_taxes = 0;
+    this._total_taxes = 0;
+    this._total_inc_taxes = 0;
+    this._article = [];
+    this.hydrate(config.global, this._itemsToHydrate());
   }
 
   get template() {
-    return this._template
+    return this._template;
   }
 
   set template(value) {
-    this._template = value
+    this._template = value;
   }
 
   get lang() {
-    return (!this._lang) ? 'en' : this._lang
+    return (!this._lang) ? 'en' : this._lang;
   }
 
   set lang(value) {
-    value = value.toLowerCase()
-    if (!['en', 'fr'].includes(value)) throw new Error(`Wrong lang, please set 'en' or 'fr'`)
-    this._lang = value
+    value = value.toLowerCase();
+    if (!['en', 'fr'].includes(value)) throw new Error('Wrong lang, please set \'en\' or \'fr\'');
+    this._lang = value;
   }
 
   get id() {
-    return this._id
+    return this._id;
   }
 
   set id(value) {
-    this._id = value
+    this._id = value;
   }
 
   get order_reference_pattern() {
-    return (!this._order_reference_pattern) ? '$prefix{OR}$date{YYMM}$separator{-}$id{00000}' : this._order_reference_pattern
+    return (!this._order_reference_pattern) ? '$prefix{OR}$date{YYMM}$separator{-}$id{00000}' : this._order_reference_pattern;
   }
 
   set order_reference_pattern(value) {
-    this._order_reference_pattern = value
+    this._order_reference_pattern = value;
   }
 
   get invoice_reference_pattern() {
-    return (!this._invoice_reference_pattern) ? '$prefix{IN}$date{YYMM}$separator{-}$id{00000}' : this._invoice_reference_pattern
+    return (!this._invoice_reference_pattern) ? '$prefix{IN}$date{YYMM}$separator{-}$id{00000}' : this._invoice_reference_pattern;
   }
 
   set invoice_reference_pattern(value) {
-    this._invoice_reference_pattern = value
+    this._invoice_reference_pattern = value;
   }
 
   get reference() {
-    return this._reference
+    return this._reference;
   }
 
   set reference(value) {
-    this._reference = value
+    this._reference = value;
   }
 
   get logo() {
-    return this._logo
+    return this._logo;
   }
 
   set logo(value) {
-    this._logo = value
+    this._logo = value;
   }
 
   get order_template() {
-    return this._order_template
+    return this._order_template;
   }
 
   set order_template(value) {
-    this._order_template = value
+    this._order_template = value;
   }
 
   get invoice_template() {
-    return this._invoice_template
+    return this._invoice_template;
   }
 
   set invoice_template(value) {
-    this._invoice_template = value
+    this._invoice_template = value;
   }
 
   get order_note() {
-    return this._order_note
+    return this._order_note;
   }
 
   set order_note(value) {
-    this._order_note = value
+    this._order_note = value;
   }
 
   get invoice_note() {
-    return this._invoice_note
+    return this._invoice_note;
   }
 
   set invoice_note(value) {
-    this._invoice_note = value
+    this._invoice_note = value;
   }
 
   get footer() {
-    return this._footer
+    return this._footer;
   }
 
   set footer(value) {
-    this._footer = value
+    this._footer = value;
   }
 
   get date_format() {
-    return (!this._date_format) ? 'YYYY/MM/DD' : this._date_format
+    return (!this._date_format) ? 'YYYY/MM/DD' : this._date_format;
   }
 
   set date_format(value) {
-    this._date_format = value
+    this._date_format = value;
   }
 
   get date() {
-    return (!this._date) ? moment().format(this.date_format) : this._date
+    return (!this._date) ? moment().format(this.date_format) : this._date;
   }
 
   set date(value) {
-    if (!moment(value).isValid()) throw new Error(`Date not valid`)
-    this._date = moment(value).format(this.date_format)
+    if (!moment(value).isValid()) throw new Error('Date not valid');
+    this._date = moment(value).format(this.date_format);
   }
 
   get total_exc_taxes() {
-    return this._total_exc_taxes
+    return this._total_exc_taxes;
   }
 
   set total_exc_taxes(value) {
-    this._total_exc_taxes = value
+    this._total_exc_taxes = value;
   }
 
   get total_taxes() {
-    return this._total_taxes
+    return this._total_taxes;
   }
 
   set total_taxes(value) {
-    this._total_taxes = value
+    this._total_taxes = value;
   }
 
   get total_inc_taxes() {
-    return this._total_inc_taxes
+    return this._total_inc_taxes;
   }
 
   set total_inc_taxes(value) {
-    this._total_inc_taxes = value
+    this._total_inc_taxes = value;
   }
 
   get article() {
-    return this._article
+    return this._article;
   }
 
   /**
@@ -173,38 +172,38 @@ export default class Generator extends Common {
   set article(value) {
     if (Array.isArray(value)) {
       for (let i = 0; i < value.length; i++) {
-        this._checkArticle(value[i])
-        value[i].total_product_without_taxes = this.formatOutputNumber(value[i].price * value[i].qt)
-        value[i].total_product_taxes = this.formatOutputNumber(this.round(value[i].total_product_without_taxes * (value[i].tax / 100)))
-        value[i].total_product_with_taxes = this.formatOutputNumber(this.round(Number(value[i].total_product_without_taxes) + Number(value[i].total_product_taxes)))
-        value[i].price = this.formatOutputNumber(value[i].price)
-        value[i].tax = this.formatOutputNumber(value[i].tax)
-        this.total_exc_taxes += Number(value[i].total_product_without_taxes)
-        this.total_inc_taxes += Number(value[i].total_product_with_taxes)
-        this.total_taxes += Number(value[i].total_product_taxes)
+        this._checkArticle(value[i]);
+        value[i].total_product_without_taxes = this.formatOutputNumber(value[i].price * value[i].qt);
+        value[i].total_product_taxes = this.formatOutputNumber(this.round(value[i].total_product_without_taxes * (value[i].tax / 100)));
+        value[i].total_product_with_taxes = this.formatOutputNumber(this.round(Number(value[i].total_product_without_taxes) + Number(value[i].total_product_taxes)));
+        value[i].price = this.formatOutputNumber(value[i].price);
+        value[i].tax = this.formatOutputNumber(value[i].tax);
+        this.total_exc_taxes += Number(value[i].total_product_without_taxes);
+        this.total_inc_taxes += Number(value[i].total_product_with_taxes);
+        this.total_taxes += Number(value[i].total_product_taxes);
       }
     } else {
-      this._checkArticle(value)
-      value.total_product_without_taxes = this.formatOutputNumber(value.price * value.qt)
-      value.total_product_taxes = this.formatOutputNumber(this.round(value.total_product_without_taxes * (value.tax / 100)))
-      value.total_product_with_taxes = this.formatOutputNumber(this.round(Number(value.total_product_without_taxes) + Number(value.total_product_taxes)))
-      value.price = this.formatOutputNumber(value.price)
-      value.tax = this.formatOutputNumber(value.tax)
-      this.total_exc_taxes += Number(value.total_product_without_taxes)
-      this.total_inc_taxes += Number(value.total_product_with_taxes)
-      this.total_taxes += Number(value.total_product_taxes)
+      this._checkArticle(value);
+      value.total_product_without_taxes = this.formatOutputNumber(value.price * value.qt);
+      value.total_product_taxes = this.formatOutputNumber(this.round(value.total_product_without_taxes * (value.tax / 100)));
+      value.total_product_with_taxes = this.formatOutputNumber(this.round(Number(value.total_product_without_taxes) + Number(value.total_product_taxes)));
+      value.price = this.formatOutputNumber(value.price);
+      value.tax = this.formatOutputNumber(value.tax);
+      this.total_exc_taxes += Number(value.total_product_without_taxes);
+      this.total_inc_taxes += Number(value.total_product_with_taxes);
+      this.total_taxes += Number(value.total_product_taxes);
     }
-    this._article = (this._article) ? this._article.concat(value) : [].concat(value)
+    this._article = (this._article) ? this._article.concat(value) : [].concat(value);
   }
 
   /**
    * @description Reinitialize article attribute
    */
   deleteArticles() {
-    this._total_inc_taxes = 0
-    this._total_taxes = 0
-    this._total_exc_taxes = 0
-    this._article = []
+    this._total_inc_taxes = 0;
+    this._total_taxes = 0;
+    this._total_exc_taxes = 0;
+    this._article = [];
   }
 
   /**
@@ -213,14 +212,14 @@ export default class Generator extends Common {
    * @private
    */
   _checkArticle(article) {
-    if (!article.hasOwnProperty('description')) throw new Error(`Description is attribute is missing`)
-    if (!article.hasOwnProperty('tax')) throw new Error(`Tax attribute is missing`)
-    if (!this.isNumeric(article.tax)) throw new Error(`Tax attribute have to be a number`)
-    if (!article.hasOwnProperty('price')) throw new Error(`Price attribute is missing`)
-    if (!this.isNumeric(article.price)) throw new Error(`Price attribute have to be a number`)
-    if (!article.hasOwnProperty('qt')) throw new Error(`Qt attribute is missing`)
-    if (!this.isNumeric(article.qt)) throw new Error(`Qt attribute have to be an integer`)
-    if (!Number.isInteger(article.qt)) throw new Error(`Qt attribute have to be an integer, not a float`)
+    if (!article.hasOwnProperty('description')) throw new Error('Description is attribute is missing');
+    if (!article.hasOwnProperty('tax')) throw new Error('Tax attribute is missing');
+    if (!this.isNumeric(article.tax)) throw new Error('Tax attribute have to be a number');
+    if (!article.hasOwnProperty('price')) throw new Error('Price attribute is missing');
+    if (!this.isNumeric(article.price)) throw new Error('Price attribute have to be a number');
+    if (!article.hasOwnProperty('qt')) throw new Error('Qt attribute is missing');
+    if (!this.isNumeric(article.qt)) throw new Error('Qt attribute have to be an integer');
+    if (!Number.isInteger(article.qt)) throw new Error('Qt attribute have to be an integer, not a float');
   }
 
   /**
@@ -228,7 +227,7 @@ export default class Generator extends Common {
    * @returns {[string,string,string,string]}
    */
   _itemsToHydrate() {
-    return ['logo', 'order_template', 'invoice_template', 'date_format', 'order_reference_pattern', 'invoice_reference_pattern', 'order_note', 'invoice_note', 'lang', 'footer']
+    return ['logo', 'order_template', 'invoice_template', 'date_format', 'order_reference_pattern', 'invoice_reference_pattern', 'order_note', 'invoice_note', 'lang', 'footer'];
   }
 
   /**
@@ -237,8 +236,8 @@ export default class Generator extends Common {
    * @returns {*}
    */
   recipient(obj) {
-    if (!obj) return this._recipient
-    return this._recipient.hydrate(obj, this._recipient._itemsToHydrate())
+    if (!obj) return this._recipient;
+    return this._recipient.hydrate(obj, this._recipient._itemsToHydrate());
   }
 
   /**
@@ -247,8 +246,8 @@ export default class Generator extends Common {
    * @returns {*}
    */
   emitter(obj) {
-    if (!obj) return this._emitter
-    return this._emitter.hydrate(obj, this._emitter._itemsToHydrate())
+    if (!obj) return this._emitter;
+    return this._emitter.hydrate(obj, this._emitter._itemsToHydrate());
   }
 
   /**
@@ -296,8 +295,8 @@ export default class Generator extends Common {
       table_total_taxes_value: this.formatOutputNumber(this.total_taxes),
       table_total_with_taxes_value: this.formatOutputNumber(this.total_inc_taxes),
       template_configuration: this._templateConfiguration(),
-      moment: moment()
-    }
+      moment: moment(),
+    };
   }
 
   /**
@@ -307,9 +306,9 @@ export default class Generator extends Common {
    * @private
    */
   _compile(keys) {
-    let template = keys.filename === 'order' ? this.order_template : this.invoice_template
-    let compiled = pug.compileFile(path.resolve(template))
-    return compiled(keys)
+    const template = keys.filename === 'order' ? this.order_template : this.invoice_template;
+    const compiled = pug.compileFile(path.resolve(template));
+    return compiled(keys);
   }
 
   /**
@@ -317,22 +316,20 @@ export default class Generator extends Common {
    * @returns {*}
    */
   getInvoice() {
-    let keys = {
+    const keys = {
       invoice_header_title: i18n.__({phrase: 'invoice_header_title', locale: this.lang}),
       invoice_header_subject: i18n.__({phrase: 'invoice_header_subject', locale: this.lang}),
       invoice_header_reference: i18n.__({phrase: 'invoice_header_reference', locale: this.lang}),
       invoice_header_reference_value: this.getReferenceFromPattern('invoice'),
       invoice_header_date: i18n.__({phrase: 'invoice_header_date', locale: this.lang}),
       table_note_content: this.invoice_note,
-      note: (note) => {
-        return (note) ? this.invoice_note = note : this.invoice_note
-      },
-      filename: 'invoice'
-    }
+      note: (note) => ((note) ? this.invoice_note = note : this.invoice_note),
+      filename: 'invoice',
+    };
     return Object.assign(keys, {
       toHTML: () => this._toHTML(keys),
-      toPDF: () => this._toPDF(keys)
-    }, this._preCompileCommonTranslations())
+      toPDF: () => this._toPDF(keys),
+    }, this._preCompileCommonTranslations());
   }
 
   /**
@@ -340,22 +337,20 @@ export default class Generator extends Common {
    * @returns {*}
    */
   getOrder() {
-    let keys = {
+    const keys = {
       order_header_title: i18n.__({phrase: 'order_header_title', locale: this.lang}),
       order_header_subject: i18n.__({phrase: 'order_header_subject', locale: this.lang}),
       order_header_reference: i18n.__({phrase: 'order_header_reference', locale: this.lang}),
       order_header_reference_value: this.getReferenceFromPattern('order'),
       order_header_date: i18n.__({phrase: 'order_header_date', locale: this.lang}),
       table_note_content: this.order_note,
-      note: (note) => {
-        return (note) ? this.order_note = note : this.order_note
-      },
-      filename: 'order'
-    }
+      note: (note) => ((note) ? this.order_note = note : this.order_note),
+      filename: 'order',
+    };
     return Object.assign(keys, {
       toHTML: () => this._toHTML(keys),
-      toPDF: () => this._toPDF(keys)
-    }, this._preCompileCommonTranslations())
+      toPDF: () => this._toPDF(keys),
+    }, this._preCompileCommonTranslations());
   }
 
   /**
@@ -363,11 +358,11 @@ export default class Generator extends Common {
    * @returns {*}
    */
   getFooter() {
-    if (!this.footer) return i18n.__({phrase: 'footer', locale: this.lang})
+    if (!this.footer) return i18n.__({phrase: 'footer', locale: this.lang});
 
-    if (this.lang === 'en') return this.footer.en
-    else if (this.lang === 'fr') return this.footer.fr
-    else throw Error(`This lang doesn't exist.`)
+    if (this.lang === 'en') return this.footer.en;
+    else if (this.lang === 'fr') return this.footer.fr;
+    throw Error('This lang doesn\'t exist.');
   }
 
   /**
@@ -376,9 +371,9 @@ export default class Generator extends Common {
    * @return {*}
    */
   getReferenceFromPattern(type) {
-    if (!['order', 'invoice'].includes(type)) throw new Error(`Type have to be "order" or "invoice"`)
-    if (this.reference) return this.reference
-    return this.setReferenceFromPattern((type === 'order') ? this.order_reference_pattern : this.invoice_reference_pattern)
+    if (!['order', 'invoice'].includes(type)) throw new Error('Type have to be "order" or "invoice"');
+    if (this.reference) return this.reference;
+    return this.setReferenceFromPattern((type === 'order') ? this.order_reference_pattern : this.invoice_reference_pattern);
   }
 
   /**
@@ -388,21 +383,20 @@ export default class Generator extends Common {
    * @private
    */
   setReferenceFromPattern(pattern) {
-    let tmp = pattern.split('$').slice(1)
-    let output = ''
-    for (let item of tmp) {
-      if (!item.endsWith('}')) throw new Error(`Wrong pattern type`)
-      if (item.startsWith('prefix{')) output += item.replace('prefix{', '').slice(0, -1)
-      else if (item.startsWith('separator{')) output += item.replace('separator{', '').slice(0, -1)
-      else if (item.startsWith('date{')) output += moment().format(item.replace('date{', '').slice(0, -1))
+    const tmp = pattern.split('$').slice(1);
+    let output = '';
+    for (const item of tmp) {
+      if (!item.endsWith('}')) throw new Error('Wrong pattern type');
+      if (item.startsWith('prefix{')) output += item.replace('prefix{', '').slice(0, -1);
+      else if (item.startsWith('separator{')) output += item.replace('separator{', '').slice(0, -1);
+      else if (item.startsWith('date{')) output += moment().format(item.replace('date{', '').slice(0, -1));
       else if (item.startsWith('id{')) {
-        const id = item.replace('id{', '').slice(0, -1)
-        if (!/^\d+$/.test(id)) throw new Error(`Id must be an integer (${id})`)
-        output += (this._id) ? this.pad(this._id, id.length) : this.pad(0, id.length)
-      }
-      else throw new Error(`${item} pattern reference unknown`)
+        const id = item.replace('id{', '').slice(0, -1);
+        if (!/^\d+$/.test(id)) throw new Error(`Id must be an integer (${id})`);
+        output += (this._id) ? this.pad(this._id, id.length) : this.pad(0, id.length);
+      } else throw new Error(`${item} pattern reference unknown`);
     }
-    return output
+    return output;
   }
 
   /**
@@ -411,11 +405,11 @@ export default class Generator extends Common {
    * @private
    */
   _toHTML(keys) {
-    const html = this._compile(keys.filename === 'order' ? this.getOrder() : this.getInvoice())
+    const html = this._compile(keys.filename === 'order' ? this.getOrder() : this.getInvoice());
     return {
-      html: html,
-      toFile: (filepath) => this._toFileFromHTML(html, (filepath) ? filepath : `${keys.filename}.html`)
-    }
+      html,
+      toFile: (filepath) => this._toFileFromHTML(html, (filepath) || `${keys.filename}.html`),
+    };
   }
 
   /**
@@ -425,13 +419,13 @@ export default class Generator extends Common {
    * @private
    */
   _toPDF(keys) {
-    const pdf = htmlToPdf.create(this._toHTML(keys).html)
+    const pdf = htmlToPdf.create(this._toHTML(keys).html);
     return {
-      pdf: pdf,
-      toFile: (filepath) => this._toFileFromPDF(pdf, (filepath) ? filepath : `${keys.filename}.pdf`),
+      pdf,
+      toFile: (filepath) => this._toFileFromPDF(pdf, (filepath) || `${keys.filename}.pdf`),
       toBuffer: (filepath) => this._toBufferFromPDF(pdf),
-      toStream: (filepath) => this._toStreamFromPDF(pdf, (filepath) ? filepath : `${keys.filename}.pdf`)
-    }
+      toStream: (filepath) => this._toStreamFromPDF(pdf, (filepath) || `${keys.filename}.pdf`),
+    };
   }
 
   /**
@@ -442,12 +436,10 @@ export default class Generator extends Common {
    * @private
    */
   _toFileFromHTML(content, filepath) {
-    return new Promise((resolve, reject) => {
-      return fs.writeFile(filepath, content, (err) => {
-        if (err) reject(err)
-        return resolve()
-      })
-    })
+    return new Promise((resolve, reject) => fs.writeFile(filepath, content, (err) => {
+      if (err) reject(err);
+      return resolve();
+    }));
   }
 
   /**
@@ -458,12 +450,10 @@ export default class Generator extends Common {
    * @private
    */
   _toFileFromPDF(content, filepath) {
-    return new Promise((resolve, reject) => {
-      return content.toFile(filepath, (err, res) => {
-        if (err) return reject(err)
-        return resolve(res)
-      })
-    })
+    return new Promise((resolve, reject) => content.toFile(filepath, (err, res) => {
+      if (err) return reject(err);
+      return resolve(res);
+    }));
   }
 
   /**
@@ -474,9 +464,9 @@ export default class Generator extends Common {
    */
   _toBufferFromPDF(content) {
     return content.toBuffer((err, buffer) => {
-      if (err) return console.error(err)
-      return buffer
-    })
+      if (err) return console.error(err);
+      return buffer;
+    });
   }
 
   /**
@@ -487,9 +477,7 @@ export default class Generator extends Common {
    * @private
    */
   _toStreamFromPDF(content, filepath) {
-    return content.toStream((err, stream) => {
-      return stream.pipe(fs.createWriteStream(filepath))
-    })
+    return content.toStream((err, stream) => stream.pipe(fs.createWriteStream(filepath)));
   }
 
   /**
@@ -498,39 +486,36 @@ export default class Generator extends Common {
    * @private
    */
   _templateConfiguration() {
-    let template_rows_per_page = 29
-    let templateConfig = {
+    const template_rows_per_page = 29;
+    const templateConfig = {
       rows_in_first_page: (this.article.length > 19) ? template_rows_per_page : 19,
       rows_per_pages: 43,
       rows_in_last_page: 33,
-    }
+    };
 
-    let nbArticles = this.article.length
-    let loop = 1
+    let nbArticles = this.article.length;
+    let loop = 1;
     while (true) {
-
       if (loop === 1) {
-        nbArticles -= templateConfig.rows_in_first_page
+        nbArticles -= templateConfig.rows_in_first_page;
         if (nbArticles <= 0) {
-          templateConfig.loop_table = (templateConfig.rows_in_first_page !== template_rows_per_page) ? 1 : 2
-          return templateConfig
+          templateConfig.loop_table = (templateConfig.rows_in_first_page !== template_rows_per_page) ? 1 : 2;
+          return templateConfig;
         }
       }
 
       if (loop >= 2) {
         if (nbArticles <= templateConfig.rows_in_last_page) {
-          templateConfig.loop_table = loop
-          return templateConfig
-        } else {
-          nbArticles -= templateConfig.rows_per_pages
-          if (nbArticles <= 0) {
-            templateConfig.loop_table = loop
-            return templateConfig
-          }
+          templateConfig.loop_table = loop;
+          return templateConfig;
+        }
+        nbArticles -= templateConfig.rows_per_pages;
+        if (nbArticles <= 0) {
+          templateConfig.loop_table = loop;
+          return templateConfig;
         }
       }
-      loop++
+      loop++;
     }
   }
-
 }

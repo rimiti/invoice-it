@@ -1,14 +1,13 @@
 export default class Common {
-
   /**
    * @description Hydrate current instance with obj attributes
    * @param obj
    * @param attributes
    */
   hydrate(obj, attributes) {
-    if (!obj) return
-    for (let item of attributes) {
-      this[item] = (obj[item]) ? obj[item] : ''
+    if (!obj) return;
+    for (const item of attributes) {
+      this[item] = (obj[item]) ? obj[item] : '';
     }
   }
 
@@ -21,9 +20,9 @@ export default class Common {
    * @private
    */
   pad(num, size = 3) {
-    let output = num.toString()
-    while (output.length < size) output = `0${output}`
-    return output
+    let output = num.toString();
+    while (output.length < size) output = `0${output}`;
+    return output;
   }
 
   /**
@@ -33,7 +32,7 @@ export default class Common {
    * @private
    */
   isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n)
+    return !isNaN(parseFloat(n)) && isFinite(n);
   }
 
   /**
@@ -43,14 +42,13 @@ export default class Common {
    * @returns {number}
    */
   round(num, decimals = 2) {
-    if (!("" + num).includes("e")) {
-      return +(Math.round(num + 'e+' + decimals) + 'e-' + decimals)
-    } else {
-      let arr = ('' + num).split('e')
-      let sig = ''
-      if (+arr[1] + decimals > 0) sig = '+'
-      return +(Math.round(+arr[0] + 'e' + sig + (+arr[1] + decimals)) + 'e-' + decimals)
+    if (!(`${num}`).includes('e')) {
+      return +(`${Math.round(`${num}e+${decimals}`)}e-${decimals}`);
     }
+    const arr = (`${num}`).split('e');
+    let sig = '';
+    if (+arr[1] + decimals > 0) sig = '+';
+    return +(`${Math.round(`${+arr[0]}e${sig}${+arr[1] + decimals}`)}e-${decimals}`);
   }
 
   /**
@@ -59,14 +57,13 @@ export default class Common {
    * @return {string}
    */
   formatOutputNumber(num) {
-    let number = num.toString()
+    const number = num.toString();
     if (number.includes('.')) {
-      let split = number.split('.')
-      if (split[1].length === 1) return `${split[0]}.${split[1]}0`
-      else if (split[1].length === 2) return number
-      else return `${split[0]}.${split[1][0]}${split[1][1]}`
+      const split = number.split('.');
+      if (split[1].length === 1) return `${split[0]}.${split[1]}0`;
+      else if (split[1].length === 2) return number;
+      return `${split[0]}.${split[1][0]}${split[1][1]}`;
     }
-    return `${number}.00`
+    return `${number}.00`;
   }
-
 }

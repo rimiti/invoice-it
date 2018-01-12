@@ -1,7 +1,7 @@
-import Generator from './generator'
-import jsonOverride from 'json-override'
+import jsonOverride from 'json-override';
+import Generator from './generator';
 
-let configuration
+let configuration;
 
 export default {
 
@@ -18,10 +18,10 @@ export default {
    * @returns {Generator}
    */
   create: (recipient, emitter) => {
-    let generator = new Generator(configuration)
-    generator.recipient(recipient)
-    generator.emitter(emitter)
-    return generator
-  }
+    const generator = new Generator(configuration);
+    generator.recipient(recipient);
+    generator.emitter(emitter);
+    return generator;
+  },
 
-}
+};
