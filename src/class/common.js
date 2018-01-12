@@ -6,6 +6,7 @@ export default class Common {
    */
   hydrate(obj, attributes) {
     if (!obj) return;
+    // eslint-disable-next-line no-restricted-syntax
     for (const item of attributes) {
       this[item] = (obj[item]) ? obj[item] : '';
     }
@@ -32,7 +33,7 @@ export default class Common {
    * @private
    */
   isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
+    return !Number.isNaN(parseFloat(n)) && Number.isFinite(n);
   }
 
   /**

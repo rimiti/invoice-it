@@ -33,9 +33,9 @@ export default class Generator extends Common {
   }
 
   set lang(value) {
-    value = value.toLowerCase();
-    if (!['en', 'fr'].includes(value)) throw new Error('Wrong lang, please set \'en\' or \'fr\'');
-    this._lang = value;
+    const tmp = value.toLowerCase();
+    if (!['en', 'fr'].includes(tmp)) throw new Error('Wrong lang, please set \'en\' or \'fr\'');
+    this._lang = tmp;
   }
 
   get id() {
@@ -165,35 +165,39 @@ export default class Generator extends Common {
 
   /**
    * @description Set
-   * @param array || object
+   * @param value
    * @example article({description: 'Licence', tax: 20, price: 100, qt: 1})
-   * @example article([{description: 'Licence', tax: 20, price: 100, qt: 1}, {description: 'Licence', tax: 20, price: 100, qt: 1}])
+   * @example article([
+   *  {description: 'Licence', tax: 20, price: 100, qt: 1},
+   *  {description: 'Licence', tax: 20, price: 100, qt: 1}
+   * ])
    */
   set article(value) {
-    if (Array.isArray(value)) {
-      for (let i = 0; i < value.length; i++) {
-        this._checkArticle(value[i]);
-        value[i].total_product_without_taxes = this.formatOutputNumber(value[i].price * value[i].qt);
-        value[i].total_product_taxes = this.formatOutputNumber(this.round(value[i].total_product_without_taxes * (value[i].tax / 100)));
-        value[i].total_product_with_taxes = this.formatOutputNumber(this.round(Number(value[i].total_product_without_taxes) + Number(value[i].total_product_taxes)));
-        value[i].price = this.formatOutputNumber(value[i].price);
-        value[i].tax = this.formatOutputNumber(value[i].tax);
-        this.total_exc_taxes += Number(value[i].total_product_without_taxes);
-        this.total_inc_taxes += Number(value[i].total_product_with_taxes);
-        this.total_taxes += Number(value[i].total_product_taxes);
+    const tmp = value;
+    if (Array.isArray(tmp)) {
+      for (let i = 0; i < tmp.length; i += 1) {
+        this._checkArticle(tmp[i]);
+        tmp[i].total_product_without_taxes = this.formatOutputNumber(tmp[i].price * tmp[i].qt);
+        tmp[i].total_product_taxes = this.formatOutputNumber(this.round(tmp[i].total_product_without_taxes * (tmp[i].tax / 100)));
+        tmp[i].total_product_with_taxes = this.formatOutputNumber(this.round(Number(tmp[i].total_product_without_taxes) + Number(tmp[i].total_product_taxes)));
+        tmp[i].price = this.formatOutputNumber(tmp[i].price);
+        tmp[i].tax = this.formatOutputNumber(tmp[i].tax);
+        this.total_exc_taxes += Number(tmp[i].total_product_without_taxes);
+        this.total_inc_taxes += Number(tmp[i].total_product_with_taxes);
+        this.total_taxes += Number(tmp[i].total_product_taxes);
       }
     } else {
-      this._checkArticle(value);
-      value.total_product_without_taxes = this.formatOutputNumber(value.price * value.qt);
-      value.total_product_taxes = this.formatOutputNumber(this.round(value.total_product_without_taxes * (value.tax / 100)));
-      value.total_product_with_taxes = this.formatOutputNumber(this.round(Number(value.total_product_without_taxes) + Number(value.total_product_taxes)));
-      value.price = this.formatOutputNumber(value.price);
-      value.tax = this.formatOutputNumber(value.tax);
-      this.total_exc_taxes += Number(value.total_product_without_taxes);
-      this.total_inc_taxes += Number(value.total_product_with_taxes);
-      this.total_taxes += Number(value.total_product_taxes);
+      this._checkArticle(tmp);
+      tmp.total_product_without_taxes = this.formatOutputNumber(tmp.price * tmp.qt);
+      tmp.total_product_taxes = this.formatOutputNumber(this.round(tmp.total_product_without_taxes * (tmp.tax / 100)));
+      tmp.total_product_with_taxes = this.formatOutputNumber(this.round(Number(tmp.total_product_without_taxes) + Number(tmp.total_product_taxes)));
+      tmp.price = this.formatOutputNumber(tmp.price);
+      tmp.tax = this.formatOutputNumber(tmp.tax);
+      this.total_exc_taxes += Number(tmp.total_product_without_taxes);
+      this.total_inc_taxes += Number(tmp.total_product_with_taxes);
+      this.total_taxes += Number(tmp.total_product_taxes);
     }
-    this._article = (this._article) ? this._article.concat(value) : [].concat(value);
+    this._article = (this._article) ? this._article.concat(tmp) : [].concat(tmp);
   }
 
   /**
@@ -212,12 +216,12 @@ export default class Generator extends Common {
    * @private
    */
   _checkArticle(article) {
-    if (!article.hasOwnProperty('description')) throw new Error('Description is attribute is missing');
-    if (!article.hasOwnProperty('tax')) throw new Error('Tax attribute is missing');
+    if (!Object.prototype.hasOwnProperty.call(article, 'description')) throw new Error('Description attribute is missing');
+    if (!Object.prototype.hasOwnProperty.call(article, 'tax')) throw new Error('Tax attribute is missing');
     if (!this.isNumeric(article.tax)) throw new Error('Tax attribute have to be a number');
-    if (!article.hasOwnProperty('price')) throw new Error('Price attribute is missing');
+    if (!Object.prototype.hasOwnProperty.call(article, 'price')) throw new Error('Price attribute is missing');
     if (!this.isNumeric(article.price)) throw new Error('Price attribute have to be a number');
-    if (!article.hasOwnProperty('qt')) throw new Error('Qt attribute is missing');
+    if (!Object.prototype.hasOwnProperty.call(article, 'qt')) throw new Error('Qt attribute is missing');
     if (!this.isNumeric(article.qt)) throw new Error('Qt attribute have to be an integer');
     if (!Number.isInteger(article.qt)) throw new Error('Qt attribute have to be an integer, not a float');
   }
@@ -252,7 +256,9 @@ export default class Generator extends Common {
 
   /**
    * @description Precompile translation to merging glabal with custom translations
-   * @returns {{logo: *, header_date: *, table_information, table_description, table_tax, table_quantity, table_price_without_taxes, table_price_without_taxes_unit, table_note, table_total_without_taxes, table_total_taxes, table_total_with_taxes, fromto_phone, fromto_mail, footer, moment: (*|moment.Moment)}}
+   * @returns {{logo: *, header_date: *, table_information, table_description, table_tax, table_quantity,
+   * table_price_without_taxes, table_price_without_taxes_unit, table_note, table_total_without_taxes,
+   * table_total_taxes, table_total_with_taxes, fromto_phone, fromto_mail, footer, moment: (*|moment.Moment)}}
    * @private
    */
   _preCompileCommonTranslations() {
@@ -385,6 +391,7 @@ export default class Generator extends Common {
   setReferenceFromPattern(pattern) {
     const tmp = pattern.split('$').slice(1);
     let output = '';
+    // eslint-disable-next-line no-restricted-syntax
     for (const item of tmp) {
       if (!item.endsWith('}')) throw new Error('Wrong pattern type');
       if (item.startsWith('prefix{')) output += item.replace('prefix{', '').slice(0, -1);
@@ -423,7 +430,7 @@ export default class Generator extends Common {
     return {
       pdf,
       toFile: (filepath) => this._toFileFromPDF(pdf, (filepath) || `${keys.filename}.pdf`),
-      toBuffer: (filepath) => this._toBufferFromPDF(pdf),
+      toBuffer: () => this._toBufferFromPDF(pdf),
       toStream: (filepath) => this._toStreamFromPDF(pdf, (filepath) || `${keys.filename}.pdf`),
     };
   }
@@ -464,7 +471,7 @@ export default class Generator extends Common {
    */
   _toBufferFromPDF(content) {
     return content.toBuffer((err, buffer) => {
-      if (err) return console.error(err);
+      if (err) throw new Error(err);
       return buffer;
     });
   }
@@ -515,7 +522,7 @@ export default class Generator extends Common {
           return templateConfig;
         }
       }
-      loop++;
+      loop += 1;
     }
   }
 }

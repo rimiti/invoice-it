@@ -6,8 +6,8 @@ i18n.configure({
   locales: ['en', 'fr'],
   directory: `${__dirname}/../config/locales`,
   defaultLocale: 'en',
-  logWarnFn: (message) => console.warn('warn', message),
-  logErrorFn: (message) => console.error('error', message),
+  logWarnFn: (message) => console.warn('warn', message), // eslint-disable-line no-console
+  logErrorFn: (message) => console.error('error', message), // eslint-disable-line no-console
 });
 
 
