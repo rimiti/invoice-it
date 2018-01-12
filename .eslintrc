@@ -12,6 +12,7 @@
     "no-return-assign": "off",
     "class-methods-use-this": "off",
     "object-curly-spacing": "off",
+    "no-restricted-globals": "off",
     "max-len": [
       2,
       190
