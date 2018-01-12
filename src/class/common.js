@@ -3,6 +3,7 @@ export default class Common {
    * @description Hydrate current instance with obj attributes
    * @param obj
    * @param attributes
+   * @todo optimize it
    */
   hydrate(obj, attributes) {
     if (!obj) return;
@@ -18,7 +19,6 @@ export default class Common {
    * @param num
    * @param size
    * @return {string}
-   * @private
    */
   pad(num, size = 3) {
     let output = num.toString();
@@ -30,10 +30,9 @@ export default class Common {
    * @description Check if is a number
    * @param n
    * @returns {boolean}
-   * @private
    */
   isNumeric(n) {
-    return !Number.isNaN(parseFloat(n)) && Number.isFinite(n);
+    return !isNaN(parseFloat(n)) && isFinite(n);
   }
 
   /**

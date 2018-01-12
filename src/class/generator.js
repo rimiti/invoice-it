@@ -384,9 +384,10 @@ export default class Generator extends Common {
 
   /**
    * @description Set reference
-   * @param item
+   * @param pattern
    * @return {*}
    * @private
+   * @todo optimize it
    */
   setReferenceFromPattern(pattern) {
     const tmp = pattern.split('$').slice(1);
