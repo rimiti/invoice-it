@@ -1,7 +1,7 @@
-import invoiceIt from '../src/lib/generator'
-import fs from 'fs'
+import fs from 'fs';
+import invoiceIt from '../src/lib/generator';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 40000;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 50000;
 jest.setTimeout(40000);
 
 describe('Invoice', () => {
@@ -18,7 +18,7 @@ describe('Invoice', () => {
     city: 'Pontault-Combault',
     country: 'France',
     phone: '06 00 00 00 00',
-    mail: 'will.jameson@test.com'
+    mail: 'will.jameson@test.com',
   };
 
   const emitter = {
@@ -30,31 +30,31 @@ describe('Invoice', () => {
     country: 'France',
     phone: '01 00 00 00 00',
     mail: 'contact@dimsolution.com',
-    website: 'www.dimsolution.com'
+    website: 'www.dimsolution.com',
   };
 
   const article1 = {
     description: 'Apple - Macbook Pro',
     tax: 19.60,
     price: 952.09,
-    qt: 3
+    qt: 3,
   };
 
   const article2 = {
     description: 'Github licence',
     tax: 10,
     price: 79,
-    qt: 1
+    qt: 1,
   };
 
   const article3 = {
     description: 'Apple care 1 year',
     tax: 20,
     price: 100,
-    qt: 3
+    qt: 3,
   };
 
-  it(`Object auto-filled`, (done) => {
+  it('Object auto-filled', (done) => {
     const invoice = invoiceIt.create(recipient, emitter);
     expect(invoice.recipient().company_name).toEqual('Receiver company');
     expect(invoice.recipient().first_name).toEqual('Will');
@@ -66,7 +66,7 @@ describe('Invoice', () => {
     expect(invoice.recipient().country).toEqual('France');
     expect(invoice.recipient().phone).toEqual('06 00 00 00 00');
     expect(invoice.recipient().mail).toEqual('will.jameson@test.com');
-    expect(invoice.emitter().name).toEqual(`Dim Solution`);
+    expect(invoice.emitter().name).toEqual('Dim Solution');
     expect(invoice.emitter().street_number).toEqual('15');
     expect(invoice.emitter().street_name).toEqual('Rue Jean Jaures');
     expect(invoice.emitter().zip_code).toEqual('75012');
@@ -78,7 +78,7 @@ describe('Invoice', () => {
     done();
   });
 
-  it(`Object not auto-filled`, (done) => {
+  it('Object not auto-filled', (done) => {
     const invoice = invoiceIt.create();
     invoice.emitter(emitter);
     invoice.recipient(recipient);
@@ -92,7 +92,7 @@ describe('Invoice', () => {
     expect(invoice.recipient().country).toEqual('France');
     expect(invoice.recipient().phone).toEqual('06 00 00 00 00');
     expect(invoice.recipient().mail).toEqual('will.jameson@test.com');
-    expect(invoice.emitter().name).toEqual(`Dim Solution`);
+    expect(invoice.emitter().name).toEqual('Dim Solution');
     expect(invoice.emitter().street_number).toEqual('15');
     expect(invoice.emitter().street_name).toEqual('Rue Jean Jaures');
     expect(invoice.emitter().zip_code).toEqual('75012');
@@ -104,19 +104,19 @@ describe('Invoice', () => {
     done();
   });
 
-  it(`Convert to HTML`, (done) => {
+  it('Convert to HTML', (done) => {
     const invoice = invoiceIt.create(recipient, emitter);
     expect(typeof invoice.getInvoice().toHTML() === 'object');
     done();
   });
 
-  it(`Export to HTML file`, (done) => {
+  it('Export to HTML file', (done) => {
     const invoice = invoiceIt.create(recipient, emitter);
     invoice.getInvoice().toHTML().toFile(htmlPathfile)
       .then(() => done());
   });
 
-  it(`Check HTML content file`, (done) => {
+  it('Check HTML content file', (done) => {
     const invoice = invoiceIt.create(recipient, emitter);
     invoice.getInvoice().toHTML().toFile(htmlPathfile)
       .then(() => {
@@ -128,12 +128,12 @@ describe('Invoice', () => {
       });
   });
 
-  it(`Export to PDF file`, (done) => {
+  it('Export to PDF file', (done) => {
     const invoice = invoiceIt.create(recipient, emitter);
     invoice.getInvoice().toPDF().toFile(pdfPathfile).then(() => done());
   });
 
-  it(`Check PDF content file`, (done) => {
+  it('Check PDF content file', (done) => {
     const invoice = invoiceIt.create(recipient, emitter);
     invoice.getInvoice().toPDF().toFile(pdfPathfile).then(() => {
       fs.readFile(pdfPathfile, 'utf8', (err, data) => {
@@ -144,7 +144,7 @@ describe('Invoice', () => {
     });
   });
 
-  it(`Add multiple articles from array`, (done) => {
+  it('Add multiple articles from array', (done) => {
     const invoice = invoiceIt.create(recipient, emitter);
     invoice.article = [article1, article2];
     expect(invoice.article).toHaveLength(2);
@@ -173,7 +173,7 @@ describe('Invoice', () => {
     done();
   });
 
-  it(`Add article from article object`, (done) => {
+  it('Add article from article object', (done) => {
     const invoice = invoiceIt.create(recipient, emitter);
     invoice.article = article1;
     invoice.article = article2;
@@ -203,13 +203,11 @@ describe('Invoice', () => {
     expect(invoice.total_inc_taxes).toEqual(3863);
     expect(invoice.total_exc_taxes).toEqual(3235.27);
     expect(invoice.total_taxes).toEqual(627.73);
-    invoice.getInvoice().toHTML().toFile(htmlPathfile).then(() => {
-      return invoice.getInvoice().toPDF().toFile(pdfPathfile)
-        .then(() => done());
-    });
+    invoice.getInvoice().toHTML().toFile(htmlPathfile).then(() => invoice.getInvoice().toPDF().toFile(pdfPathfile)
+      .then(() => done()));
   });
 
-  it(`Delete all articles`, (done) => {
+  it('Delete all articles', (done) => {
     const invoice = invoiceIt.create(recipient, emitter);
     invoice.article = article1;
     invoice.article = article2;
@@ -219,7 +217,7 @@ describe('Invoice', () => {
     done();
   });
 
-  it(`Get totals from array`, (done) => {
+  it('Get totals from array', (done) => {
     const invoice = invoiceIt.create(recipient, emitter);
     invoice.article = [article1, article2];
     expect(invoice.total_exc_taxes).toEqual(2935.27);

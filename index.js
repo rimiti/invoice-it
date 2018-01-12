@@ -1,6 +1,6 @@
-import generator from './dist/src/lib/generator'
+import generator from './dist/src/lib/generator';
 
 export {
-  generator as default
-}
+  generator as default,
+};
 
