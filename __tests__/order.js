@@ -1,7 +1,7 @@
 import fs from 'fs';
 import invoiceIt from '../src/lib/generator';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 40000;
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 50000;
 jest.setTimeout(40000);
 
 describe('Order', () => {
