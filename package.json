@@ -5,8 +5,11 @@
   "license": "MIT",
   "main": "dist/src/lib/generator.js",
   "scripts": {
-    "clean": "rm -rf coverage dist tmp",
+    "lint": "eslint .",
+    "clean": "rm -rf coverage dist tmp invoice.pdf invoice.html order.pdf order.html",
+    "pretest": "npm run lint",
     "test": "jest --coverage",
+    "test-only": "jest --coverage",
     "test:watch": "jest --watch",
     "prepare": "npm run build",
     "build": "npm run build:copy && babel src/**/* index.js -d dist",
