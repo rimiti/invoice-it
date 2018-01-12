@@ -1,6 +1,6 @@
 {
   "name": "invoice-it",
-  "version": "1.7.2",
+  "version": "1.8.0",
   "description": "Order and invoice generator",
   "license": "MIT",
   "main": "dist/src/lib/generator.js",
