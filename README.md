@@ -3,7 +3,7 @@
 [![Dependencies][prod-dependencies-badge]][prod-dependencies]
 [![Dependencies][dev-dependencies-badge]][dev-dependencies]
 [![Code Climate score][codeclimate-score-badge]][codeclimate-score]
-[![Code Climate coverage][codeclimate-coverage-badge]][codeclimate-coverage]
+[![Code Climate coverage][coverage-badge]][coverage]
 [![Code Climate coverage][codeclimate-issues-badge]][codeclimate-issues]
 [![Node.js version][nodejs-badge]][nodejs]
 [![NPM version][npm-badge]][npm]
@@ -243,8 +243,8 @@ MIT © [Dimitri DO BAIRRO](https://github.com/rimiti/invoice-it/blob/master/LICE
 [dev-dependencies]: https://david-dm.org/rimiti/invoice-it?type=dev
 [codeclimate-score-badge]: https://codeclimate.com/github/rimiti/invoice-it/badges/gpa.svg
 [codeclimate-score]: https://codeclimate.com/github/rimiti/invoice-it
-[codeclimate-coverage-badge]: https://codeclimate.com/github/rimiti/invoice-it/badges/coverage.svg
-[codeclimate-coverage]: https://codeclimate.com/github/rimiti/invoice-it/coverage
+[coverage-badge]: https://codecov.io/gh/rimiti/invoice-it/branch/master/graph/badge.svg
+[coverage]: https://codecov.io/gh/rimiti/invoice-it
 [codeclimate-issues-badge]: https://codeclimate.com/github/rimiti/invoice-it/badges/issue_count.svg
 [codeclimate-issues]: https://codeclimate.com/github/rimiti/invoice-it
 [nodejs-badge]: https://img.shields.io/badge/node->=%206.9.0-blue.svg?style=flat-square
