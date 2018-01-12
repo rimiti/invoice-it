@@ -6,10 +6,15 @@
     "jasmine": true
   },
   "rules": {
+    "no-underscore-dangle": "off",
+    "camelcase": "off",
+    "no-constant-condition": "off",
+    "no-return-assign": "off",
+    "class-methods-use-this": "off",
     "object-curly-spacing": "off",
     "max-len": [
       2,
-      120
+      190
     ],
     "prefer-arrow-callback": 0,
     "arrow-parens": [
