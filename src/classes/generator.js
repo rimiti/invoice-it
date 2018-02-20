@@ -423,12 +423,11 @@ export default class Generator extends Common {
 
   /**
    * @description Save content to pdf file
-   * @param filepath
    * @returns {*}
    * @private
    */
   _toPDF(keys) {
-    const pdf = htmlToPdf.create(this._toHTML(keys).html);
+    const pdf = htmlToPdf.create(this._toHTML(keys).html, {timeout: '90000'});
     return {
       pdf,
       toFile: (filepath) => this._toFileFromPDF(pdf, (filepath) || `${keys.filename}.pdf`),
