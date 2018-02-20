@@ -32,6 +32,19 @@ $ npm install invoice-it --save
 
 ## Usage
 
+
+### Importation
+
+**From import**
+```javascript
+import invoiceIt from 'invoice-it';
+```
+
+**From require**
+```javascript
+const invoiceIt = require('invoice-it');
+```
+
 ### Order
 
 To generate an order:

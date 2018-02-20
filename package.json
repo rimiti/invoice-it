@@ -1,9 +1,9 @@
 {
   "name": "invoice-it",
-  "version": "1.10.0",
+  "version": "2.0.0",
   "description": "Order and invoice generator",
   "license": "MIT",
-  "main": "dist/src/lib/generator.js",
+  "main": "dist/index.js",
   "scripts": {
     "lint": "eslint .",
     "clean": "rm -rf coverage dist tmp invoice.pdf invoice.html order.pdf order.html",
@@ -12,9 +12,8 @@
     "test-only": "jest --coverage",
     "test:watch": "jest --watch",
     "prepare": "npm run build",
-    "build": "npm run build:copy && babel src/**/* index.js -d dist",
-    "build:copy": "copyfiles src/**/*.json static/**/*.pug dist",
-    "build:watch": "babel --watch src/**/*.js -d dist && babel index.js -d dist --copy-files"
+    "build": "babel src -d dist --copy-files --source-maps inline",
+    "build:watch": "babel src -d dist --watch --copy-files --source-maps inline"
   },
   "repository": {
     "type": "git",
@@ -45,24 +44,20 @@
     "i18n-factory": "0.0.2",
     "json-override": "^0.2.0",
     "moment": "^2.20.1",
-    "pug": "^2.0.0-rc.4",
-    "source-map-support": "^0.5.0"
+    "pug": "^2.0.0-rc.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "~6.26.0",
-    "babel-eslint": "^8.2.1",
-    "babel-jest": "~22.0.6",
-    "babel-plugin-transform-async-to-generator": "~6.24.1",
-    "babel-plugin-transform-es2015-modules-commonjs": "~6.26.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-eslint": "^8.2.2",
+    "babel-jest": "~22.4.0",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-plugin-transform-runtime": "~6.23.0",
-    "babel-preset-stage-3": "~6.24.1",
-    "copyfiles": "^1.2.0",
-    "eslint": "^4.15.0",
+    "eslint": "^4.18.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
-    "jest": "^22.0.6"
+    "jest": "^22.4.0"
   },
   "jest": {
     "moduleFileExtensions": [
