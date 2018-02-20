@@ -1,5 +1,5 @@
 import fs from 'fs';
-import invoiceIt from '../src/lib/generator';
+import invoiceIt from '../src/lib';
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 50000;
 jest.setTimeout(40000);
