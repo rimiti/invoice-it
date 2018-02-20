@@ -1,8 +1,8 @@
 import fs from 'fs';
-import invoiceIt from '../src/lib';
+import invoiceIt from '../src';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 50000;
-jest.setTimeout(40000);
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 90000;
+jest.setTimeout(90000);
 
 describe('Invoice', () => {
   const htmlPathfile = './invoice.html';
