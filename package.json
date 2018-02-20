@@ -3,7 +3,7 @@
   "version": "1.10.0",
   "description": "Order and invoice generator",
   "license": "MIT",
-  "main": "dist/lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "lint": "eslint .",
     "clean": "rm -rf coverage dist tmp invoice.pdf invoice.html order.pdf order.html",
