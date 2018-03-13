@@ -16,7 +16,7 @@ If you want some examples, check tests.
 
 ## Install
 ```
-$ npm install invoice-it --save
+$ npm install @rimiti/invoice-it --save
 ```
 
 ## Features
@@ -37,12 +37,12 @@ $ npm install invoice-it --save
 
 **From import**
 ```javascript
-import invoiceIt from 'invoice-it';
+import invoiceIt from '@rimiti/invoice-it';
 ```
 
 **From require**
 ```javascript
-const invoiceIt = require('invoice-it');
+const invoiceIt = require('@rimiti/invoice-it');
 ```
 
 ### Order
@@ -50,7 +50,7 @@ const invoiceIt = require('invoice-it');
 To generate an order:
 
 ```js
-import invoiceIt from 'invoice-it';
+import invoiceIt from '@rimiti/invoice-it';
 
   const recipient = {
     company_name: 'Receiver company',
@@ -138,7 +138,7 @@ order.getOrder().toPDF().toFile('./order.pdf')
 To generate an invoice:
 
 ```js
-import invoiceIt from 'invoice-it';
+import invoiceIt from '@rimiti/invoice-it';
 
   const recipient = {
     company_name: 'Receiver company',
@@ -226,7 +226,7 @@ invoice.getInvoice().toPDF().toFile('./invoice.pdf')
 To add more language:
 
 ```js
-import invoiceIt from 'invoice-it';
+import invoiceIt from '@rimiti/invoice-it';
 
 invoiceIt.configure({
   language: {
