@@ -1,6 +1,6 @@
 {
-  "name": "invoice-it",
-  "version": "2.0.0",
+  "name": "@rimiti/invoice-it",
+  "version": "2.2.0",
   "description": "Order and invoice generator",
   "license": "MIT",
   "main": "dist/index.js",

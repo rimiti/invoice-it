@@ -60,7 +60,4 @@ typings/
 .env
 
 .idea/
-/dist/invoice.html
-/dist/invoice.pdf
-/dist/order.pdf
-/dist/order.html
+dist/
