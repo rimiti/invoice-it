@@ -1,5 +1,5 @@
 {
-  "name": "invoice-it",
+  "name": "@rimiti/invoice-it",
   "version": "2.1.0",
   "description": "Order and invoice generator",
   "license": "MIT",
