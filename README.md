@@ -1,5 +1,7 @@
 # invoice-it
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/rimiti/invoice-it.svg)](https://greenkeeper.io/)
+
 [![Dependencies][prod-dependencies-badge]][prod-dependencies]
 [![Dependencies][dev-dependencies-badge]][dev-dependencies]
 [![Code Climate score][codeclimate-score-badge]][codeclimate-score]
