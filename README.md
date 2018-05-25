@@ -1,5 +1,6 @@
 # invoice-it
 
+[![Greenkeeper badge][greenkeeper-badge]][greenkeeper]
 [![Dependencies][prod-dependencies-badge]][prod-dependencies]
 [![Dependencies][dev-dependencies-badge]][dev-dependencies]
 [![Code Climate score][codeclimate-score-badge]][codeclimate-score]
@@ -250,6 +251,8 @@ Run using npm run <script> command.
 ## License
 MIT © [Dimitri DO BAIRRO](https://github.com/rimiti/invoice-it/blob/master/LICENSE)
 
+[greenkeeper-badge]: https://badges.greenkeeper.io/rimiti/invoice-it.svg
+[greenkeeper]: https://greenkeeper.io/
 [prod-dependencies-badge]: https://david-dm.org/rimiti/invoice-it/status.svg
 [prod-dependencies]: https://david-dm.org/rimiti/invoice-it
 [dev-dependencies-badge]: https://david-dm.org/rimiti/invoice-it/dev-status.svg
