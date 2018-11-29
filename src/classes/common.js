@@ -61,7 +61,7 @@ export default class Common {
     if (number.includes('.')) {
       const split = number.split('.');
       if (split[1].length === 1) return `${split[0]}.${split[1]}0`;
-      else if (split[1].length === 2) return number;
+      if (split[1].length === 2) return number;
       return `${split[0]}.${split[1][0]}${split[1][1]}`;
     }
     return `${number}.00`;
