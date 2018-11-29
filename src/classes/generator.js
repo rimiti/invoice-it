@@ -368,7 +368,7 @@ export default class Generator extends Common {
     if (!this.footer) return i18n.__({phrase: 'footer', locale: this.lang});
 
     if (this.lang === 'en') return this.footer.en;
-    else if (this.lang === 'fr') return this.footer.fr;
+    if (this.lang === 'fr') return this.footer.fr;
     throw Error('This lang doesn\'t exist.');
   }
 
