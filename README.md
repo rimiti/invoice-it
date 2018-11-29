@@ -1,13 +1,9 @@
 # invoice-it
 
-[![Greenkeeper badge][greenkeeper-badge]][greenkeeper]
 [![Dependencies][prod-dependencies-badge]][prod-dependencies]
-[![Dependencies][dev-dependencies-badge]][dev-dependencies]
 [![Code Climate score][codeclimate-score-badge]][codeclimate-score]
 [![Code Climate coverage][coverage-badge]][coverage]
 [![Code Climate coverage][codeclimate-issues-badge]][codeclimate-issues]
-[![Node.js version][nodejs-badge]][nodejs]
-[![NPM version][npm-badge]][npm]
 [![Build Status][travis-badge]][travis-ci]
 [![MIT License][license-badge]][LICENSE]
 [![PRs Welcome][prs-badge]][prs]
@@ -251,23 +247,14 @@ Run using npm run <script> command.
 ## License
 MIT © [Dimitri DO BAIRRO](https://github.com/rimiti/invoice-it/blob/master/LICENSE)
 
-[greenkeeper-badge]: https://badges.greenkeeper.io/rimiti/invoice-it.svg
-[greenkeeper]: https://greenkeeper.io/
 [prod-dependencies-badge]: https://david-dm.org/rimiti/invoice-it/status.svg
 [prod-dependencies]: https://david-dm.org/rimiti/invoice-it
-[dev-dependencies-badge]: https://david-dm.org/rimiti/invoice-it/dev-status.svg
-[dev-dependencies]: https://david-dm.org/rimiti/invoice-it?type=dev
 [codeclimate-score-badge]: https://codeclimate.com/github/rimiti/invoice-it/badges/gpa.svg
 [codeclimate-score]: https://codeclimate.com/github/rimiti/invoice-it
 [coverage-badge]: https://codecov.io/gh/rimiti/invoice-it/branch/master/graph/badge.svg
 [coverage]: https://codecov.io/gh/rimiti/invoice-it
 [codeclimate-issues-badge]: https://codeclimate.com/github/rimiti/invoice-it/badges/issue_count.svg
 [codeclimate-issues]: https://codeclimate.com/github/rimiti/invoice-it
-[nodejs-badge]: https://img.shields.io/badge/node->=%206.9.0-blue.svg?style=flat-square
-[nodejs]: https://nodejs.org/dist/latest-v6.x/docs/api/
-[npm-badge]: https://img.shields.io/badge/npm->=%203.10.8-blue.svg?style=flat-square
-[npm]: https://docs.npmjs.com/
-[node_acl]: https://github.com/OptimalBits/node_acl
 [travis-badge]: https://travis-ci.org/rimiti/invoice-it.svg?branch=master
 [travis-ci]: https://travis-ci.org/rimiti/invoice-it
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
