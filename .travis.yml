@@ -1,20 +1,9 @@
 language: node_js
 node_js:
   - 10
-env:
-  - FRESH_DEPS=false
-  - FRESH_DEPS=true
-matrix:
-  exclude:
-    - node_js: 6
-      env: FRESH_DEPS=true
-cache:
-  directories:
-    - $HOME/.npm
 before_install:
-  - npm install --global npm@^5.3.0 codecov
-  - npm --version
-  - if [[ ${FRESH_DEPS} == "true" ]]; then rm package-lock.json; fi
-install:
-  - if [[ ${FRESH_DEPS} == "true" ]]; then npm install --prefer-online; else npm install --prefer-offline; fi
-after_success: npm run test && codecov
+  - npm i -g codecov
+  - npm i html-pdf -S
+script:
+  - npm run test
+after_success: codecov
