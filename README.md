@@ -42,6 +42,11 @@ import invoiceIt from '@rimiti/invoice-it';
 const invoiceIt = require('@rimiti/invoice-it');
 ```
 
+**If you want to export your invoice in PDF, you must install the *html-pdf (v2.2.0)* peer dependence**
+```bash
+$ npm i -S html-pdf@2.2.0
+```
+
 ### Order
 
 To generate an order:
