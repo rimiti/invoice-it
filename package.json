@@ -6,6 +6,7 @@
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "clean": "rm -rf coverage dist tmp invoice.pdf invoice.html order.pdf order.html",
     "pretest": "npm run lint",
     "test": "jest --coverage",
