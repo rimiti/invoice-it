@@ -545,7 +545,6 @@ export default class Generator extends Common {
    */
   _loadHtmlToPdf() {
     try {
-      /* eslint import/no-unresolved: [2, { ignore: ['html-pdf'] }] */
       return require('html-pdf'); // eslint-disable-line global-require
     } catch (err) {
       throw new Error('Cannot load html-pdf. Try installing it: npm install html-pdf@2.2.0');
