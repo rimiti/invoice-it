@@ -40,11 +40,13 @@
   },
   "homepage": "https://github.com/rimiti/invoice-it#readme",
   "dependencies": {
-    "html-pdf": "^2.2.0",
     "i18n-factory": "0.0.2",
     "json-override": "^0.2.0",
     "moment": "^2.23.0",
     "pug": "^2.0.3"
+  },
+  "peerDependencies": {
+    "html-pdf": "^2.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
