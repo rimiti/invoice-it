@@ -6,10 +6,10 @@
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "clean": "rm -rf coverage dist tmp invoice.pdf invoice.html order.pdf order.html",
     "pretest": "npm run lint",
     "test": "jest --coverage",
-    "test-only": "jest --coverage",
     "test:watch": "jest --watch",
     "prepare": "npm run build",
     "build": "babel src -d dist --copy-files --source-maps inline",
@@ -40,11 +40,13 @@
   },
   "homepage": "https://github.com/rimiti/invoice-it#readme",
   "dependencies": {
-    "html-pdf": "^2.2.0",
     "i18n-factory": "0.0.2",
     "json-override": "^0.2.0",
-    "moment": "^2.22.2",
+    "moment": "^2.23.0",
     "pug": "^2.0.3"
+  },
+  "peerDependencies": {
+    "html-pdf": "^2.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -54,7 +56,7 @@
     "babel-plugin-add-module-exports": "^1.0.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-runtime": "~6.23.0",
-    "eslint": "^5.9.0",
+    "eslint": "^5.12.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "jest": "^23.6.0"

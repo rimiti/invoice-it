@@ -2,7 +2,6 @@ import moment from 'moment';
 import pug from 'pug';
 import fs from 'fs';
 import path from 'path';
-import htmlToPdf from 'html-pdf';
 import Common from './common';
 import Recipient from './recipient';
 import Emitter from './emitter';
@@ -427,6 +426,7 @@ export default class Generator extends Common {
    * @private
    */
   _toPDF(keys) {
+    const htmlToPdf = this._loadHtmlToPdf();
     const pdf = htmlToPdf.create(this._toHTML(keys).html, {timeout: '90000'});
     return {
       pdf,
@@ -536,5 +536,19 @@ export default class Generator extends Common {
     this._defaultLocale = (config && config.defaultLocale) ? config.defaultLocale : 'en';
     this._availableLocale = (config && config.locales) ? config.locales : ['en', 'fr'];
     if (config) i18n.configure(config);
+  }
+
+  /**
+   * @description Loads html-pdf module if available
+   * @returns {*}
+   * @private
+   */
+  _loadHtmlToPdf() {
+    try {
+      /* eslint import/no-unresolved: [2, { ignore: ['html-pdf'] }] */
+      return require('html-pdf'); // eslint-disable-line global-require
+    } catch (err) {
+      throw new Error('Cannot load html-pdf. Try installing it: npm i -S html-pdf@2.2.0');
+    }
   }
 }
