@@ -34,11 +34,7 @@ export default class Generator extends Common {
 
   set lang(value) {
     const tmp = value.toLowerCase();
-    if (!this._availableLocale.includes(tmp)) {
-      throw new Error(
-        `Wrong lang, please set one of ${this._availableLocale.join(', ')}`,
-      );
-    }
+    if (!this._availableLocale.includes(tmp)) throw new Error(`Wrong lang, please set one of ${this._availableLocale.join(', ')}`);
     this._lang = tmp;
   }
 
@@ -51,9 +47,7 @@ export default class Generator extends Common {
   }
 
   get order_reference_pattern() {
-    return (!this._order_reference_pattern)
-      ? '$prefix{OR}$date{YYMM}$separator{-}$id{00000}' : this
-        ._order_reference_pattern;
+    return (!this._order_reference_pattern) ? '$prefix{OR}$date{YYMM}$separator{-}$id{00000}' : this._order_reference_pattern;
   }
 
   set order_reference_pattern(value) {
@@ -61,9 +55,7 @@ export default class Generator extends Common {
   }
 
   get invoice_reference_pattern() {
-    return (!this._invoice_reference_pattern)
-      ? '$prefix{IN}$date{YYMM}$separator{-}$id{00000}' : this
-        ._invoice_reference_pattern;
+    return (!this._invoice_reference_pattern) ? '$prefix{IN}$date{YYMM}$separator{-}$id{00000}' : this._invoice_reference_pattern;
   }
 
   set invoice_reference_pattern(value) {
@@ -185,14 +177,9 @@ export default class Generator extends Common {
     if (Array.isArray(tmp)) {
       for (let i = 0; i < tmp.length; i += 1) {
         this._checkArticle(tmp[i]);
-        tmp[i].total_product_without_taxes = this.formatOutputNumber(tmp[i]
-          .price * tmp[i].qt);
-        tmp[i].total_product_taxes = this.formatOutputNumber(this.round(tmp[i]
-          .total_product_without_taxes * (tmp[i].tax / 100)));
-        tmp[i].total_product_with_taxes = this.formatOutputNumber(this.round(
-          Number(tmp[i].total_product_without_taxes) + Number(tmp[i]
-            .total_product_taxes),
-        ));
+        tmp[i].total_product_without_taxes = this.formatOutputNumber(tmp[i].price * tmp[i].qt);
+        tmp[i].total_product_taxes = this.formatOutputNumber(this.round(tmp[i].total_product_without_taxes * (tmp[i].tax / 100)));
+        tmp[i].total_product_with_taxes = this.formatOutputNumber(this.round(Number(tmp[i].total_product_without_taxes) + Number(tmp[i].total_product_taxes)));
         tmp[i].price = this.formatOutputNumber(tmp[i].price);
         tmp[i].tax = this.formatOutputNumber(tmp[i].tax);
         this.total_exc_taxes += Number(tmp[i].total_product_without_taxes);
@@ -201,23 +188,16 @@ export default class Generator extends Common {
       }
     } else {
       this._checkArticle(tmp);
-      tmp.total_product_without_taxes = this.formatOutputNumber(tmp.price
-        * tmp.qt);
-      tmp.total_product_taxes = this.formatOutputNumber(this.round(tmp
-        .total_product_without_taxes * (tmp.tax / 100)));
-      tmp.total_product_with_taxes = this.formatOutputNumber(this.round(
-        Number(tmp.total_product_without_taxes) + Number(tmp
-          .total_product_taxes),
-      ));
+      tmp.total_product_without_taxes = this.formatOutputNumber(tmp.price * tmp.qt);
+      tmp.total_product_taxes = this.formatOutputNumber(this.round(tmp.total_product_without_taxes * (tmp.tax / 100)));
+      tmp.total_product_with_taxes = this.formatOutputNumber(this.round(Number(tmp.total_product_without_taxes) + Number(tmp.total_product_taxes)));
       tmp.price = this.formatOutputNumber(tmp.price);
       tmp.tax = this.formatOutputNumber(tmp.tax);
       this.total_exc_taxes += Number(tmp.total_product_without_taxes);
       this.total_inc_taxes += Number(tmp.total_product_with_taxes);
       this.total_taxes += Number(tmp.total_product_taxes);
     }
-    this._article = (this._article) ? this._article.concat(tmp) : [].concat(
-      tmp,
-    );
+    this._article = (this._article) ? this._article.concat(tmp) : [].concat(tmp);
   }
 
   /**
@@ -238,32 +218,12 @@ export default class Generator extends Common {
   _checkArticle(article) {
     if (!Object.prototype.hasOwnProperty.call(article, 'description')) throw new Error('Description attribute is missing');
     if (!Object.prototype.hasOwnProperty.call(article, 'tax')) throw new Error('Tax attribute is missing');
-    if (!this.isNumeric(article.tax)) {
-      throw new Error(
-        'Tax attribute have to be a number',
-      );
-    }
+    if (!this.isNumeric(article.tax)) throw new Error('Tax attribute have to be a number');
     if (!Object.prototype.hasOwnProperty.call(article, 'price')) throw new Error('Price attribute is missing');
-    if (!this.isNumeric(article.price)) {
-      throw new Error(
-        'Price attribute have to be a number',
-      );
-    }
-    if (!Object.prototype.hasOwnProperty.call(article, 'qt')) {
-      throw new Error(
-        'Qt attribute is missing',
-      );
-    }
-    if (!this.isNumeric(article.qt)) {
-      throw new Error(
-        'Qt attribute have to be an integer',
-      );
-    }
-    if (!Number.isInteger(article.qt)) {
-      throw new Error(
-        'Qt attribute have to be an integer, not a float',
-      );
-    }
+    if (!this.isNumeric(article.price)) throw new Error('Price attribute have to be a number');
+    if (!Object.prototype.hasOwnProperty.call(article, 'qt')) throw new Error('Qt attribute is missing');
+    if (!this.isNumeric(article.qt)) throw new Error('Qt attribute have to be an integer');
+    if (!Number.isInteger(article.qt)) throw new Error('Qt attribute have to be an integer, not a float');
   }
 
   /**
@@ -271,10 +231,7 @@ export default class Generator extends Common {
    * @returns {[string,string,string,string]}
    */
   _itemsToHydrate() {
-    return ['logo', 'order_template', 'invoice_template', 'date_format',
-      'date', 'order_reference_pattern', 'invoice_reference_pattern',
-      'order_note', 'invoice_note', 'lang', 'footer',
-    ];
+    return ['logo', 'order_template', 'invoice_template', 'date_format', 'date', 'order_reference_pattern', 'invoice_reference_pattern', 'order_note', 'invoice_note', 'lang', 'footer'];
   }
 
   /**
@@ -376,11 +333,9 @@ export default class Generator extends Common {
       recipient_phone: this.recipient().phone,
       recipient_mail: this.recipient().mail,
       articles: this.article,
-      table_total_without_taxes_value: this.formatOutputNumber(this
-        .total_exc_taxes),
+      table_total_without_taxes_value: this.formatOutputNumber(this.total_exc_taxes),
       table_total_taxes_value: this.formatOutputNumber(this.total_taxes),
-      table_total_with_taxes_value: this.formatOutputNumber(this
-        .total_inc_taxes),
+      table_total_with_taxes_value: this.formatOutputNumber(this.total_inc_taxes),
       template_configuration: this._templateConfiguration(),
       moment: moment(),
     };
@@ -393,8 +348,7 @@ export default class Generator extends Common {
    * @private
    */
   _compile(keys) {
-    const template = keys.filename === 'order' ? this.order_template : this
-      .invoice_template;
+    const template = keys.filename === 'order' ? this.order_template : this.invoice_template;
     const compiled = pug.compileFile(path.resolve(template));
     return compiled(keys);
   }
@@ -417,16 +371,13 @@ export default class Generator extends Common {
         phrase: 'invoice_header_reference',
         locale: this.lang,
       }),
-      invoice_header_reference_value: this.getReferenceFromPattern(
-        'invoice',
-      ),
+      invoice_header_reference_value: this.getReferenceFromPattern('invoice'),
       invoice_header_date: i18n.__({
         phrase: 'invoice_header_date',
         locale: this.lang,
       }),
       table_note_content: this.invoice_note,
-      note: (note) => ((note) ? this.invoice_note = note : this
-        .invoice_note),
+      note: (note) => ((note) ? this.invoice_note = note : this.invoice_note),
       filename: 'invoice',
     };
     return Object.assign(keys, {
@@ -491,14 +442,9 @@ export default class Generator extends Common {
    * @return {*}
    */
   getReferenceFromPattern(type) {
-    if (!['order', 'invoice'].includes(type)) {
-      throw new Error(
-        'Type have to be "order" or "invoice"',
-      );
-    }
+    if (!['order', 'invoice'].includes(type)) throw new Error('Type have to be "order" or "invoice"');
     if (this.reference) return this.reference;
-    return this.setReferenceFromPattern((type === 'order') ? this
-      .order_reference_pattern : this.invoice_reference_pattern);
+    return this.setReferenceFromPattern((type === 'order') ? this.order_reference_pattern : this.invoice_reference_pattern);
   }
 
   /**
@@ -514,25 +460,13 @@ export default class Generator extends Common {
     // eslint-disable-next-line no-restricted-syntax
     for (const item of tmp) {
       if (!item.endsWith('}')) throw new Error('Wrong pattern type');
-      if (item.startsWith('prefix{')) {
-        output += item.replace('prefix{', '')
-          .slice(0, -1);
-      } else if (item.startsWith('separator{')) {
-        output += item.replace(
-          'separator{', '',
-        ).slice(0, -1);
-      } else if (item.startsWith('date{')) {
-        output += moment().format(item
-          .replace('date{', '').slice(0, -1));
-      } else if (item.startsWith('id{')) {
+      if (item.startsWith('prefix{')) output += item.replace('prefix{', '').slice(0, -1);
+      else if (item.startsWith('separator{')) output += item.replace('separator{', '').slice(0, -1);
+      else if (item.startsWith('date{')) output += moment().format(item.replace('date{', '').slice(0, -1));
+      else if (item.startsWith('id{')) {
         const id = item.replace('id{', '').slice(0, -1);
-        if (!/^\d+$/.test(id)) {
-          throw new Error(
-            `Id must be an integer (${id})`,
-          );
-        }
-        output += (this._id) ? this.pad(this._id, id.length) : this.pad(0, id
-          .length);
+        if (!/^\d+$/.test(id)) throw new Error(`Id must be an integer (${id})`);
+        output += (this._id) ? this.pad(this._id, id.length) : this.pad(0, id.length);
       } else throw new Error(`${item} pattern reference unknown`);
     }
     return output;
@@ -544,12 +478,10 @@ export default class Generator extends Common {
    * @private
    */
   _toHTML(keys) {
-    const html = this._compile(keys.filename === 'order' ? this.getOrder()
-      : this.getInvoice());
+    const html = this._compile(keys.filename === 'order' ? this.getOrder() : this.getInvoice());
     return {
       html,
-      toFile: (filepath) => this._toFileFromHTML(html, (filepath)
-        || `${keys.filename}.html`),
+      toFile: (filepath) => this._toFileFromHTML(html, (filepath) || `${keys.filename}.html`),
     };
   }
 
@@ -565,11 +497,9 @@ export default class Generator extends Common {
     });
     return {
       pdf,
-      toFile: (filepath) => this._toFileFromPDF(pdf, (filepath)
-        || `${keys.filename}.pdf`),
+      toFile: (filepath) => this._toFileFromPDF(pdf, (filepath) || `${keys.filename}.pdf`),
       toBuffer: () => this._toBufferFromPDF(pdf),
-      toStream: (filepath) => this._toStreamFromPDF(pdf, (filepath)
-        || `${keys.filename}.pdf`),
+      toStream: (filepath) => this._toStreamFromPDF(pdf, (filepath) || `${keys.filename}.pdf`),
     };
   }
 
@@ -581,9 +511,7 @@ export default class Generator extends Common {
    * @private
    */
   _toFileFromHTML(content, filepath) {
-    return new Promise((resolve, reject) => fs.writeFile(filepath, content, (
-      err,
-    ) => {
+    return new Promise((resolve, reject) => fs.writeFile(filepath, content, (err) => {
       if (err) reject(err);
       return resolve();
     }));
@@ -597,8 +525,7 @@ export default class Generator extends Common {
    * @private
    */
   _toFileFromPDF(content, filepath) {
-    return new Promise((resolve, reject) => content.toFile(filepath, (err,
-      res) => {
+    return new Promise((resolve, reject) => content.toFile(filepath, (err, res) => {
       if (err) return reject(err);
       return resolve(res);
     }));
@@ -625,9 +552,7 @@ export default class Generator extends Common {
    * @private
    */
   _toStreamFromPDF(content, filepath) {
-    return content.toStream((err, stream) => stream.pipe(fs.createWriteStream(
-      filepath,
-    )));
+    return content.toStream((err, stream) => stream.pipe(fs.createWriteStream(filepath)));
   }
 
   /**
@@ -638,8 +563,7 @@ export default class Generator extends Common {
   _templateConfiguration() {
     const template_rows_per_page = 29;
     const templateConfig = {
-      rows_in_first_page: (this.article.length > 19)
-        ? template_rows_per_page : 19,
+      rows_in_first_page: (this.article.length > 19) ? template_rows_per_page : 19,
       rows_per_pages: 43,
       rows_in_last_page: 33,
     };
@@ -650,8 +574,7 @@ export default class Generator extends Common {
       if (loop === 1) {
         nbArticles -= templateConfig.rows_in_first_page;
         if (nbArticles <= 0) {
-          templateConfig.loop_table = (templateConfig.rows_in_first_page
-            !== template_rows_per_page) ? 1 : 2;
+          templateConfig.loop_table = (templateConfig.rows_in_first_page !== template_rows_per_page) ? 1 : 2;
           return templateConfig;
         }
       }
@@ -677,11 +600,8 @@ export default class Generator extends Common {
    * @private
    */
   _i18nConfigure(config) {
-    this._defaultLocale = (config && config.defaultLocale) ? config
-      .defaultLocale : 'en';
-    this._availableLocale = (config && config.locales) ? config.locales : [
-      'en', 'fr',
-    ];
+    this._defaultLocale = (config && config.defaultLocale) ? config.defaultLocale : 'en';
+    this._availableLocale = (config && config.locales) ? config.locales : ['en', 'fr'];
     if (config) i18n.configure(config);
   }
 
@@ -695,9 +615,7 @@ export default class Generator extends Common {
       /* eslint import/no-unresolved: [2, { ignore: ['html-pdf'] }] */
       return require('html-pdf'); // eslint-disable-line global-require
     } catch (err) {
-      throw new Error(
-        'Cannot load html-pdf. Try installing it: npm i -S html-pdf@2.2.0',
-      );
+      throw new Error('Cannot load html-pdf. Try installing it: npm i -S html-pdf@2.2.0');
     }
   }
 }
