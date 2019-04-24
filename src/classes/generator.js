@@ -1,3 +1,4 @@
+
 import moment from 'moment';
 import pug from 'pug';
 import fs from 'fs';
@@ -265,54 +266,18 @@ export default class Generator extends Common {
     return {
       logo: this.logo,
       header_date: this.date,
-      table_information: i18n.__({
-        phrase: 'table_information',
-        locale: this.lang,
-      }),
-      table_description: i18n.__({
-        phrase: 'table_description',
-        locale: this.lang,
-      }),
-      table_tax: i18n.__({
-        phrase: 'table_tax',
-        locale: this.lang,
-      }),
-      table_quantity: i18n.__({
-        phrase: 'table_quantity',
-        locale: this.lang,
-      }),
-      table_price_without_taxes: i18n.__({
-        phrase: 'table_price_without_taxes',
-        locale: this.lang,
-      }),
-      table_price_without_taxes_unit: i18n.__({
-        phrase: 'table_price_without_taxes_unit',
-        locale: this.lang,
-      }),
-      table_note: i18n.__({
-        phrase: 'table_note',
-        locale: this.lang,
-      }),
-      table_total_without_taxes: i18n.__({
-        phrase: 'table_total_without_taxes',
-        locale: this.lang,
-      }),
-      table_total_taxes: i18n.__({
-        phrase: 'table_total_taxes',
-        locale: this.lang,
-      }),
-      table_total_with_taxes: i18n.__({
-        phrase: 'table_total_with_taxes',
-        locale: this.lang,
-      }),
-      fromto_phone: i18n.__({
-        phrase: 'fromto_phone',
-        locale: this.lang,
-      }),
-      fromto_mail: i18n.__({
-        phrase: 'fromto_mail',
-        locale: this.lang,
-      }),
+      table_information: i18n.__({phrase: 'table_information', locale: this.lang}),
+      table_description: i18n.__({phrase: 'table_description', locale: this.lang}),
+      table_tax: i18n.__({phrase: 'table_tax', locale: this.lang}),
+      table_quantity: i18n.__({phrase: 'table_quantity', locale: this.lang}),
+      table_price_without_taxes: i18n.__({phrase: 'table_price_without_taxes', locale: this.lang}),
+      table_price_without_taxes_unit: i18n.__({phrase: 'table_price_without_taxes_unit', locale: this.lang}),
+      table_note: i18n.__({phrase: 'table_note', locale: this.lang}),
+      table_total_without_taxes: i18n.__({phrase: 'table_total_without_taxes', locale: this.lang}),
+      table_total_taxes: i18n.__({phrase: 'table_total_taxes', locale: this.lang}),
+      table_total_with_taxes: i18n.__({phrase: 'table_total_with_taxes', locale: this.lang}),
+      fromto_phone: i18n.__({phrase: 'fromto_phone', locale: this.lang}),
+      fromto_mail: i18n.__({phrase: 'fromto_mail', locale: this.lang}),
       footer: this.getFooter(),
       emitter_name: this.emitter().name,
       emitter_street_number: this.emitter().street_number,
@@ -359,23 +324,11 @@ export default class Generator extends Common {
    */
   getInvoice() {
     const keys = {
-      invoice_header_title: i18n.__({
-        phrase: 'invoice_header_title',
-        locale: this.lang,
-      }),
-      invoice_header_subject: i18n.__({
-        phrase: 'invoice_header_subject',
-        locale: this.lang,
-      }),
-      invoice_header_reference: i18n.__({
-        phrase: 'invoice_header_reference',
-        locale: this.lang,
-      }),
+      invoice_header_title: i18n.__({phrase: 'invoice_header_title', locale: this.lang}),
+      invoice_header_subject: i18n.__({phrase: 'invoice_header_subject', locale: this.lang}),
+      invoice_header_reference: i18n.__({phrase: 'invoice_header_reference', locale: this.lang}),
       invoice_header_reference_value: this.getReferenceFromPattern('invoice'),
-      invoice_header_date: i18n.__({
-        phrase: 'invoice_header_date',
-        locale: this.lang,
-      }),
+      invoice_header_date: i18n.__({phrase: 'invoice_header_date', locale: this.lang}),
       table_note_content: this.invoice_note,
       note: (note) => ((note) ? this.invoice_note = note : this.invoice_note),
       filename: 'invoice',
@@ -392,23 +345,11 @@ export default class Generator extends Common {
    */
   getOrder() {
     const keys = {
-      order_header_title: i18n.__({
-        phrase: 'order_header_title',
-        locale: this.lang,
-      }),
-      order_header_subject: i18n.__({
-        phrase: 'order_header_subject',
-        locale: this.lang,
-      }),
-      order_header_reference: i18n.__({
-        phrase: 'order_header_reference',
-        locale: this.lang,
-      }),
+      order_header_title: i18n.__({phrase: 'order_header_title', locale: this.lang}),
+      order_header_subject: i18n.__({phrase: 'order_header_subject', locale: this.lang}),
+      order_header_reference: i18n.__({phrase: 'order_header_reference', locale: this.lang}),
       order_header_reference_value: this.getReferenceFromPattern('order'),
-      order_header_date: i18n.__({
-        phrase: 'order_header_date',
-        locale: this.lang,
-      }),
+      order_header_date: i18n.__({phrase: 'order_header_date', locale: this.lang}),
       table_note_content: this.order_note,
       note: (note) => ((note) ? this.order_note = note : this.order_note),
       filename: 'order',
@@ -424,12 +365,7 @@ export default class Generator extends Common {
    * @returns {*}
    */
   getFooter() {
-    if (!this.footer) {
-      return i18n.__({
-        phrase: 'footer',
-        locale: this.lang,
-      });
-    }
+    if (!this.footer) return i18n.__({phrase: 'footer', locale: this.lang});
 
     if (this.lang === 'en') return this.footer.en;
     if (this.lang === 'fr') return this.footer.fr;
@@ -492,9 +428,7 @@ export default class Generator extends Common {
    */
   _toPDF(keys) {
     const htmlToPdf = this._loadHtmlToPdf();
-    const pdf = htmlToPdf.create(this._toHTML(keys).html, {
-      timeout: '90000',
-    });
+    const pdf = htmlToPdf.create(this._toHTML(keys).html, {timeout: '90000'});
     return {
       pdf,
       toFile: (filepath) => this._toFileFromPDF(pdf, (filepath) || `${keys.filename}.pdf`),
