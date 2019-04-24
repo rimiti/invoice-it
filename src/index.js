@@ -19,6 +19,7 @@ generator.configure({
     order_note: '',
     invoice_template: `${__dirname}/../static/invoice.pug`,
     invoice_note: '',
+    date: new Date(),
     date_format: 'DD/MM/YYYY',
     lang: 'en',
   },
