@@ -10,10 +10,8 @@ import i18n from '../lib/i18n';
 export default class Generator extends Common {
   constructor(config) {
     super();
-    this._recipient = (config.recipient) ? new Recipient(config.recipient)
-      : new Recipient();
-    this._emitter = (config.emitter) ? new Emitter(config.emitter)
-      : new Emitter();
+    this._recipient = (config.recipient) ? new Recipient(config.recipient) : new Recipient();
+    this._emitter = (config.emitter) ? new Emitter(config.emitter) : new Emitter();
     this._total_exc_taxes = 0;
     this._total_taxes = 0;
     this._total_inc_taxes = 0;
