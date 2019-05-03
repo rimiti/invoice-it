@@ -39,7 +39,7 @@ import invoiceIt from '@rimiti/invoice-it';
 
 **From require**
 ```javascript
-const invoiceIt = require('@rimiti/invoice-it');
+const invoiceIt = require('@rimiti/invoice-it').default;
 ```
 
 **If you want to export your invoice in PDF, you must install the *html-pdf (v2.2.0)* peer dependence**
@@ -221,6 +221,105 @@ invoice.getInvoice().toPDF().toFile('./invoice.pdf')
   .then(() => {
       console.log('PDF file created.');
   });
+```
+
+### Customization
+
+All below globals attributes are totally customizable for the `.configure()` method or from `setters`:
+
+**From .configure()**
+
+The configure method override all default attributes presente [in this file](https://github.com/rimiti/invoice-it/blob/master/src/index.js).
+
+Example:
+
+To generate and export in PDF an invoice with:
+    - Logo url: http://example.com/logo.png
+    - Date format: YYYY-MM-DD
+    - Your invoice pattern: INVOICE-1901_00001
+    - Invoice note: It's my custom node!
+
+```js
+import invoiceIt from '@rimiti/invoice-it';
+
+invoiceIt.configure({
+  global: {
+    logo: 'http://example.com/logo.png',
+    invoice_reference_pattern: '$prefix{INVOICE}$date{YYMM}$separator{_}$id{00000}',
+    invoice_note: 'It\'s my custom node!',
+    date_format: 'YYYY-MM-DD',
+  },
+});
+
+const recipient = {
+  company_name: 'Receiver company',
+  first_name: 'Will',
+  last_name: 'Jameson',
+  street_number: '20',
+  street_name: 'Rue Victor Hugo',
+  zip_code: '77340',
+  city: 'Pontault-Combault',
+  country: 'France',
+  phone: '06 00 00 00 00',
+  mail: 'will.jameson@test.com'
+};
+
+const emitter = {
+  name: 'Dim Solution',
+  street_number: '73',
+  street_name: 'Rue Jean Jaures',
+  zip_code: '75012',
+  city: 'Paris',
+  country: 'France',
+  phone: '01 00 00 00 00',
+  mail: 'contact@dimsolution.com',
+  website: 'www.dimsolution.com'
+};
+
+const invoice = invoiceIt.create(recipient, emitter);
+
+invoice.id = 1;
+order.getInvoice().toPDF().toFile();
+```
+
+**From setters**
+
+```js
+import invoiceIt from '@rimiti/invoice-it';
+
+const recipient = {
+  company_name: 'Receiver company',
+  first_name: 'Will',
+  last_name: 'Jameson',
+  street_number: '20',
+  street_name: 'Rue Victor Hugo',
+  zip_code: '77340',
+  city: 'Pontault-Combault',
+  country: 'France',
+  phone: '06 00 00 00 00',
+  mail: 'will.jameson@test.com'
+};
+
+const emitter = {
+  name: 'Dim Solution',
+  street_number: '73',
+  street_name: 'Rue Jean Jaures',
+  zip_code: '75012',
+  city: 'Paris',
+  country: 'France',
+  phone: '01 00 00 00 00',
+  mail: 'contact@dimsolution.com',
+  website: 'www.dimsolution.com'
+};
+
+const invoice = invoiceIt.create(recipient, emitter);
+
+invoice.global.logo = 'http://example.com/logo.png';
+invoice.global.invoice_reference_pattern = '$prefix{INVOICE}$date{YYMM}$separator{_}$id{00000}';
+invoice.global.invoice_note = 'It\'s my custom node!';
+invoice.global.date_format = 'YYYY-MM-DD';
+invoice.id = 1;
+order.getInvoice().toPDF().toFile();
 ```
 
 ### i18n
