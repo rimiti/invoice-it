@@ -225,13 +225,13 @@ invoice.getInvoice().toPDF().toFile('./invoice.pdf')
 
 ### Customization
 
-All below globals attributes are totally customizable for the `.configure()` method or from `setters`:
+All below globals attributes are totally customizable from the `.configure()` method or from `setters`:
 
 **From .configure()**
 
-The configure method override all default attributes presente [in this file](https://github.com/rimiti/invoice-it/blob/master/src/index.js).
+The configure method can override all default attributes presents [in this file](https://github.com/rimiti/invoice-it/blob/master/src/index.js).
 
-Example:
+Customization example:
 
 To generate and export in PDF an invoice with:
     - Logo url: http://example.com/logo.png
