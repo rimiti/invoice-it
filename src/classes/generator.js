@@ -318,24 +318,41 @@ export default class Generator extends Common {
     return compiled(keys);
   }
 
+  getPhrases(type) {
+    return {
+      header_title: i18n.__({phrase: `${type}_header_title`, locale: this.lang}),
+      header_subject: i18n.__({phrase: `${type}_header_subject`, locale: this.lang}),
+      header_reference: i18n.__({phrase: `${type}_header_reference`, locale: this.lang}),
+      invoice_header_date: i18n.__({phrase: `${type}_header_date`, locale: this.lang}),
+    };
+  }
+
   /**
    * @description Return invoice translation keys object
    * @returns {*}
    */
-  getInvoice() {
+  getInvoice(params = []) {
     const keys = {
-      invoice_header_title: i18n.__({phrase: 'invoice_header_title', locale: this.lang}),
-      invoice_header_subject: i18n.__({phrase: 'invoice_header_subject', locale: this.lang}),
-      invoice_header_reference: i18n.__({phrase: 'invoice_header_reference', locale: this.lang}),
+      invoice_header_title: this.getPhrases('invoice').header_title,
+      invoice_header_subject: this.getPhrases('invoice').header_subject,
+      invoice_header_reference: this.getPhrases('invoice').header_reference,
       invoice_header_reference_value: this.getReferenceFromPattern('invoice'),
-      invoice_header_date: i18n.__({phrase: 'invoice_header_date', locale: this.lang}),
+      invoice_header_date: this.getPhrases('invoice').header_date,
       table_note_content: this.invoice_note,
       note: (note) => ((note) ? this.invoice_note = note : this.invoice_note),
       filename: 'invoice',
     };
+    params.forEach((phrase) => {
+      if (typeof phrase === 'string') {
+        keys[phrase] = i18n.__({ phrase, locale: this.lang });
+      } else if (typeof phrase === 'object' && phrase.key && phrase.value) {
+        keys[phrase.key] = phrase.value;
+      }
+    });
+
     return Object.assign(keys, {
-      toHTML: () => this._toHTML(keys),
-      toPDF: () => this._toPDF(keys),
+      toHTML: () => this._toHTML(keys, params),
+      toPDF: () => this._toPDF(keys, params),
     }, this._preCompileCommonTranslations());
   }
 
@@ -343,20 +360,28 @@ export default class Generator extends Common {
    * @description Return order translation keys object
    * @returns {*}
    */
-  getOrder() {
+  getOrder(params = []) {
     const keys = {
-      order_header_title: i18n.__({phrase: 'order_header_title', locale: this.lang}),
-      order_header_subject: i18n.__({phrase: 'order_header_subject', locale: this.lang}),
-      order_header_reference: i18n.__({phrase: 'order_header_reference', locale: this.lang}),
+      order_header_title: this.getPhrases('order').header_title,
+      order_header_subject: this.getPhrases('order').header_subject,
+      order_header_reference: this.getPhrases('order').header_reference,
       order_header_reference_value: this.getReferenceFromPattern('order'),
-      order_header_date: i18n.__({phrase: 'order_header_date', locale: this.lang}),
+      order_header_date: this.getPhrases('order').invoice_header_date,
       table_note_content: this.order_note,
       note: (note) => ((note) ? this.order_note = note : this.order_note),
       filename: 'order',
     };
+    params.forEach((phrase) => {
+      if (typeof phrase === 'string') {
+        keys[phrase] = i18n.__({ phrase, locale: this.lang });
+      } else if (typeof phrase === 'object' && phrase.key && phrase.value) {
+        keys[phrase.key] = phrase.value;
+      }
+    });
+
     return Object.assign(keys, {
-      toHTML: () => this._toHTML(keys),
-      toPDF: () => this._toPDF(keys),
+      toHTML: () => this._toHTML(keys, params),
+      toPDF: () => this._toPDF(keys, params),
     }, this._preCompileCommonTranslations());
   }
 
@@ -413,8 +438,8 @@ export default class Generator extends Common {
    * @returns {{html: *, toFile: (function(*): *)}}
    * @private
    */
-  _toHTML(keys) {
-    const html = this._compile(keys.filename === 'order' ? this.getOrder() : this.getInvoice());
+  _toHTML(keys, params = []) {
+    const html = this._compile(keys.filename === 'order' ? this.getOrder(params) : this.getInvoice(params));
     return {
       html,
       toFile: (filepath) => this._toFileFromHTML(html, (filepath) || `${keys.filename}.html`),
@@ -426,9 +451,9 @@ export default class Generator extends Common {
    * @returns {*}
    * @private
    */
-  _toPDF(keys) {
+  _toPDF(keys, params = []) {
     const htmlToPdf = this._loadHtmlToPdf();
-    const pdf = htmlToPdf.create(this._toHTML(keys).html, {timeout: '90000'});
+    const pdf = htmlToPdf.create(this._toHTML(keys, params).html, {timeout: '90000'});
     return {
       pdf,
       toFile: (filepath) => this._toFileFromPDF(pdf, (filepath) || `${keys.filename}.pdf`),

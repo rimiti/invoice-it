@@ -110,6 +110,14 @@ describe('Order', () => {
     done();
   });
 
+  it('Export to HTML file with additional fields', (done) => {
+    const order = invoiceIt.create(recipient, emitter);
+    order.getOrder(['invoice_header_payment_reference', {
+      key: 'invoice_header_paymentId_value',
+      value: 'paymentRef',
+    }]).toHTML().toFile(htmlPathfile).then(() => done());
+  });
+
   it('Export to HTML file', (done) => {
     const order = invoiceIt.create(recipient, emitter);
     order.getOrder().toHTML().toFile(htmlPathfile).then(() => done());
@@ -125,6 +133,14 @@ describe('Order', () => {
           done();
         });
       });
+  });
+
+  it('Export to PDF file with additional fields', (done) => {
+    const order = invoiceIt.create(recipient, emitter);
+    order.getOrder(['invoice_header_payment_reference', {
+      key: 'invoice_header_paymentId_value',
+      value: 'paymentRef',
+    }]).toPDF().toFile(pdfPathfile).then(() => done());
   });
 
   it('Export to PDF file', (done) => {
