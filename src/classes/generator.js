@@ -318,17 +318,22 @@ export default class Generator extends Common {
     return compiled(keys);
   }
 
+  /**
+   * @description Prepare phrases from translations
+   * @param type
+   */
   getPhrases(type) {
     return {
       header_title: i18n.__({phrase: `${type}_header_title`, locale: this.lang}),
       header_subject: i18n.__({phrase: `${type}_header_subject`, locale: this.lang}),
       header_reference: i18n.__({phrase: `${type}_header_reference`, locale: this.lang}),
-      invoice_header_date: i18n.__({phrase: `${type}_header_date`, locale: this.lang}),
+      header_date: i18n.__({phrase: `${type}_header_date`, locale: this.lang}),
     };
   }
 
   /**
    * @description Return invoice translation keys object
+   * @param params
    * @returns {*}
    */
   getInvoice(params = []) {
@@ -358,6 +363,7 @@ export default class Generator extends Common {
 
   /**
    * @description Return order translation keys object
+   * @param params
    * @returns {*}
    */
   getOrder(params = []) {
@@ -366,7 +372,7 @@ export default class Generator extends Common {
       order_header_subject: this.getPhrases('order').header_subject,
       order_header_reference: this.getPhrases('order').header_reference,
       order_header_reference_value: this.getReferenceFromPattern('order'),
-      order_header_date: this.getPhrases('order').invoice_header_date,
+      order_header_date: this.getPhrases('order').header_date,
       table_note_content: this.order_note,
       note: (note) => ((note) ? this.order_note = note : this.order_note),
       filename: 'order',
@@ -435,6 +441,8 @@ export default class Generator extends Common {
 
   /**
    * @description Export object with html content and exportation functions
+   * @param keys
+   * @param params
    * @returns {{html: *, toFile: (function(*): *)}}
    * @private
    */
@@ -448,6 +456,8 @@ export default class Generator extends Common {
 
   /**
    * @description Save content to pdf file
+   * @param keys
+   * @param params
    * @returns {*}
    * @private
    */

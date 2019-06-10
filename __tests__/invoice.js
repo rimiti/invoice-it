@@ -7,6 +7,7 @@ jest.setTimeout(90000);
 describe('Invoice', () => {
   const htmlPathfile = './invoice.html';
   const pdfPathfile = './invoice.pdf';
+  const pdfPathfileAdd = './invoiceAdd.pdf';
 
   const recipient = {
     company_name: 'Receiver company',
@@ -141,7 +142,7 @@ describe('Invoice', () => {
     invoice.getInvoice(['invoice_header_payment_reference', {
       key: 'invoice_header_paymentId_value',
       value: 'paymentRef',
-    }]).toPDF().toFile(pdfPathfile).then(() => done());
+    }]).toPDF().toFile(pdfPathfileAdd).then(() => done());
   });
 
   it('Export to PDF file', (done) => {

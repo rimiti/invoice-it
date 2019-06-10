@@ -225,11 +225,11 @@ invoice.getInvoice().toPDF().toFile('./invoice.pdf')
 
 Add custom fields to invoice
 ```js
-let paymentId = {
+const paymentId = {
   key: 'invoice_header_paymentId_value',
   value: paymentRef
 };
-let phrases = ['invoice_header_payment_reference', paymentId];
+const phrases = ['invoice_header_payment_reference', paymentId];
 invoice.getInvoice(phrases).toPDF()
 ```
 
