@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "clean": "rm -rf coverage dist tmp invoice.pdf invoice.html order.pdf order.html",
+    "clean": "rm -rf coverage dist tmp invoice.pdf invoice.html order.pdf orderAdd.pdf order.html invoiceAdd.pdf",
     "pretest": "npm run lint",
     "test": "jest --coverage",
     "test:watch": "jest --watch",

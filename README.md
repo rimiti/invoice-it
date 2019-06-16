@@ -223,6 +223,16 @@ invoice.getInvoice().toPDF().toFile('./invoice.pdf')
   });
 ```
 
+Add custom fields to invoice
+```js
+const paymentId = {
+  key: 'invoice_header_paymentId_value',
+  value: paymentRef
+};
+const phrases = ['invoice_header_payment_reference', paymentId];
+invoice.getInvoice(phrases).toPDF()
+```
+
 ### Customization
 
 All below globals attributes are totally customizable from the `.configure()` method or from `setters`:
