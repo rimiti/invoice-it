@@ -3,8 +3,8 @@ node_js:
   - node
   - lts/*
 before_install:
-  - npm i -g codecov
-  - npm i html-pdf -S
+  - yarn add global codecov
+  - yarn add html-pdf
 script:
-  - npm run test
+  - yarn test test
 after_success: codecov
