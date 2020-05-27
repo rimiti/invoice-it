@@ -40,25 +40,23 @@
   },
   "homepage": "https://github.com/rimiti/invoice-it#readme",
   "dependencies": {
+    "html-pdf": "2.2.0",
     "i18n-factory": "0.0.2",
-    "json-override": "^0.2.0",
-    "moment": "^2.24.0",
-    "pug": "^2.0.3"
-  },
-  "peerDependencies": {
-    "html-pdf": "^2.2.0"
+    "json-override": "0.2.0",
+    "moment": "2.24.0",
+    "pug": "2.0.3",
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.3",
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "@babel/register": "^7.4.0",
-    "babel-eslint": "^10.0.1",
+    "@babel/cli": "7.4.3",
+    "@babel/core": "7.4.3",
+    "@babel/preset-env": "7.4.3",
+    "@babel/register": "7.4.0",
+    "babel-eslint": "10.0.1",
     "babel-jest": "~24.7.1",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.2",
-    "jest": "^24.7.1"
+    "eslint": "5.16.0",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.17.2",
+    "jest": "24.7.1"
   },
   "jest": {
     "moduleFileExtensions": [
