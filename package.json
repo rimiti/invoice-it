@@ -44,7 +44,7 @@
     "i18n-factory": "0.0.2",
     "json-override": "0.2.0",
     "moment": "2.26.0",
-    "pug": "3.0.0"
+    "pug": "3.0.1"
   },
   "devDependencies": {
     "@babel/cli": "7.10.0",
