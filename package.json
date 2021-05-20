@@ -40,7 +40,7 @@
   },
   "homepage": "https://github.com/rimiti/invoice-it#readme",
   "dependencies": {
-    "html-pdf": "2.2.0",
+    "html-pdf": "3.0.1",
     "i18n-factory": "0.0.2",
     "json-override": "0.2.0",
     "moment": "2.26.0",
