@@ -10,5 +10,4 @@ i18n.configure({
   logErrorFn: (message) => console.error('error', message), // eslint-disable-line no-console
 });
 
-
 export default i18n;
