@@ -479,10 +479,12 @@ export default class Generator extends Common {
    * @private
    */
   _toFileFromHTML(content, filepath) {
-    return new Promise((resolve, reject) => fs.writeFile(filepath, content, (err) => {
-      if (err) reject(err);
-      return resolve();
-    }));
+    return new Promise((resolve, reject) => {
+      fs.writeFile(filepath, content, (err) => {
+        if (err) reject(err);
+        return resolve();
+      });
+    });
   }
 
   /**
@@ -493,10 +495,12 @@ export default class Generator extends Common {
    * @private
    */
   _toFileFromPDF(content, filepath) {
-    return new Promise((resolve, reject) => content.toFile(filepath, (err, res) => {
-      if (err) return reject(err);
-      return resolve(res);
-    }));
+    return new Promise((resolve, reject) => {
+      content.toFile(filepath, (err, res) => {
+        if (err) return reject(err);
+        return resolve(res);
+      });
+    });
   }
 
   /**
@@ -506,10 +510,12 @@ export default class Generator extends Common {
    * @private
    */
   _toBufferFromPDF(content) {
-    return new Promise((resolve, reject) => content.toBuffer((err, buffer) => {
-      if (err) return reject(err);
-      return resolve(buffer);
-    }));
+    return new Promise((resolve, reject) => {
+      content.toBuffer((err, buffer) => {
+        if (err) return reject(err);
+        return resolve(buffer);
+      });
+    });
   }
 
   /**
